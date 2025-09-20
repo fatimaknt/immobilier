@@ -182,7 +182,9 @@ export default function AdminApartments() {
                 price_per_day: editingApartment.price_per_day,
                 price_per_week: editingApartment.price_per_week,
                 available: editingApartment.available,
-                equipment: editingApartment.equipment,
+                equipment: typeof editingApartment.equipment === 'string'
+                    ? editingApartment.equipment.split(',').map(item => item.trim()).filter(item => item)
+                    : editingApartment.equipment,
                 images: editingApartment.images,
                 coordinates: editingApartment.coordinates
             };
@@ -933,8 +935,18 @@ export default function AdminApartments() {
                                         fullWidth
                                         label="Équipements (séparés par des virgules)"
                                         placeholder="WiFi, Climatisation, Parking, Piscine, Balcon, Cuisine équipée..."
-                                        value={editingApartment?.equipment?.join(', ') || ''}
-                                        onChange={(e) => handleInputChange('equipment', e.target.value.split(',').map(item => item.trim()).filter(item => item))}
+                                        value={typeof editingApartment?.equipment === 'string'
+                                            ? editingApartment.equipment
+                                            : Array.isArray(editingApartment?.equipment)
+                                                ? editingApartment.equipment.join(', ')
+                                                : ''}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            // Garder la valeur brute pour l'affichage, mais traiter les équipements seulement à la sauvegarde
+                                            if (editingApartment) {
+                                                setEditingApartment({ ...editingApartment, equipment: value });
+                                            }
+                                        }}
                                         variant="outlined"
                                         multiline
                                         rows={3}

@@ -174,7 +174,9 @@ export default function AdminCars() {
                 seats: editingCar.seats,
                 year: editingCar.year,
                 mileage: editingCar.mileage,
-                features: editingCar.features
+                features: typeof editingCar.features === 'string'
+                    ? editingCar.features.split(',').map(item => item.trim()).filter(item => item)
+                    : editingCar.features
             };
 
             if (editingCar.id) {
@@ -902,8 +904,17 @@ export default function AdminCars() {
                                         fullWidth
                                         label="Équipements (séparés par des virgules)"
                                         placeholder="Climatisation, GPS, Bluetooth, Sièges en cuir, Toit ouvrant..."
-                                        value={editingCar?.features?.join(', ') || ''}
-                                        onChange={(e) => handleInputChange('features', e.target.value.split(',').map(item => item.trim()).filter(item => item))}
+                                        value={typeof editingCar?.features === 'string'
+                                            ? editingCar.features
+                                            : Array.isArray(editingCar?.features)
+                                                ? editingCar.features.join(', ')
+                                                : ''}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            if (editingCar) {
+                                                setEditingCar({ ...editingCar, features: value });
+                                            }
+                                        }}
                                         variant="outlined"
                                         multiline
                                         rows={4}
