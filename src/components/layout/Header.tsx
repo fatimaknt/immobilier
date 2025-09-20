@@ -148,6 +148,16 @@ const Header: React.FC = () => {
                                         </Box>
                                     </MenuItem>
                                 ))}
+                                <MenuItem
+                                    onClick={handleCloseNavMenu}
+                                    component={Link}
+                                    href="/booking"
+                                >
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        <Typography textAlign="center">🏠</Typography>
+                                        <Typography textAlign="center">Réserver</Typography>
+                                    </Box>
+                                </MenuItem>
                             </Menu>
                         </Box>
 

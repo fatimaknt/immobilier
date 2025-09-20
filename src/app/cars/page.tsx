@@ -172,7 +172,14 @@ export default function CarsPage() {
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3 }}>
                     <Fade in timeout={1000}>
                         <Box textAlign="center">
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, mb: 3 }}>
+                            <Box sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: { xs: 2, md: 3 },
+                                mb: 3,
+                                flexDirection: { xs: 'column', sm: 'row' }
+                            }}>
                                 <CarIcon
                                     sx={{
                                         fontSize: { xs: '3rem', md: '4.5rem' },
@@ -193,7 +200,7 @@ export default function CarsPage() {
                                     variant="h1"
                                     sx={{
                                         fontWeight: 900,
-                                        fontSize: { xs: '3rem', md: '4.5rem' },
+                                        fontSize: { xs: '2.5rem', sm: '3rem', md: '4.5rem' },
                                         background: 'linear-gradient(45deg, #FFD700, #FFA500)',
                                         backgroundClip: 'text',
                                         WebkitBackgroundClip: 'text',
@@ -295,38 +302,41 @@ export default function CarsPage() {
                         </Box>
                     </Fade>
 
-                    <Grid container spacing={4}>
+                    <Box sx={{
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
+                        gap: 4,
+                        justifyContent: 'center'
+                    }}>
                         {features.map((feature, index) => (
-                            <Grid item xs={12} sm={6} md={3} key={index}>
-                                <Grow in timeout={1000 + index * 200}>
-                                    <Card
-                                        sx={{
-                                            p: 4,
-                                            textAlign: 'center',
-                                            height: '100%',
-                                            borderRadius: 4,
-                                            background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
-                                            transition: 'all 0.3s ease',
-                                            '&:hover': {
-                                                transform: 'translateY(-8px)',
-                                                boxShadow: `0 20px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
-                                            },
-                                        }}
-                                    >
-                                        <Box sx={{ mb: 3 }}>
-                                            {feature.icon}
-                                        </Box>
-                                        <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                                            {feature.title}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            {feature.desc}
-                                        </Typography>
-                                    </Card>
-                                </Grow>
-                            </Grid>
+                            <Fade in timeout={1000 + index * 200} key={index}>
+                                <Card
+                                    sx={{
+                                        p: 4,
+                                        textAlign: 'center',
+                                        height: '100%',
+                                        borderRadius: 4,
+                                        background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
+                                        transition: 'all 0.3s ease',
+                                        '&:hover': {
+                                            transform: 'translateY(-8px)',
+                                            boxShadow: `0 20px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
+                                        },
+                                    }}
+                                >
+                                    <Box sx={{ mb: 3 }}>
+                                        {feature.icon}
+                                    </Box>
+                                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
+                                        {feature.title}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {feature.desc}
+                                    </Typography>
+                                </Card>
+                            </Fade>
                         ))}
-                    </Grid>
+                    </Box>
                 </Container>
             </Box>
 

@@ -116,7 +116,7 @@ export default function ContactForm() {
     };
 
     return (
-        <Box sx={{ maxWidth: 600, mx: 'auto' }}>
+        <Box sx={{ maxWidth: { xs: '100%', sm: 800, md: 600 }, mx: 'auto' }}>
             <Typography
                 variant="h4"
                 sx={{
@@ -124,6 +124,7 @@ export default function ContactForm() {
                     mb: 4,
                     textAlign: 'center',
                     color: theme.palette.text.primary,
+                    fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
                 }}
             >
                 📝 Nous Contacter
@@ -133,13 +134,22 @@ export default function ContactForm() {
                 component="form"
                 onSubmit={handleSubmit}
                 sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
+                    display: 'grid',
+                    gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
                     gap: 3,
-                    p: 4,
+                    p: { xs: 3, sm: 4 },
                     borderRadius: 4,
                     backgroundColor: 'white',
                     boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                    '& > *:nth-of-type(5)': { // Message field spans full width
+                        gridColumn: '1 / -1',
+                    },
+                    '& > *:nth-of-type(6)': { // File upload spans full width
+                        gridColumn: '1 / -1',
+                    },
+                    '& > *:nth-of-type(7)': { // Submit button spans full width
+                        gridColumn: '1 / -1',
+                    },
                 }}
             >
                 <TextField
@@ -207,7 +217,7 @@ export default function ContactForm() {
                     name="message"
                     label="Message"
                     multiline
-                    rows={5}
+                    rows={3}
                     value={formData.message}
                     onChange={handleChange}
                     required
@@ -234,10 +244,14 @@ export default function ContactForm() {
                             component="span"
                             variant="outlined"
                             startIcon={<AttachFileIcon />}
+                            size="small"
                             sx={{
                                 borderRadius: 3,
                                 borderColor: theme.palette.primary.main,
                                 color: theme.palette.primary.main,
+                                py: { xs: 1, sm: 1.5 },
+                                px: { xs: 2, sm: 3 },
+                                fontSize: { xs: '0.8rem', sm: '0.9rem' },
                                 '&:hover': {
                                     borderColor: theme.palette.primary.dark,
                                     backgroundColor: `${theme.palette.primary.main}10`,
@@ -265,8 +279,8 @@ export default function ContactForm() {
                     sx={{
                         width: '100%',
                         borderRadius: 3,
-                        py: 3,
-                        fontSize: '1.2rem',
+                        py: { xs: 1.5, sm: 2, md: 3 },
+                        fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' },
                         fontWeight: 700,
                         background: 'linear-gradient(135deg, #1976d2, #42a5f5)',
                         '&:hover': {

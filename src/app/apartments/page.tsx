@@ -5,20 +5,16 @@ import {
     Box,
     Container,
     Typography,
-    Grid,
     Card,
-    CardMedia,
     FormControl,
     InputLabel,
     Select,
     MenuItem,
     Button,
-    Chip,
     Paper,
     useTheme,
     alpha,
     Fade,
-    Grow,
 } from '@mui/material';
 import {
     FilterList as FilterIcon,
@@ -173,7 +169,14 @@ export default function ApartmentsPage() {
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3 }}>
                     <Fade in timeout={1000}>
                         <Box textAlign="center">
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, mb: 3 }}>
+                            <Box sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: { xs: 2, md: 3 },
+                                mb: 3,
+                                flexDirection: { xs: 'column', sm: 'row' }
+                            }}>
                                 <ApartmentIcon
                                     sx={{
                                         fontSize: { xs: '3rem', md: '4.5rem' },
@@ -194,13 +197,14 @@ export default function ApartmentsPage() {
                                     variant="h1"
                                     sx={{
                                         fontWeight: 900,
-                                        fontSize: { xs: '3rem', md: '4.5rem' },
+                                        fontSize: { xs: '2.5rem', sm: '3rem', md: '4.5rem' },
                                         background: 'linear-gradient(45deg, #FFD700, #FFA500)',
                                         backgroundClip: 'text',
                                         WebkitBackgroundClip: 'text',
                                         WebkitTextFillColor: 'transparent',
                                         textShadow: '0 4px 8px rgba(0,0,0,0.3)',
                                         filter: 'drop-shadow(0 0 10px rgba(255,215,0,0.5))',
+                                        textAlign: 'center',
                                     }}
                                 >
                                     Nos Appartements
@@ -301,7 +305,7 @@ export default function ApartmentsPage() {
 
 
                     <Box sx={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
-                        {zones && zones.length > 0 ? zones.map((zone, index) => (
+                        {zones && zones.length > 0 ? zones.map((zone) => (
                             <Box
                                 key={zone.name}
                                 sx={{
@@ -428,38 +432,46 @@ export default function ApartmentsPage() {
                         </Box>
                     </Fade>
 
-                    <Grid container spacing={4}>
+                    <Box sx={{
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
+                        gap: 4,
+                        justifyContent: 'center'
+                    }}>
                         {features.map((feature, index) => (
-                            <Grid item xs={12} sm={6} md={3} key={index}>
-                                <Grow in timeout={1200 + index * 200}>
+                            <Fade in timeout={1200 + index * 200} key={index}>
+                                <div>
                                     <Card
                                         sx={{
-                                            p: 4,
+                                            p: { xs: 3, md: 4 },
                                             textAlign: 'center',
                                             height: '100%',
                                             borderRadius: 4,
                                             background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
                                             transition: 'all 0.3s ease',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
                                             '&:hover': {
                                                 transform: 'translateY(-8px)',
                                                 boxShadow: `0 20px 40px ${alpha(theme.palette.primary.main, 0.15)}`,
                                             },
                                         }}
                                     >
-                                        <Box sx={{ mb: 3 }}>
+                                        <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
                                             {feature.icon}
                                         </Box>
-                                        <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
+                                        <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, textAlign: 'center' }}>
                                             {feature.title}
                                         </Typography>
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center' }}>
                                             {feature.desc}
                                         </Typography>
                                     </Card>
-                                </Grow>
-                            </Grid>
+                                </div>
+                            </Fade>
                         ))}
-                    </Grid>
+                    </Box>
                 </Container>
             </Box>
 
@@ -484,126 +496,124 @@ export default function ApartmentsPage() {
                                 </Typography>
                             </Box>
 
-                            <Grid container spacing={3} alignItems="flex-end" justifyContent="center">
-                                <Grid item xs={12} sm={6} md={3}>
-                                    <FormControl fullWidth>
-                                        <InputLabel sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Zone</InputLabel>
-                                        <Select
-                                            value={selectedZone}
-                                            label="Zone"
-                                            onChange={(e) => setSelectedZone(e.target.value)}
-                                            sx={{
-                                                height: 56,
-                                                fontSize: '1.1rem',
-                                                fontWeight: 600,
-                                                minWidth: 150,
-                                                '& .MuiSelect-select': {
-                                                    py: 2,
-                                                    px: 3,
-                                                    fontSize: '1.1rem',
-                                                    fontWeight: 600,
-                                                },
-                                                '& .MuiInputLabel-root': {
-                                                    fontSize: '1.1rem',
-                                                    left: 8,
-                                                }
-                                            }}
-                                        >
-                                            <MenuItem value="" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Toutes les zones</MenuItem>
-                                            {zones.map(zone => (
-                                                <MenuItem key={zone.name} value={zone.name} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>
-                                                    {zone.name}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={3}>
-                                    <FormControl fullWidth>
-                                        <InputLabel sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Nombre de pièces</InputLabel>
-                                        <Select
-                                            value={roomsFilter || ''}
-                                            label="Nombre de pièces"
-                                            onChange={(e) => setRoomsFilter(e.target.value ? parseInt(e.target.value as string) : null)}
-                                            sx={{
-                                                height: 56,
-                                                fontSize: '1.1rem',
-                                                fontWeight: 600,
-                                                minWidth: 150,
-                                                '& .MuiSelect-select': {
-                                                    py: 2,
-                                                    px: 3,
-                                                    fontSize: '1.1rem',
-                                                    fontWeight: 600,
-                                                },
-                                                '& .MuiInputLabel-root': {
-                                                    fontSize: '1.1rem',
-                                                    left: 8,
-                                                }
-                                            }}
-                                        >
-                                            <MenuItem value="" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Tous</MenuItem>
-                                            <MenuItem value={1} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>1 pièce</MenuItem>
-                                            <MenuItem value={2} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>2 pièces</MenuItem>
-                                            <MenuItem value={3} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>3 pièces</MenuItem>
-                                            <MenuItem value={4} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>4+ pièces</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={3}>
-                                    <FormControl fullWidth>
-                                        <InputLabel sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Trier par</InputLabel>
-                                        <Select
-                                            value={sortBy}
-                                            label="Trier par"
-                                            onChange={(e) => setSortBy(e.target.value as 'price' | 'rooms' | 'surface')}
-                                            sx={{
-                                                height: 56,
-                                                fontSize: '1.1rem',
-                                                fontWeight: 600,
-                                                minWidth: 150,
-                                                '& .MuiSelect-select': {
-                                                    py: 2,
-                                                    px: 3,
-                                                    fontSize: '1.1rem',
-                                                    fontWeight: 600,
-                                                },
-                                                '& .MuiInputLabel-root': {
-                                                    fontSize: '1.1rem',
-                                                    left: 8,
-                                                }
-                                            }}
-                                        >
-                                            <MenuItem value="price" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Prix croissant</MenuItem>
-                                            <MenuItem value="rooms" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Nombre de pièces</MenuItem>
-                                            <MenuItem value="surface" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Surface</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={3}>
-                                    <Button
-                                        fullWidth
-                                        variant="outlined"
+                            <Box sx={{
+                                display: 'grid',
+                                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
+                                gap: 3,
+                                alignItems: 'flex-end',
+                                justifyContent: 'center'
+                            }}>
+                                <FormControl fullWidth>
+                                    <InputLabel sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Zone</InputLabel>
+                                    <Select
+                                        value={selectedZone}
+                                        label="Zone"
+                                        onChange={(e) => setSelectedZone(e.target.value)}
                                         sx={{
-                                            py: 2,
                                             height: 56,
                                             fontSize: '1.1rem',
-                                            fontWeight: 600
-                                        }}
-                                        onClick={() => {
-                                            setSelectedZone('');
-                                            setPriceRange([0, 100000]);
-                                            setRoomsFilter(null);
-                                            setSortBy('price');
+                                            fontWeight: 600,
+                                            minWidth: 150,
+                                            '& .MuiSelect-select': {
+                                                py: 2,
+                                                px: 3,
+                                                fontSize: '1.1rem',
+                                                fontWeight: 600,
+                                            },
+                                            '& .MuiInputLabel-root': {
+                                                fontSize: '1.1rem',
+                                                left: 8,
+                                            }
                                         }}
                                     >
-                                        Réinitialiser
-                                    </Button>
-                                </Grid>
-                            </Grid>
+                                        <MenuItem value="" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Toutes les zones</MenuItem>
+                                        {zones.map(zone => (
+                                            <MenuItem key={zone.name} value={zone.name} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>
+                                                {zone.name}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+
+                                <FormControl fullWidth>
+                                    <InputLabel sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Nombre de pièces</InputLabel>
+                                    <Select
+                                        value={roomsFilter || ''}
+                                        label="Nombre de pièces"
+                                        onChange={(e) => setRoomsFilter(e.target.value ? Number(e.target.value) : null)}
+                                        sx={{
+                                            height: 56,
+                                            fontSize: '1.1rem',
+                                            fontWeight: 600,
+                                            minWidth: 150,
+                                            '& .MuiSelect-select': {
+                                                py: 2,
+                                                px: 3,
+                                                fontSize: '1.1rem',
+                                                fontWeight: 600,
+                                            },
+                                            '& .MuiInputLabel-root': {
+                                                fontSize: '1.1rem',
+                                                left: 8,
+                                            }
+                                        }}
+                                    >
+                                        <MenuItem value="" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Tous</MenuItem>
+                                        <MenuItem value={1} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>1 pièce</MenuItem>
+                                        <MenuItem value={2} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>2 pièces</MenuItem>
+                                        <MenuItem value={3} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>3 pièces</MenuItem>
+                                        <MenuItem value={4} sx={{ fontSize: '1.1rem', fontWeight: 600 }}>4+ pièces</MenuItem>
+                                    </Select>
+                                </FormControl>
+
+                                <FormControl fullWidth>
+                                    <InputLabel sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Trier par</InputLabel>
+                                    <Select
+                                        value={sortBy}
+                                        label="Trier par"
+                                        onChange={(e) => setSortBy(e.target.value as 'price' | 'rooms' | 'surface')}
+                                        sx={{
+                                            height: 56,
+                                            fontSize: '1.1rem',
+                                            fontWeight: 600,
+                                            minWidth: 150,
+                                            '& .MuiSelect-select': {
+                                                py: 2,
+                                                px: 3,
+                                                fontSize: '1.1rem',
+                                                fontWeight: 600,
+                                            },
+                                            '& .MuiInputLabel-root': {
+                                                fontSize: '1.1rem',
+                                                left: 8,
+                                            }
+                                        }}
+                                    >
+                                        <MenuItem value="price" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Prix croissant</MenuItem>
+                                        <MenuItem value="rooms" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Nombre de pièces</MenuItem>
+                                        <MenuItem value="surface" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Surface</MenuItem>
+                                    </Select>
+                                </FormControl>
+
+                                <Button
+                                    fullWidth
+                                    variant="outlined"
+                                    sx={{
+                                        py: 2,
+                                        height: 56,
+                                        fontSize: '1.1rem',
+                                        fontWeight: 600
+                                    }}
+                                    onClick={() => {
+                                        setSelectedZone('');
+                                        setPriceRange([0, 100000]);
+                                        setRoomsFilter(null);
+                                        setSortBy('price');
+                                    }}
+                                >
+                                    Réinitialiser
+                                </Button>
+                            </Box>
                         </Paper>
                     </Fade>
 
@@ -618,16 +628,16 @@ export default function ApartmentsPage() {
                     {filteredApartments.length > 0 ? (
                         <Box sx={{
                             display: 'grid',
-                            gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' },
+                            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
                             gap: 3,
                             justifyContent: 'center'
                         }}>
                             {filteredApartments.map((apartment, index) => (
-                                <Grow key={apartment.id} in timeout={1000 + index * 100}>
-                                    <div style={{ width: '100%' }}>
+                                <Fade in timeout={1000 + index * 100} key={apartment.id}>
+                                    <div>
                                         <ApartmentCard apartment={apartment} />
                                     </div>
-                                </Grow>
+                                </Fade>
                             ))}
                         </Box>
                     ) : (
@@ -687,48 +697,51 @@ export default function ApartmentsPage() {
                             <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
                                 Notre équipe vous aide à choisir le logement parfait selon vos besoins
                             </Typography>
-                            <Grid container spacing={3} justifyContent="center">
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Button
-                                        component="a"
-                                        href="https://wa.me/221784929439?text=Bonjour,%20j'aimerais%20des%20informations%20sur%20vos%20appartements."
-                                        target="_blank"
-                                        variant="contained"
-                                        size="large"
-                                        fullWidth
-                                        sx={{
-                                            backgroundColor: '#25D366',
-                                            color: 'white',
-                                            py: 2,
-                                            '&:hover': {
-                                                backgroundColor: '#1DA851',
-                                            },
-                                        }}
-                                    >
-                                        💬 WhatsApp
-                                    </Button>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Button
-                                        component="a"
-                                        href="tel:+221784929439"
-                                        variant="outlined"
-                                        size="large"
-                                        fullWidth
-                                        sx={{
-                                            borderColor: 'white',
-                                            color: 'white',
-                                            py: 2,
-                                            '&:hover': {
-                                                backgroundColor: 'white',
-                                                color: theme.palette.primary.main,
-                                            },
-                                        }}
-                                    >
-                                        📞 Appeler
-                                    </Button>
-                                </Grid>
-                            </Grid>
+                            <Box sx={{
+                                display: 'grid',
+                                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' },
+                                gap: 3,
+                                justifyContent: 'center',
+                                maxWidth: 600,
+                                mx: 'auto'
+                            }}>
+                                <Button
+                                    component="a"
+                                    href="https://wa.me/221784929439?text=Bonjour,%20j'aimerais%20des%20informations%20sur%20vos%20appartements."
+                                    target="_blank"
+                                    variant="contained"
+                                    size="large"
+                                    fullWidth
+                                    sx={{
+                                        backgroundColor: '#25D366',
+                                        color: 'white',
+                                        py: 2,
+                                        '&:hover': {
+                                            backgroundColor: '#1DA851',
+                                        },
+                                    }}
+                                >
+                                    💬 WhatsApp
+                                </Button>
+                                <Button
+                                    component="a"
+                                    href="tel:+221784929439"
+                                    variant="outlined"
+                                    size="large"
+                                    fullWidth
+                                    sx={{
+                                        borderColor: 'white',
+                                        color: 'white',
+                                        py: 2,
+                                        '&:hover': {
+                                            backgroundColor: 'white',
+                                            color: theme.palette.primary.main,
+                                        },
+                                    }}
+                                >
+                                    📞 Appeler
+                                </Button>
+                            </Box>
                         </Box>
                     </Fade>
                 </Container>

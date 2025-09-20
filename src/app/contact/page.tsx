@@ -286,11 +286,11 @@ export default function ContactPage() {
                             <Paper
                                 elevation={3}
                                 sx={{
-                                    p: 8,
-                                    py: 6,
+                                    p: { xs: 4, sm: 6, md: 8 },
+                                    py: { xs: 4, sm: 5, md: 6 },
                                     borderRadius: 4,
                                     background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
-                                    minHeight: '600px',
+                                    minHeight: { xs: '400px', sm: '500px', md: '600px' },
                                 }}
                             >
                                 <Typography
@@ -300,6 +300,7 @@ export default function ContactPage() {
                                         mb: 4,
                                         color: theme.palette.text.primary,
                                         textAlign: 'center',
+                                        fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' },
                                     }}
                                 >
                                     ✉️ Envoyez-nous un message
@@ -315,139 +316,138 @@ export default function ContactPage() {
             {/* Informations en bas - alignées horizontalement */}
             <Box sx={{ py: 4, backgroundColor: 'white' }}>
                 <Container maxWidth="lg">
-                    <Grid container spacing={4}>
+                    <Box sx={{
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+                        gap: 4,
+                        justifyContent: 'center'
+                    }}>
                         {/* Horaires */}
-                        <Grid item xs={12} md={4}>
-                            <Card
-                                sx={{
-                                    p: 4,
-                                    borderRadius: 3,
-                                    backgroundColor: 'white',
-                                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                                    border: '1px solid #e0e0e0',
-                                    '&:hover': {
-                                        boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
-                                    },
-                                    transition: 'all 0.3s ease',
-                                    height: '100%',
-                                }}
-                            >
-                                <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, textAlign: 'center', color: theme.palette.text.primary }}>
-                                    🕒 Horaires d'ouverture
-                                </Typography>
-                                <Stack spacing={2}>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
-                                        <Typography variant="body2" sx={{ fontWeight: 600 }}>Lundi - Vendredi</Typography>
-                                        <Typography variant="body2" color="text.secondary">8h00 - 18h00</Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
-                                        <Typography variant="body2" sx={{ fontWeight: 600 }}>Samedi</Typography>
-                                        <Typography variant="body2" color="text.secondary">9h00 - 16h00</Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
-                                        <Typography variant="body2" sx={{ fontWeight: 600 }}>Dimanche</Typography>
-                                        <Typography variant="body2" color="error">Fermé</Typography>
-                                    </Box>
-                                </Stack>
-                            </Card>
-                        </Grid>
+                        <Card
+                            sx={{
+                                p: 4,
+                                borderRadius: 3,
+                                backgroundColor: 'white',
+                                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                                border: '1px solid #e0e0e0',
+                                '&:hover': {
+                                    boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                                },
+                                transition: 'all 0.3s ease',
+                                height: '100%',
+                            }}
+                        >
+                            <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, textAlign: 'center', color: theme.palette.text.primary }}>
+                                🕒 Horaires d'ouverture
+                            </Typography>
+                            <Stack spacing={2}>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
+                                    <Typography variant="body2" sx={{ fontWeight: 600 }}>Lundi - Vendredi</Typography>
+                                    <Typography variant="body2" color="text.secondary">8h00 - 18h00</Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
+                                    <Typography variant="body2" sx={{ fontWeight: 600 }}>Samedi</Typography>
+                                    <Typography variant="body2" color="text.secondary">9h00 - 16h00</Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
+                                    <Typography variant="body2" sx={{ fontWeight: 600 }}>Dimanche</Typography>
+                                    <Typography variant="body2" color="error">Fermé</Typography>
+                                </Box>
+                            </Stack>
+                        </Card>
 
                         {/* Réseaux sociaux */}
-                        <Grid item xs={12} md={4}>
-                            <Card
-                                sx={{
-                                    p: 4,
-                                    borderRadius: 3,
-                                    textAlign: 'center',
-                                    backgroundColor: 'white',
-                                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                                    border: '1px solid #e0e0e0',
-                                    '&:hover': {
-                                        boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
-                                    },
-                                    transition: 'all 0.3s ease',
-                                    height: '100%',
-                                }}
-                            >
-                                <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: theme.palette.text.primary }}>
-                                    🌐 Suivez-nous
-                                </Typography>
-                                <Stack direction="row" spacing={2} justifyContent="center">
-                                    {socialLinks.map((social) => (
-                                        <IconButton
-                                            key={social.name}
-                                            href={social.href}
-                                            target="_blank"
-                                            sx={{
-                                                color: 'white',
+                        <Card
+                            sx={{
+                                p: 4,
+                                borderRadius: 3,
+                                textAlign: 'center',
+                                backgroundColor: 'white',
+                                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                                border: '1px solid #e0e0e0',
+                                '&:hover': {
+                                    boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                                },
+                                transition: 'all 0.3s ease',
+                                height: '100%',
+                            }}
+                        >
+                            <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: theme.palette.text.primary }}>
+                                🌐 Suivez-nous
+                            </Typography>
+                            <Stack direction="row" spacing={2} justifyContent="center">
+                                {socialLinks.map((social) => (
+                                    <IconButton
+                                        key={social.name}
+                                        href={social.href}
+                                        target="_blank"
+                                        sx={{
+                                            color: 'white',
+                                            backgroundColor: social.color,
+                                            width: 45,
+                                            height: 45,
+                                            '&:hover': {
                                                 backgroundColor: social.color,
-                                                width: 45,
-                                                height: 45,
-                                                '&:hover': {
-                                                    backgroundColor: social.color,
-                                                    transform: 'translateY(-2px)',
-                                                    boxShadow: `0 6px 20px ${social.color}40`,
-                                                },
-                                                transition: 'all 0.3s ease',
-                                            }}
-                                        >
-                                            {social.icon}
-                                        </IconButton>
-                                    ))}
-                                </Stack>
-                            </Card>
-                        </Grid>
+                                                transform: 'translateY(-2px)',
+                                                boxShadow: `0 6px 20px ${social.color}40`,
+                                            },
+                                            transition: 'all 0.3s ease',
+                                        }}
+                                    >
+                                        {social.icon}
+                                    </IconButton>
+                                ))}
+                            </Stack>
+                        </Card>
 
                         {/* Contact WhatsApp */}
-                        <Grid item xs={12} md={4}>
-                            <Card
+                        <Card
+                            sx={{
+                                p: 4,
+                                borderRadius: 3,
+                                textAlign: 'center',
+                                backgroundColor: 'white',
+                                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                                border: '1px solid #e0e0e0',
+                                '&:hover': {
+                                    boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                                },
+                                transition: 'all 0.3s ease',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: theme.palette.text.primary }}>
+                                💬 Contact Direct
+                            </Typography>
+                            <Button
+                                href="https://wa.me/221784929439"
+                                target="_blank"
+                                startIcon={<WhatsAppIcon />}
+                                variant="contained"
+                                size="large"
+                                fullWidth
                                 sx={{
-                                    p: 4,
+                                    backgroundColor: '#25D366',
+                                    py: { xs: 1.5, sm: 2 },
                                     borderRadius: 3,
-                                    textAlign: 'center',
-                                    backgroundColor: 'white',
-                                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                                    border: '1px solid #e0e0e0',
+                                    fontSize: { xs: '0.9rem', sm: '1rem' },
+                                    fontWeight: 600,
+                                    textTransform: 'none',
                                     '&:hover': {
-                                        boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                                        backgroundColor: '#1DA851',
+                                        transform: 'translateY(-2px)',
+                                        boxShadow: '0 6px 20px rgba(37,211,102,0.3)',
                                     },
                                     transition: 'all 0.3s ease',
-                                    height: '100%',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'center',
                                 }}
                             >
-                                <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: theme.palette.text.primary }}>
-                                    💬 Contact Direct
-                                </Typography>
-                                <Button
-                                    href="https://wa.me/221784929439"
-                                    target="_blank"
-                                    startIcon={<WhatsAppIcon />}
-                                    variant="contained"
-                                    size="large"
-                                    fullWidth
-                                    sx={{
-                                        backgroundColor: '#25D366',
-                                        py: 2,
-                                        borderRadius: 3,
-                                        fontSize: '1rem',
-                                        fontWeight: 600,
-                                        textTransform: 'none',
-                                        '&:hover': {
-                                            backgroundColor: '#1DA851',
-                                            transform: 'translateY(-2px)',
-                                            boxShadow: '0 6px 20px rgba(37,211,102,0.3)',
-                                        },
-                                        transition: 'all 0.3s ease',
-                                    }}
-                                >
-                                    Contact WhatsApp
-                                </Button>
-                            </Card>
-                        </Grid>
-                    </Grid>
+                                Contact WhatsApp
+                            </Button>
+                        </Card>
+                    </Box>
                 </Container>
             </Box>
         </Box>

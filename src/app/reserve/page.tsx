@@ -5,7 +5,6 @@ import {
     Box,
     Container,
     Typography,
-    Grid,
     Card,
     TextField,
     Button,
@@ -165,7 +164,14 @@ export default function ReservePage() {
                 <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3 }}>
                     <Fade in timeout={1000}>
                         <Box textAlign="center">
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, mb: 3 }}>
+                            <Box sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: { xs: 2, md: 3 },
+                                mb: 3,
+                                flexDirection: { xs: 'column', sm: 'row' }
+                            }}>
                                 <ReserveIcon
                                     sx={{
                                         fontSize: { xs: '3rem', md: '4.5rem' },
@@ -186,7 +192,7 @@ export default function ReservePage() {
                                     variant="h1"
                                     sx={{
                                         fontWeight: 900,
-                                        fontSize: { xs: '3rem', md: '4.5rem' },
+                                        fontSize: { xs: '2.5rem', sm: '3rem', md: '4.5rem' },
                                         background: 'linear-gradient(45deg, #FFD700, #FFA500)',
                                         backgroundClip: 'text',
                                         WebkitBackgroundClip: 'text',
@@ -252,8 +258,13 @@ export default function ReservePage() {
             {/* Formulaire de réservation */}
             <Box sx={{ py: 6, backgroundColor: '#f8f9fa' }}>
                 <Container maxWidth="lg">
-                    <Grid container spacing={6}>
-                        <Grid item xs={12} md={8}>
+                    <Box sx={{
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr', md: '2fr 1fr' },
+                        gap: 6,
+                        alignItems: 'start'
+                    }}>
+                        <Box>
                             <Fade in timeout={1400}>
                                 <Paper
                                     elevation={3}
@@ -343,44 +354,44 @@ export default function ReservePage() {
                                                 <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
                                                     📅 Période de réservation
                                                 </Typography>
-                                                <Grid container spacing={3}>
-                                                    <Grid item xs={12} sm={6}>
-                                                        <TextField
-                                                            fullWidth
-                                                            label="Date de début"
-                                                            type="date"
-                                                            value={startDate}
-                                                            onChange={(e) => setStartDate(e.target.value)}
-                                                            required
-                                                            InputLabelProps={{
-                                                                shrink: true,
-                                                            }}
-                                                            sx={{
-                                                                '& .MuiOutlinedInput-root': {
-                                                                    borderRadius: 3,
-                                                                },
-                                                            }}
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={12} sm={6}>
-                                                        <TextField
-                                                            fullWidth
-                                                            label="Date de fin"
-                                                            type="date"
-                                                            value={endDate}
-                                                            onChange={(e) => setEndDate(e.target.value)}
-                                                            required
-                                                            InputLabelProps={{
-                                                                shrink: true,
-                                                            }}
-                                                            sx={{
-                                                                '& .MuiOutlinedInput-root': {
-                                                                    borderRadius: 3,
-                                                                },
-                                                            }}
-                                                        />
-                                                    </Grid>
-                                                </Grid>
+                                                <Box sx={{
+                                                    display: 'grid',
+                                                    gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+                                                    gap: 3
+                                                }}>
+                                                    <TextField
+                                                        fullWidth
+                                                        label="Date de début"
+                                                        type="date"
+                                                        value={startDate}
+                                                        onChange={(e) => setStartDate(e.target.value)}
+                                                        required
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                        sx={{
+                                                            '& .MuiOutlinedInput-root': {
+                                                                borderRadius: 3,
+                                                            },
+                                                        }}
+                                                    />
+                                                    <TextField
+                                                        fullWidth
+                                                        label="Date de fin"
+                                                        type="date"
+                                                        value={endDate}
+                                                        onChange={(e) => setEndDate(e.target.value)}
+                                                        required
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                        sx={{
+                                                            '& .MuiOutlinedInput-root': {
+                                                                borderRadius: 3,
+                                                            },
+                                                        }}
+                                                    />
+                                                </Box>
                                             </Box>
 
                                             {/* Informations client */}
@@ -389,42 +400,42 @@ export default function ReservePage() {
                                                 👤 Vos informations
                                             </Typography>
 
-                                            <Grid container spacing={3}>
-                                                <Grid item xs={12} sm={6}>
-                                                    <TextField
-                                                        fullWidth
-                                                        label="Nom complet"
-                                                        value={clientInfo.name}
-                                                        onChange={(e) => handleInputChange('name', e.target.value)}
-                                                        required
-                                                        InputProps={{
-                                                            startAdornment: <PersonIcon sx={{ mr: 1, color: 'text.secondary' }} />,
-                                                        }}
-                                                        sx={{
-                                                            '& .MuiOutlinedInput-root': {
-                                                                borderRadius: 3,
-                                                            },
-                                                        }}
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={12} sm={6}>
-                                                    <TextField
-                                                        fullWidth
-                                                        label="Téléphone"
-                                                        value={clientInfo.phone}
-                                                        onChange={(e) => handleInputChange('phone', e.target.value)}
-                                                        required
-                                                        InputProps={{
-                                                            startAdornment: <PhoneIcon sx={{ mr: 1, color: 'text.secondary' }} />,
-                                                        }}
-                                                        sx={{
-                                                            '& .MuiOutlinedInput-root': {
-                                                                borderRadius: 3,
-                                                            },
-                                                        }}
-                                                    />
-                                                </Grid>
-                                            </Grid>
+                                            <Box sx={{
+                                                display: 'grid',
+                                                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
+                                                gap: 3
+                                            }}>
+                                                <TextField
+                                                    fullWidth
+                                                    label="Nom complet"
+                                                    value={clientInfo.name}
+                                                    onChange={(e) => handleInputChange('name', e.target.value)}
+                                                    required
+                                                    InputProps={{
+                                                        startAdornment: <PersonIcon sx={{ mr: 1, color: 'text.secondary' }} />,
+                                                    }}
+                                                    sx={{
+                                                        '& .MuiOutlinedInput-root': {
+                                                            borderRadius: 3,
+                                                        },
+                                                    }}
+                                                />
+                                                <TextField
+                                                    fullWidth
+                                                    label="Téléphone"
+                                                    value={clientInfo.phone}
+                                                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                                                    required
+                                                    InputProps={{
+                                                        startAdornment: <PhoneIcon sx={{ mr: 1, color: 'text.secondary' }} />,
+                                                    }}
+                                                    sx={{
+                                                        '& .MuiOutlinedInput-root': {
+                                                            borderRadius: 3,
+                                                        },
+                                                    }}
+                                                />
+                                            </Box>
 
                                             <TextField
                                                 fullWidth
@@ -485,12 +496,12 @@ export default function ReservePage() {
                                             <Button
                                                 type="submit"
                                                 variant="contained"
-                                                size="large"
+                                                size="medium"
                                                 startIcon={<CheckIcon />}
                                                 sx={{
-                                                    py: 2,
-                                                    px: 4,
-                                                    fontSize: '1.2rem',
+                                                    py: { xs: 1, sm: 1.5, md: 2 },
+                                                    px: { xs: 2, sm: 3, md: 4 },
+                                                    fontSize: { xs: '0.9rem', sm: '1rem', md: '1.2rem' },
                                                     fontWeight: 700,
                                                     borderRadius: 3,
                                                     background: 'linear-gradient(135deg, #4CAF50, #66BB6A)',
@@ -508,10 +519,10 @@ export default function ReservePage() {
                                     </form>
                                 </Paper>
                             </Fade>
-                        </Grid>
+                        </Box>
 
                         {/* Résumé de la réservation */}
-                        <Grid item xs={12} md={4}>
+                        <Box>
                             <Stack spacing={4}>
                                 <Card
                                     sx={{
@@ -619,8 +630,8 @@ export default function ReservePage() {
                                     </Button>
                                 </Card>
                             </Stack>
-                        </Grid>
-                    </Grid>
+                        </Box>
+                    </Box>
                 </Container>
             </Box>
         </Box>

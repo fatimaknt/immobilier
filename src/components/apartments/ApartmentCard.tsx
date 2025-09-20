@@ -4,7 +4,6 @@ import React from 'react';
 import {
     Card,
     CardContent,
-    CardMedia,
     Typography,
     Chip,
     Box,
@@ -20,7 +19,6 @@ import {
     Bathtub as BathroomIcon,
     AspectRatio as SizeIcon,
 } from '@mui/icons-material';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Apartment } from '../../types';
 import { formatPrice } from '@/utils/helpers';
@@ -210,7 +208,13 @@ const ApartmentCard: React.FC<ApartmentCardProps> = ({ apartment, onClick }) => 
                 </Typography>
 
                 {/* Équipements */}
-                <Stack direction="row" spacing={1} sx={{ mb: 3, flexWrap: 'wrap', gap: 1 }}>
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: { xs: 'center', sm: 'flex-start' },
+                    flexWrap: 'wrap',
+                    gap: 1,
+                    mb: 3
+                }}>
                     {apartment.equipment.slice(0, 3).map((equipment, index) => (
                         <Chip
                             key={index}
@@ -225,21 +229,27 @@ const ApartmentCard: React.FC<ApartmentCardProps> = ({ apartment, onClick }) => 
                         />
                     ))}
                     {apartment.equipment.length > 3 && (
-                        <Typography variant="caption" color="text.secondary">
+                        <Typography variant="caption" color="text.secondary" sx={{ alignSelf: 'center' }}>
                             +{apartment.equipment.length - 3} autres
                         </Typography>
                     )}
-                </Stack>
+                </Box>
 
                 {/* Prix et bouton */}
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Box>
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    gap: { xs: 2, sm: 0 }
+                }}>
+                    <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
                         <Typography
                             variant="h5"
                             sx={{
                                 fontWeight: 800,
                                 color: theme.palette.text.primary,
-                                fontSize: '1.5rem',
+                                fontSize: { xs: '1.3rem', sm: '1.5rem' },
                             }}
                         >
                             {formatPrice(apartment.price_per_day)}
@@ -253,15 +263,16 @@ const ApartmentCard: React.FC<ApartmentCardProps> = ({ apartment, onClick }) => 
                         component={Link}
                         href={`/booking?type=apartment&id=${apartment.id}`}
                         variant="contained"
-                        size="small"
+                        size="medium"
                         onClick={(e) => e.stopPropagation()}
                         sx={{
                             borderRadius: 3,
-                            px: 3,
-                            py: 1,
+                            px: { xs: 4, sm: 3 },
+                            py: { xs: 1.5, sm: 1 },
                             fontWeight: 600,
-                            fontSize: '0.8rem',
+                            fontSize: { xs: '0.9rem', sm: '0.8rem' },
                             background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
+                            minWidth: { xs: '120px', sm: 'auto' },
                             '&:hover': {
                                 transform: 'scale(1.05)',
                             },
