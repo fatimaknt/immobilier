@@ -273,20 +273,21 @@ export default function ContactForm() {
                 <Button
                     type="submit"
                     variant="contained"
-                    size="large"
+                    size="medium"
                     disabled={loading}
                     startIcon={<SendIcon />}
                     sx={{
                         width: '100%',
-                        borderRadius: 3,
-                        py: { xs: 1.5, sm: 2, md: 3 },
-                        fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' },
-                        fontWeight: 700,
+                        borderRadius: 2,
+                        py: { xs: 1, sm: 1.2, md: 1.5 },
+                        px: { xs: 2, sm: 3 },
+                        fontSize: { xs: '0.9rem', sm: '1rem' },
+                        fontWeight: 600,
                         background: 'linear-gradient(135deg, #1976d2, #42a5f5)',
                         '&:hover': {
                             background: 'linear-gradient(135deg, #1565c0, #1976d2)',
-                            transform: 'translateY(-2px)',
-                            boxShadow: '0 8px 25px rgba(25,118,210,0.3)',
+                            transform: 'translateY(-1px)',
+                            boxShadow: '0 4px 15px rgba(25,118,210,0.3)',
                         },
                         '&:disabled': {
                             background: '#e0e0e0',
