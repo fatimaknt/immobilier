@@ -8,7 +8,7 @@ const WhatsAppFab: React.FC = () => {
     const theme = useTheme();
 
     const handleWhatsAppClick = () => {
-        const phoneNumber = '+221123456789';
+        const phoneNumber = '+221784929439';
         const message = encodeURIComponent('Bonjour, je souhaite obtenir plus d\'informations sur vos services de location.');
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
         window.open(whatsappUrl, '_blank');

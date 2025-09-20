@@ -2,7 +2,7 @@ import React from 'react';
 
 const WhatsAppFab: React.FC = () => {
     const handleWhatsAppClick = () => {
-        const phoneNumber = '+33123456789'; // Replace with your WhatsApp number
+        const phoneNumber = '+221784929439'; // Replace with your WhatsApp number
         const message = 'Bonjour, je suis intéressé par vos services de location.';
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');

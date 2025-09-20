@@ -229,7 +229,7 @@ const Footer: React.FC = () => {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexDirection: { xs: 'column', sm: 'row' } }}>
                                     <PhoneIcon sx={{ fontSize: 20, color: theme.palette.primary.light }} />
                                     <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                                        +221 12 345 67 89
+                                        +221 78 492 94 39
                                     </Typography>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexDirection: { xs: 'column', sm: 'row' } }}>
@@ -245,7 +245,7 @@ const Footer: React.FC = () => {
                                     </Typography>
                                 </Box>
                                 <Button
-                                    href="https://wa.me/221123456789"
+                                    href="https://wa.me/221784929439"
                                     target="_blank"
                                     startIcon={<WhatsAppIcon />}
                                     variant="contained"
@@ -356,7 +356,7 @@ const Footer: React.FC = () => {
                         Développé par{' '}
                         <Box
                             component="a"
-                            href="tel:+221770874619"
+                            href="tel:+221784929439"
                             sx={{
                                 color: '#FFD700',
                                 textDecoration: 'none',

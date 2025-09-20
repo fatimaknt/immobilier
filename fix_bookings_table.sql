@@ -54,5 +54,5 @@ IF NOT EXISTS idx_bookings_created_at ON bookings
 
 -- Insérer quelques données de test (optionnel)
 -- INSERT INTO bookings (type, entity_id, user_name, user_email, user_phone, start_date, end_date, total_amount, payment_method, notes) VALUES
--- ('apartment', '123e4567-e89b-12d3-a456-426614174000', 'Jean Dupont', 'jean@example.com', '+221701234567', '2024-01-15', '2024-01-20', 50000, 'whatsapp', 'Réservation test'),
--- ('car', '123e4567-e89b-12d3-a456-426614174001', 'Marie Martin', 'marie@example.com', '+221701234568', '2024-01-16', '2024-01-18', 30000, 'whatsapp', 'Location voiture test');
+-- ('apartment', '123e4567-e89b-12d3-a456-426614174000', 'Jean Dupont', 'jean@example.com', '+221784929439', '2024-01-15', '2024-01-20', 50000, 'whatsapp', 'Réservation test'),
+-- ('car', '123e4567-e89b-12d3-a456-426614174001', 'Marie Martin', 'marie@example.com', '+221784929439', '2024-01-16', '2024-01-18', 30000, 'whatsapp', 'Location voiture test');

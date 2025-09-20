@@ -24,45 +24,52 @@ import {
     InputLabel,
     Select,
     MenuItem,
-    Grid,
     useTheme,
-    Fade,
-    Fab,
     Tooltip,
-    Alert,
     Card,
     CardContent,
     InputAdornment,
     Stack,
-    Badge,
 } from '@mui/material';
 import {
     Delete as DeleteIcon,
-    Edit as EditIcon,
     Visibility as ViewIcon,
     BookOnline as BookingIcon,
     ArrowBack as ArrowBackIcon,
     Search as SearchIcon,
-    FilterList as FilterIcon,
+    Refresh as RefreshIcon,
     CheckCircle as ConfirmIcon,
     Cancel as CancelIcon,
-    Refresh as RefreshIcon,
 } from '@mui/icons-material';
 import Link from 'next/link';
-import { Booking } from '@/types';
+// import { Booking } from '@/types';
+
+// Type temporaire pour correspondre à la structure de la base de données
+interface BookingData {
+    id: string;
+    type: 'apartment' | 'car';
+    entity_id: string;
+    user_name: string;
+    user_email: string;
+    user_phone: string;
+    start_date: string;
+    end_date: string;
+    total_amount: number;
+    status: 'pending' | 'confirmed' | 'cancelled';
+    payment_method: string;
+    notes?: string;
+    created_at: string;
+}
 
 export default function AdminBookings() {
     const theme = useTheme();
-    const [bookings, setBookings] = useState<Booking[]>([]);
+    const [bookings, setBookings] = useState<BookingData[]>([]);
     const [loading, setLoading] = useState(true);
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [editingBooking, setEditingBooking] = useState<Booking | null>(null);
     const [viewDialogOpen, setViewDialogOpen] = useState(false);
-    const [viewingBooking, setViewingBooking] = useState<Booking | null>(null);
+    const [viewingBooking, setViewingBooking] = useState<BookingData | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const [statusFilter, setStatusFilter] = useState('all');
     const [typeFilter, setTypeFilter] = useState('all');
-    const [newBookingsCount, setNewBookingsCount] = useState(0);
+    const [statusFilter, setStatusFilter] = useState('all');
 
     useEffect(() => {
         fetchBookings();
@@ -76,12 +83,7 @@ export default function AdminBookings() {
             const data = await response.json();
 
             if (response.ok) {
-                setBookings(data);
-                const newCount = data.filter((booking: Booking) =>
-                    booking.status === 'pending' &&
-                    new Date(booking.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000)
-                ).length;
-                setNewBookingsCount(newCount);
+                setBookings(data as BookingData[]);
             } else {
                 console.error('Erreur lors du chargement des réservations:', data.error);
             }
@@ -92,12 +94,8 @@ export default function AdminBookings() {
         }
     };
 
-    const handleEdit = (booking: Booking) => {
-        setEditingBooking(booking);
-        setDialogOpen(true);
-    };
 
-    const handleView = (booking: Booking) => {
+    const handleView = (booking: BookingData) => {
         setViewingBooking(booking);
         setViewDialogOpen(true);
     };
@@ -146,57 +144,8 @@ export default function AdminBookings() {
         }
     };
 
-    const handleInputChange = (field: keyof Booking, value: any) => {
-        if (editingBooking) {
-            setEditingBooking({ ...editingBooking, [field]: value });
-        }
-    };
 
-    const handleSave = async () => {
-        if (!editingBooking) return;
 
-        try {
-            const response = await fetch(`/api/bookings/${editingBooking.id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(editingBooking),
-            });
-
-            if (response.ok) {
-                setBookings(bookings.map(booking =>
-                    booking.id === editingBooking.id ? editingBooking : booking
-                ));
-                setDialogOpen(false);
-                setEditingBooking(null);
-            } else {
-                const errorData = await response.json();
-                alert(`Erreur lors de la sauvegarde: ${errorData.error}`);
-            }
-        } catch (error) {
-            console.error('Erreur lors de la sauvegarde:', error);
-            alert('Erreur lors de la sauvegarde des modifications');
-        }
-    };
-
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case 'pending': return 'warning';
-            case 'confirmed': return 'success';
-            case 'cancelled': return 'error';
-            default: return 'default';
-        }
-    };
-
-    const getStatusLabel = (status: string) => {
-        switch (status) {
-            case 'pending': return 'En attente';
-            case 'confirmed': return 'Confirmée';
-            case 'cancelled': return 'Annulée';
-            default: return status;
-        }
-    };
 
     const formatPrice = (amount: number) => {
         return new Intl.NumberFormat('fr-FR', {
@@ -218,14 +167,14 @@ export default function AdminBookings() {
 
     const filteredBookings = bookings.filter(booking => {
         const matchesSearch =
-            booking.user_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            booking.user_email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            booking.user_phone.includes(searchTerm);
+            booking.user_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            booking.user_email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            booking.user_phone?.includes(searchTerm);
 
+        const matchesType = typeFilter === 'all' || booking.type?.toLowerCase() === typeFilter;
         const matchesStatus = statusFilter === 'all' || booking.status === statusFilter;
-        const matchesType = typeFilter === 'all' || booking.type === typeFilter;
 
-        return matchesSearch && matchesStatus && matchesType;
+        return matchesSearch && matchesType && matchesStatus;
     });
 
     if (loading) {
@@ -238,7 +187,7 @@ export default function AdminBookings() {
 
     return (
         <Box sx={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
-            <Container maxWidth="xl" sx={{ py: 4 }}>
+            <Container maxWidth="xl" sx={{ py: 15 }}>
                 <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <Link href="/admin">
@@ -256,13 +205,6 @@ export default function AdminBookings() {
                         </Box>
                     </Box>
                     <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                        {newBookingsCount > 0 && (
-                            <Badge badgeContent={newBookingsCount} color="error">
-                                <Alert severity="info" sx={{ mb: 0 }}>
-                                    {newBookingsCount} nouvelle(s) réservation(s)
-                                </Alert>
-                            </Badge>
-                        )}
                         <Button
                             variant="outlined"
                             startIcon={<RefreshIcon />}
@@ -275,8 +217,8 @@ export default function AdminBookings() {
 
                 <Card sx={{ mb: 3 }}>
                     <CardContent>
-                        <Grid container spacing={3} alignItems="center">
-                            <Grid item xs={12} md={4}>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, alignItems: 'center' }}>
+                            <Box sx={{ flex: '1 1 300px', minWidth: 300 }}>
                                 <TextField
                                     fullWidth
                                     placeholder="Rechercher par nom, email ou téléphone..."
@@ -290,8 +232,22 @@ export default function AdminBookings() {
                                         ),
                                     }}
                                 />
-                            </Grid>
-                            <Grid item xs={12} md={3}>
+                            </Box>
+                            <Box sx={{ flex: '1 1 150px', minWidth: 150 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel>Type</InputLabel>
+                                    <Select
+                                        value={typeFilter}
+                                        onChange={(e) => setTypeFilter(e.target.value)}
+                                        label="Type"
+                                    >
+                                        <MenuItem value="all">Tous les types</MenuItem>
+                                        <MenuItem value="apartment">Appartements</MenuItem>
+                                        <MenuItem value="car">Voitures</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                            <Box sx={{ flex: '1 1 150px', minWidth: 150 }}>
                                 <FormControl fullWidth>
                                     <InputLabel>Statut</InputLabel>
                                     <Select
@@ -305,27 +261,13 @@ export default function AdminBookings() {
                                         <MenuItem value="cancelled">Annulées</MenuItem>
                                     </Select>
                                 </FormControl>
-                            </Grid>
-                            <Grid item xs={12} md={3}>
-                                <FormControl fullWidth>
-                                    <InputLabel>Type</InputLabel>
-                                    <Select
-                                        value={typeFilter}
-                                        onChange={(e) => setTypeFilter(e.target.value)}
-                                        label="Type"
-                                    >
-                                        <MenuItem value="all">Tous les types</MenuItem>
-                                        <MenuItem value="apartment">Appartements</MenuItem>
-                                        <MenuItem value="car">Voitures</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} md={2}>
+                            </Box>
+                            <Box sx={{ flex: '0 0 auto' }}>
                                 <Typography variant="body2" color="text.secondary">
                                     {filteredBookings.length} réservation(s)
                                 </Typography>
-                            </Grid>
-                        </Grid>
+                            </Box>
+                        </Box>
                     </CardContent>
                 </Card>
 
@@ -380,8 +322,10 @@ export default function AdminBookings() {
                                     </TableCell>
                                     <TableCell>
                                         <Chip
-                                            label={getStatusLabel(booking.status)}
-                                            color={getStatusColor(booking.status) as any}
+                                            label={booking.status === 'pending' ? 'En attente' :
+                                                booking.status === 'confirmed' ? 'Confirmée' : 'Annulée'}
+                                            color={booking.status === 'pending' ? 'warning' :
+                                                booking.status === 'confirmed' ? 'success' : 'error'}
                                             size="small"
                                         />
                                     </TableCell>
@@ -398,14 +342,6 @@ export default function AdminBookings() {
                                                     onClick={() => handleView(booking)}
                                                 >
                                                     <ViewIcon />
-                                                </IconButton>
-                                            </Tooltip>
-                                            <Tooltip title="Modifier">
-                                                <IconButton
-                                                    size="small"
-                                                    onClick={() => handleEdit(booking)}
-                                                >
-                                                    <EditIcon />
                                                 </IconButton>
                                             </Tooltip>
                                             {booking.status === 'pending' && (
@@ -461,8 +397,8 @@ export default function AdminBookings() {
                 <DialogTitle>Détails de la réservation</DialogTitle>
                 <DialogContent>
                     {viewingBooking && (
-                        <Grid container spacing={3} sx={{ mt: 1 }}>
-                            <Grid item xs={12} md={6}>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, mt: 1 }}>
+                            <Box sx={{ flex: '1 1 300px', minWidth: 300 }}>
                                 <Typography variant="subtitle2" gutterBottom>Client</Typography>
                                 <Typography variant="body1" gutterBottom>
                                     {viewingBooking.user_name}
@@ -473,8 +409,8 @@ export default function AdminBookings() {
                                 <Typography variant="body2" color="text.secondary">
                                     {viewingBooking.user_phone}
                                 </Typography>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
+                            </Box>
+                            <Box sx={{ flex: '1 1 300px', minWidth: 300 }}>
                                 <Typography variant="subtitle2" gutterBottom>Réservation</Typography>
                                 <Typography variant="body1" gutterBottom>
                                     {viewingBooking.type === 'apartment' ? 'Appartement' : 'Voiture'}
@@ -482,8 +418,8 @@ export default function AdminBookings() {
                                 <Typography variant="body2" color="text.secondary">
                                     ID: {viewingBooking.entity_id}
                                 </Typography>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
+                            </Box>
+                            <Box sx={{ flex: '1 1 300px', minWidth: 300 }}>
                                 <Typography variant="subtitle2" gutterBottom>Période</Typography>
                                 <Typography variant="body1">
                                     Du {formatDate(viewingBooking.start_date)}
@@ -491,20 +427,14 @@ export default function AdminBookings() {
                                 <Typography variant="body1">
                                     Au {formatDate(viewingBooking.end_date)}
                                 </Typography>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
+                            </Box>
+                            <Box sx={{ flex: '1 1 300px', minWidth: 300 }}>
                                 <Typography variant="subtitle2" gutterBottom>Montant</Typography>
                                 <Typography variant="h6" color="primary">
                                     {formatPrice(viewingBooking.total_amount)}
                                 </Typography>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Typography variant="subtitle2" gutterBottom>Notes</Typography>
-                                <Typography variant="body1">
-                                    {viewingBooking.notes || 'Aucune note'}
-                                </Typography>
-                            </Grid>
-                        </Grid>
+                            </Box>
+                        </Box>
                     )}
                 </DialogContent>
                 <DialogActions>
@@ -512,104 +442,6 @@ export default function AdminBookings() {
                 </DialogActions>
             </Dialog>
 
-            <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="md" fullWidth>
-                <DialogTitle>Modifier la réservation</DialogTitle>
-                <DialogContent>
-                    {editingBooking && (
-                        <Grid container spacing={3} sx={{ mt: 1 }}>
-                            <Grid item xs={12} md={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Nom du client"
-                                    value={editingBooking.user_name}
-                                    onChange={(e) => handleInputChange('user_name', e.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Email"
-                                    value={editingBooking.user_email}
-                                    onChange={(e) => handleInputChange('user_email', e.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Téléphone"
-                                    value={editingBooking.user_phone}
-                                    onChange={(e) => handleInputChange('user_phone', e.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <FormControl fullWidth>
-                                    <InputLabel>Statut</InputLabel>
-                                    <Select
-                                        value={editingBooking.status}
-                                        onChange={(e) => handleInputChange('status', e.target.value)}
-                                        label="Statut"
-                                    >
-                                        <MenuItem value="pending">En attente</MenuItem>
-                                        <MenuItem value="confirmed">Confirmée</MenuItem>
-                                        <MenuItem value="cancelled">Annulée</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Date de début"
-                                    type="date"
-                                    value={editingBooking.start_date}
-                                    onChange={(e) => handleInputChange('start_date', e.target.value)}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Date de fin"
-                                    type="date"
-                                    value={editingBooking.end_date}
-                                    onChange={(e) => handleInputChange('end_date', e.target.value)}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Montant total"
-                                    type="number"
-                                    value={editingBooking.total_amount}
-                                    onChange={(e) => handleInputChange('total_amount', parseFloat(e.target.value))}
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <TextField
-                                    fullWidth
-                                    label="Méthode de paiement"
-                                    value={editingBooking.payment_method}
-                                    onChange={(e) => handleInputChange('payment_method', e.target.value)}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    label="Notes"
-                                    multiline
-                                    rows={3}
-                                    value={editingBooking.notes || ''}
-                                    onChange={(e) => handleInputChange('notes', e.target.value)}
-                                />
-                            </Grid>
-                        </Grid>
-                    )}
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setDialogOpen(false)}>Annuler</Button>
-                    <Button onClick={handleSave} variant="contained">Sauvegarder</Button>
-                </DialogActions>
-            </Dialog>
         </Box>
     );
 }

@@ -691,7 +691,7 @@ export default function ApartmentsPage() {
                                 <Grid item xs={12} sm={6} md={4}>
                                     <Button
                                         component="a"
-                                        href="https://wa.me/221770874619?text=Bonjour,%20j'aimerais%20des%20informations%20sur%20vos%20appartements."
+                                        href="https://wa.me/221784929439?text=Bonjour,%20j'aimerais%20des%20informations%20sur%20vos%20appartements."
                                         target="_blank"
                                         variant="contained"
                                         size="large"
@@ -711,7 +711,7 @@ export default function ApartmentsPage() {
                                 <Grid item xs={12} sm={6} md={4}>
                                     <Button
                                         component="a"
-                                        href="tel:+221770874619"
+                                        href="tel:+221784929439"
                                         variant="outlined"
                                         size="large"
                                         fullWidth

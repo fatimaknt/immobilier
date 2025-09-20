@@ -174,8 +174,8 @@ Le dashboard admin est entièrement responsive :
 
 Pour toute question ou problème :
 - 📧 Email : contact@residencecedo.sn
-- 📱 Téléphone : +221 12 345 67 89
-- 💬 WhatsApp : +221 12 345 67 89
+- 📱 Téléphone : +221 78 492 94 39
+- 💬 WhatsApp : +221 78 492 94 39
 
 ---
 

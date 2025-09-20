@@ -192,12 +192,12 @@ export default function PrivacyPage() {
                                     </Link>
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
-                                    Téléphone : +221 12 345 67 89
+                                    Téléphone : +221 78 492 94 39
                                 </Typography>
                                 <Typography variant="body1" sx={{ mb: 1 }}>
                                     WhatsApp :
-                                    <Link href="https://wa.me/221123456789" target="_blank" sx={{ ml: 1, color: theme.palette.primary.main }}>
-                                        +221 12 345 67 89
+                                    <Link href="https://wa.me/221784929439" target="_blank" sx={{ ml: 1, color: theme.palette.primary.main }}>
+                                        +221 78 492 94 39
                                     </Link>
                                 </Typography>
                                 <Typography variant="body1">

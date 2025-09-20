@@ -56,14 +56,6 @@ export default function MessagesPage() {
     const [openDialog, setOpenDialog] = useState(false);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        fetchMessages();
-    }, []);
-
-    useEffect(() => {
-        filterMessages();
-    }, [filterMessages]);
-
     const fetchMessages = async () => {
         try {
             setLoading(true);
@@ -75,6 +67,7 @@ export default function MessagesPage() {
                 setError('Erreur lors du chargement des messages');
             }
         } catch (err) {
+            console.error('Erreur lors du chargement des messages:', err);
             setError('Erreur de connexion');
         } finally {
             setLoading(false);
@@ -99,6 +92,14 @@ export default function MessagesPage() {
 
         setFilteredMessages(filtered);
     }, [messages, searchTerm, statusFilter]);
+
+    useEffect(() => {
+        fetchMessages();
+    }, []);
+
+    useEffect(() => {
+        filterMessages();
+    }, [filterMessages]);
 
     const markAsRead = async (messageId: string) => {
         try {

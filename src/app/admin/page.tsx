@@ -42,6 +42,12 @@ interface DashboardStats {
     totalRevenue: number;
     newMessages: number;
     approvedTestimonials: number;
+    pendingTestimonials: number;
+    trends: {
+        apartmentsThisMonth: number;
+        carsThisMonth: number;
+        revenueGrowth: number;
+    };
 }
 
 export default function AdminDashboard() {
@@ -54,6 +60,12 @@ export default function AdminDashboard() {
         totalRevenue: 0,
         newMessages: 0,
         approvedTestimonials: 0,
+        pendingTestimonials: 0,
+        trends: {
+            apartmentsThisMonth: 0,
+            carsThisMonth: 0,
+            revenueGrowth: 0,
+        },
     });
     const [loading, setLoading] = useState(true);
 
@@ -63,17 +75,13 @@ export default function AdminDashboard() {
 
     const fetchDashboardStats = async () => {
         try {
-            // Simuler les données pour l'instant
-            // En production, ces données viendront de l'API
-            setStats({
-                totalApartments: 29,
-                totalCars: 8,
-                totalBookings: 156,
-                pendingBookings: 12,
-                totalRevenue: 2450000,
-                newMessages: 5,
-                approvedTestimonials: 23,
-            });
+            const response = await fetch('/api/stats');
+            if (response.ok) {
+                const data = await response.json();
+                setStats(data);
+            } else {
+                console.error('Erreur lors du chargement des statistiques');
+            }
         } catch (error) {
             console.error('Erreur lors du chargement des statistiques:', error);
         } finally {
@@ -126,14 +134,14 @@ export default function AdminDashboard() {
             value: stats.totalApartments,
             icon: <ApartmentIcon />,
             color: '#1976d2',
-            trend: '+3 ce mois',
+            trend: stats.trends.apartmentsThisMonth > 0 ? `+${stats.trends.apartmentsThisMonth} ce mois` : 'Aucun ce mois',
         },
         {
             title: 'Voitures',
             value: stats.totalCars,
             icon: <CarIcon />,
             color: '#2e7d32',
-            trend: '+1 ce mois',
+            trend: stats.trends.carsThisMonth > 0 ? `+${stats.trends.carsThisMonth} ce mois` : 'Aucune ce mois',
         },
         {
             title: 'Réservations',
@@ -147,14 +155,14 @@ export default function AdminDashboard() {
             value: formatPrice(stats.totalRevenue),
             icon: <MoneyIcon />,
             color: '#4caf50',
-            trend: '+15% ce mois',
+            trend: stats.trends.revenueGrowth > 0 ? `+${stats.trends.revenueGrowth}% ce mois` : stats.trends.revenueGrowth < 0 ? `${stats.trends.revenueGrowth}% ce mois` : 'Stable ce mois',
         },
         {
             title: 'Messages',
             value: stats.newMessages,
             icon: <ContactIcon />,
             color: '#7b1fa2',
-            trend: 'Non lus',
+            trend: stats.newMessages > 0 ? 'Non lus' : 'Tous lus',
         },
         {
             title: 'Avis',
@@ -182,12 +190,12 @@ export default function AdminDashboard() {
             backgroundColor: '#f0f9ff',
             py: 4
         }}>
-            <Container maxWidth="lg" sx={{ pb: 6, pt: 8 }}>
+            <Container maxWidth="xl" sx={{ pb: 6, pt: 8 }}>
 
                 {/* Statistiques compactes */}
                 <Grid container spacing={3} sx={{ mb: 6 }}>
                     {statCards.map((stat, index) => (
-                        <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
+                        <Grid item xs={12} sm={6} md={4} key={index}>
                             <Fade in timeout={1000 + index * 200}>
                                 <Card
                                     sx={{
@@ -198,6 +206,7 @@ export default function AdminDashboard() {
                                         transition: 'all 0.3s ease',
                                         height: '100%',
                                         minHeight: 160,
+                                        width: '100%',
                                         '&:hover': {
                                             transform: 'translateY(-2px)',
                                             boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
@@ -402,7 +411,7 @@ export default function AdminDashboard() {
                                 }}>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
                                         <Chip
-                                            label="12"
+                                            label={stats.pendingBookings}
                                             sx={{
                                                 background: '#ef4444',
                                                 color: 'white',
@@ -435,7 +444,7 @@ export default function AdminDashboard() {
                                 }}>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
                                         <Chip
-                                            label="5"
+                                            label={stats.newMessages}
                                             sx={{
                                                 background: '#f59e0b',
                                                 color: 'white',
@@ -468,7 +477,7 @@ export default function AdminDashboard() {
                                 }}>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
                                         <Chip
-                                            label="3"
+                                            label={stats.pendingTestimonials}
                                             sx={{
                                                 background: '#10b981',
                                                 color: 'white',

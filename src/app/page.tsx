@@ -295,7 +295,7 @@ export default function HomePage() {
                                             }}
                                         >
                                             <IconButton
-                                                href="https://wa.me/221123456789"
+                                                href="https://wa.me/221784929439"
                                                 target="_blank"
                                                 sx={{
                                                     backgroundColor: '#25D366',
@@ -312,7 +312,7 @@ export default function HomePage() {
                                                 <WhatsAppIcon />
                                             </IconButton>
                                             <IconButton
-                                                href="tel:+221123456789"
+                                                href="tel:+221784929439"
                                                 sx={{
                                                     backgroundColor: 'rgba(255,255,255,0.2)',
                                                     color: 'white',
@@ -329,7 +329,7 @@ export default function HomePage() {
                                                 <PhoneIcon />
                                             </IconButton>
                                             <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                                                📞 +221 12 345 67 89
+                                                📞 +221 78 492 94 39
                                             </Typography>
                                         </Stack>
                                     </Box>

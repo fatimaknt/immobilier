@@ -1,9 +1,9 @@
 export const COMPANY_INFO = {
     name: 'Location Pro',
     tagline: 'Votre partenaire de confiance pour la location',
-    phone: '+221 77 123 45 67',
+    phone: '+221 78 492 94 39',
     email: 'contact@locationpro.sn',
-    whatsapp: '+221771234567',
+    whatsapp: '+221784929439',
     address: 'Dakar, Sénégal'
 };
 

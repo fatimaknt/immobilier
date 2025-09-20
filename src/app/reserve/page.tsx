@@ -602,7 +602,7 @@ export default function ReservePage() {
                                         Notre équipe est disponible pour vous accompagner dans votre réservation
                                     </Typography>
                                     <Button
-                                        href="https://wa.me/221123456789"
+                                        href="https://wa.me/221784929439"
                                         target="_blank"
                                         variant="outlined"
                                         fullWidth
