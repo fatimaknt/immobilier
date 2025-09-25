@@ -40,6 +40,7 @@ interface DashboardStats {
     totalBookings: number;
     pendingBookings: number;
     totalRevenue: number;
+    totalMessages: number;
     newMessages: number;
     approvedTestimonials: number;
     pendingTestimonials: number;
@@ -58,6 +59,7 @@ export default function AdminDashboard() {
         totalBookings: 0,
         pendingBookings: 0,
         totalRevenue: 0,
+        totalMessages: 0,
         newMessages: 0,
         approvedTestimonials: 0,
         pendingTestimonials: 0,
@@ -159,10 +161,10 @@ export default function AdminDashboard() {
         },
         {
             title: 'Messages',
-            value: stats.newMessages,
+            value: stats.totalMessages,
             icon: <ContactIcon />,
             color: '#7b1fa2',
-            trend: stats.newMessages > 0 ? 'Non lus' : 'Tous lus',
+            trend: `${stats.newMessages} nouveaux`,
         },
         {
             title: 'Avis',
@@ -373,131 +375,7 @@ export default function AdminDashboard() {
                 </Box>
 
                 {/* Alertes et notifications épurées */}
-                <Fade in timeout={1600}>
-                    <Paper
-                        sx={{
-                            mt: 6,
-                            p: 4,
-                            borderRadius: 3,
-                            background: 'white',
-                            border: '1px solid #e2e8f0',
-                            boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-                        }}
-                    >
-                        <Typography variant="h4" sx={{
-                            fontWeight: 800,
-                            mb: 4,
-                            color: '#1e293b',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 2
-                        }}>
-                            <NotificationsIcon sx={{ fontSize: 28, color: '#f59e0b' }} />
-                            Alertes et Notifications
-                        </Typography>
-
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} md={4}>
-                                <Box sx={{
-                                    p: 3,
-                                    borderRadius: 3,
-                                    background: '#fef2f2',
-                                    border: '1px solid #fecaca',
-                                    transition: 'all 0.2s ease',
-                                    '&:hover': {
-                                        transform: 'translateY(-2px)',
-                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                                    }
-                                }}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
-                                        <Chip
-                                            label={stats.pendingBookings}
-                                            sx={{
-                                                background: '#ef4444',
-                                                color: 'white',
-                                                fontWeight: 700,
-                                                fontSize: '0.8rem'
-                                            }}
-                                            size="small"
-                                        />
-                                        <Typography variant="body2" sx={{ color: '#374151', fontWeight: 600 }}>
-                                            Réservations en attente
-                                        </Typography>
-                                    </Box>
-                                    <Typography variant="caption" sx={{ color: '#6b7280' }}>
-                                        Confirmation requise
-                                    </Typography>
-                                </Box>
-                            </Grid>
-
-                            <Grid item xs={12} md={4}>
-                                <Box sx={{
-                                    p: 3,
-                                    borderRadius: 3,
-                                    background: '#fffbeb',
-                                    border: '1px solid #fed7aa',
-                                    transition: 'all 0.2s ease',
-                                    '&:hover': {
-                                        transform: 'translateY(-2px)',
-                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                                    }
-                                }}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
-                                        <Chip
-                                            label={stats.newMessages}
-                                            sx={{
-                                                background: '#f59e0b',
-                                                color: 'white',
-                                                fontWeight: 700,
-                                                fontSize: '0.8rem'
-                                            }}
-                                            size="small"
-                                        />
-                                        <Typography variant="body2" sx={{ color: '#374151', fontWeight: 600 }}>
-                                            Nouveaux messages
-                                        </Typography>
-                                    </Box>
-                                    <Typography variant="caption" sx={{ color: '#6b7280' }}>
-                                        Réponse requise
-                                    </Typography>
-                                </Box>
-                            </Grid>
-
-                            <Grid item xs={12} md={4}>
-                                <Box sx={{
-                                    p: 3,
-                                    borderRadius: 3,
-                                    background: '#f0fdf4',
-                                    border: '1px solid #bbf7d0',
-                                    transition: 'all 0.2s ease',
-                                    '&:hover': {
-                                        transform: 'translateY(-2px)',
-                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                                    }
-                                }}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
-                                        <Chip
-                                            label={stats.pendingTestimonials}
-                                            sx={{
-                                                background: '#10b981',
-                                                color: 'white',
-                                                fontWeight: 700,
-                                                fontSize: '0.8rem'
-                                            }}
-                                            size="small"
-                                        />
-                                        <Typography variant="body2" sx={{ color: '#374151', fontWeight: 600 }}>
-                                            Avis à approuver
-                                        </Typography>
-                                    </Box>
-                                    <Typography variant="caption" sx={{ color: '#6b7280' }}>
-                                        Modération requise
-                                    </Typography>
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    </Paper>
-                </Fade>
+               
             </Container>
         </Box >
     );

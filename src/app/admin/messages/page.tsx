@@ -58,19 +58,29 @@ export default function MessagesPage() {
 
     const fetchMessages = async () => {
         try {
+            console.log('🔄 Début du chargement des messages...');
             setLoading(true);
+            setError('');
+
             const response = await fetch('/api/contact');
+            console.log('📡 Réponse API:', response.status, response.ok);
+
             if (response.ok) {
                 const data = await response.json();
+                console.log('📨 Messages reçus:', data);
+                console.log('📊 Nombre de messages:', data.length);
                 setMessages(data);
             } else {
-                setError('Erreur lors du chargement des messages');
+                const errorData = await response.json();
+                console.error('❌ Erreur API:', errorData);
+                setError(`Erreur lors du chargement des messages: ${errorData.error || 'Erreur inconnue'}`);
             }
         } catch (err) {
-            console.error('Erreur lors du chargement des messages:', err);
-            setError('Erreur de connexion');
+            console.error('❌ Erreur lors du chargement des messages:', err);
+            setError('Erreur de connexion au serveur');
         } finally {
             setLoading(false);
+            console.log('✅ Chargement terminé');
         }
     };
 
@@ -262,7 +272,7 @@ export default function MessagesPage() {
                 <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
                     <Chip
                         icon={<FilterIcon />}
-                        label={`Total: ${filteredMessages.length}`}
+                        label={`Total: ${messages.length} messages`}
                         color="primary"
                         variant="outlined"
                     />
@@ -281,6 +291,11 @@ export default function MessagesPage() {
                         color="success"
                         variant="outlined"
                     />
+                    <Chip
+                        label={`Affichés: ${filteredMessages.length}`}
+                        color="info"
+                        variant="outlined"
+                    />
                 </Box>
             </Box>
 
@@ -296,6 +311,14 @@ export default function MessagesPage() {
                                 ? 'Aucun message ne correspond à vos critères de recherche.'
                                 : 'Aucun message de contact reçu pour le moment.'}
                         </Typography>
+                        <Box sx={{ mt: 3, p: 2, backgroundColor: 'grey.100', borderRadius: 2 }}>
+                            <Typography variant="body2" color="text.secondary">
+                                🔍 Debug: Total messages: {messages.length} | Filtres: {filteredMessages.length}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                📡 Status: {loading ? 'Chargement...' : 'Terminé'} | Erreur: {error || 'Aucune'}
+                            </Typography>
+                        </Box>
                     </CardContent>
                 </Card>
             ) : (
@@ -452,6 +475,46 @@ export default function MessagesPage() {
                                         {selectedMessage.message}
                                     </Typography>
                                 </Box>
+                            </Box>
+
+                            <Box>
+                                <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+                                    💰 Tarifs disponibles
+                                </Typography>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm={6}>
+                                        <Box sx={{ p: 2, backgroundColor: 'primary.50', borderRadius: 2, border: '1px solid', borderColor: 'primary.200' }}>
+                                            <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'primary.main', mb: 1 }}>
+                                                🏠 Appartements
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                • Studio: 15,000 - 20,000 FCFA/jour
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                • 2-3 pièces: 18,000 - 30,000 FCFA/jour
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                • 4+ pièces: 30,000 - 60,000 FCFA/jour
+                                            </Typography>
+                                        </Box>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <Box sx={{ p: 2, backgroundColor: 'secondary.50', borderRadius: 2, border: '1px solid', borderColor: 'secondary.200' }}>
+                                            <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'secondary.main', mb: 1 }}>
+                                                🚗 Voitures
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                • Compact: 25,000 - 30,000 FCFA/jour
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                • SUV: 30,000 - 50,000 FCFA/jour
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                • Premium: 50,000 - 65,000 FCFA/jour
+                                            </Typography>
+                                        </Box>
+                                    </Grid>
+                                </Grid>
                             </Box>
 
                             <Typography variant="caption" color="text.secondary">

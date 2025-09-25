@@ -34,6 +34,7 @@ export async function GET() {
         const totalRevenue = bookingsData?.reduce((sum, b) => sum + (b.total_amount || 0), 0) || 0
 
         // Calculer les statistiques des messages
+        const totalMessages = messagesData?.length || 0
         const newMessages = messagesData?.filter(m => m.status === 'new').length || 0
 
         // Calculer les statistiques des témoignages
@@ -90,6 +91,7 @@ export async function GET() {
             totalBookings,
             pendingBookings,
             totalRevenue: Math.round(totalRevenue),
+            totalMessages,
             newMessages,
             approvedTestimonials,
             pendingTestimonials,

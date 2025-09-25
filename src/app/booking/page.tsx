@@ -159,21 +159,39 @@ export default function BookingPage() {
         setIsSubmitting(true);
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
+            // Préparer les données pour l'API
             const bookingData = {
                 type: bookingType,
-                itemId: selectedItem,
-                ...formData,
-                totalPrice: calculateTotal(),
-                createdAt: new Date().toISOString()
+                entity_id: selectedItem, // Utiliser l'ID de l'item sélectionné
+                user_name: formData.customerName,
+                user_email: formData.customerEmail,
+                user_phone: formData.customerPhone,
+                start_date: formData.startDate,
+                end_date: formData.endDate,
+                total_amount: calculateTotal(),
+                payment_method: 'whatsapp', // Par défaut
+                notes: formData.message || 'Réservation via site web'
             };
 
-            console.log('Réservation:', bookingData);
-            setSubmitSuccess(true);
+            console.log('📝 Envoi de la réservation:', bookingData);
 
-            const itemName = getItemTitle(selectedItemData!);
-            const whatsappMessage = `Nouvelle réservation:
+            // Sauvegarder dans la base de données
+            const response = await fetch('/api/bookings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookingData)
+            });
+
+            if (response.ok) {
+                const savedBooking = await response.json();
+                console.log('✅ Réservation sauvegardée:', savedBooking);
+                setSubmitSuccess(true);
+
+                // Envoyer le message WhatsApp
+                const itemName = getItemTitle(selectedItemData!);
+                const whatsappMessage = `Nouvelle réservation:
 ${bookingType === 'apartment' ? 'Appartement' : 'Voiture'}: ${itemName}
 Du: ${formData.startDate}
 Au: ${formData.endDate}
@@ -183,12 +201,18 @@ Téléphone: ${formData.customerPhone}
 Total: ${formatPrice(calculateTotal())}
 Message: ${formData.message}`;
 
-            setTimeout(() => {
-                window.open(`https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-            }, 1000);
+                setTimeout(() => {
+                    window.open(`https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+                }, 1000);
+            } else {
+                const errorData = await response.json();
+                console.error('❌ Erreur lors de la sauvegarde:', errorData);
+                alert('Erreur lors de la sauvegarde de la réservation. Veuillez réessayer.');
+            }
 
         } catch (error) {
-            console.error('Erreur lors de la réservation:', error);
+            console.error('❌ Erreur lors de la réservation:', error);
+            alert('Erreur de connexion. Veuillez réessayer.');
         } finally {
             setIsSubmitting(false);
         }

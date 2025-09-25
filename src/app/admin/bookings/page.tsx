@@ -24,7 +24,6 @@ import {
     InputLabel,
     Select,
     MenuItem,
-    useTheme,
     Tooltip,
     Card,
     CardContent,
@@ -62,9 +61,9 @@ interface BookingData {
 }
 
 export default function AdminBookings() {
-    const theme = useTheme();
     const [bookings, setBookings] = useState<BookingData[]>([]);
     const [loading, setLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('');
     const [viewDialogOpen, setViewDialogOpen] = useState(false);
     const [viewingBooking, setViewingBooking] = useState<BookingData | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
@@ -79,18 +78,47 @@ export default function AdminBookings() {
 
     const fetchBookings = async () => {
         try {
-            const response = await fetch('/api/bookings');
-            const data = await response.json();
+            console.log('🔄 Chargement des réservations...');
+            setLoading(true);
+            setErrorMessage('');
+
+            const response = await fetch('/api/bookings', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                cache: 'no-cache' // Éviter le cache
+            });
+
+            console.log('📡 Réponse API réservations:', response.status, response.ok);
 
             if (response.ok) {
-                setBookings(data as BookingData[]);
+                const data = await response.json();
+                console.log('📊 Données reçues:', data);
+
+                // Nettoyer les données côté client aussi
+                const cleanedData = (data || []).map((booking: BookingData) => ({
+                    ...booking,
+                    start_date: booking.start_date || '',
+                    end_date: booking.end_date || '',
+                    total_amount: Number(booking.total_amount) || 0,
+                    created_at: booking.created_at || new Date().toISOString()
+                }));
+
+                setBookings(cleanedData);
+                setErrorMessage('');
+                console.log('✅ Réservations chargées:', cleanedData.length);
             } else {
-                console.error('Erreur lors du chargement des réservations:', data.error);
+                const errorData = await response.json();
+                console.error('❌ Erreur API réservations:', errorData);
+                setErrorMessage(`Erreur: ${errorData.error || 'Impossible de charger les réservations'}`);
             }
         } catch (error) {
-            console.error('Erreur lors du chargement des réservations:', error);
+            console.error('❌ Erreur lors du chargement des réservations:', error);
+            setErrorMessage('Erreur de connexion au serveur');
         } finally {
             setLoading(false);
+            console.log('✅ Chargement des réservations terminé');
         }
     };
 
@@ -120,6 +148,32 @@ export default function AdminBookings() {
         }
     };
 
+    // Fonctions de formatage
+    const formatDate = (dateString: string) => {
+        if (!dateString) return 'Date invalide';
+        try {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fr-FR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        } catch (error) {
+            console.error('Erreur formatage date:', error);
+            return 'Date invalide';
+        }
+    };
+
+    const formatPrice = (amount: number) => {
+        if (!amount || isNaN(amount)) return '0 FCFA';
+        return new Intl.NumberFormat('fr-FR', {
+            style: 'currency',
+            currency: 'XOF',
+            minimumFractionDigits: 0,
+        }).format(amount);
+    };
+
+
     const handleStatusUpdate = async (id: string, newStatus: 'pending' | 'confirmed' | 'cancelled') => {
         try {
             const response = await fetch(`/api/bookings/${id}`, {
@@ -147,23 +201,6 @@ export default function AdminBookings() {
 
 
 
-    const formatPrice = (amount: number) => {
-        return new Intl.NumberFormat('fr-FR', {
-            style: 'currency',
-            currency: 'XOF',
-            minimumFractionDigits: 0,
-        }).format(amount);
-    };
-
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString('fr-FR', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    };
 
     const filteredBookings = bookings.filter(booking => {
         const matchesSearch =
