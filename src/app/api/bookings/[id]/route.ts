@@ -3,10 +3,10 @@ import { supabaseAdmin } from '@/lib/supabase'
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = params
+        const { id } = await params
         const body = await request.json()
         const { status } = body
 
@@ -33,10 +33,10 @@ export async function PATCH(
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = params
+        const { id } = await params
 
         const { error } = await supabaseAdmin
             .from('bookings')

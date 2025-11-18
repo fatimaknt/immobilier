@@ -24,10 +24,6 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // Configuration Turbopack
-  turbopack: {
-    root: '/Users/pro/immobilier/location-site'
-  },
   // Autres configurations si nécessaire
   experimental: {
     optimizePackageImports: ['@heroicons/react']

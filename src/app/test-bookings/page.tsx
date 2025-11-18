@@ -2,9 +2,32 @@
 
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, Alert, CircularProgress, Card, CardContent } from '@mui/material';
+import {
+    Science as ScienceIcon,
+    Send as SendIcon,
+    Inbox as InboxIcon,
+    Error as ErrorIcon,
+    CheckCircle as CheckIcon,
+    BarChart as BarChartIcon,
+} from '@mui/icons-material';
+
+interface BookingData {
+    id?: string;
+    type: string;
+    user_name: string;
+    user_email: string;
+    user_phone: string;
+    start_date: string;
+    end_date: string;
+    total_amount?: number;
+    status?: string;
+    payment_method?: string;
+    notes?: string;
+    created_at?: string;
+}
 
 export default function TestBookingsPage() {
-    const [bookings, setBookings] = useState<any[]>([]);
+    const [bookings, setBookings] = useState<BookingData[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -13,21 +36,21 @@ export default function TestBookingsPage() {
         setError('');
 
         try {
-            console.log('🧪 Test de l\'API /api/bookings...');
+            console.log('Test de l\'API /api/bookings...');
             const response = await fetch('/api/bookings');
-            console.log('📡 Réponse:', response.status, response.ok);
+            console.log('Réponse:', response.status, response.ok);
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('📨 Données reçues:', data);
+                console.log('Données reçues:', data);
                 setBookings(data);
             } else {
                 const errorData = await response.json();
-                console.error('❌ Erreur:', errorData);
+                console.error('Erreur:', errorData);
                 setError(`Erreur ${response.status}: ${errorData.error || 'Inconnue'}`);
             }
         } catch (err) {
-            console.error('❌ Erreur de connexion:', err);
+            console.error('Erreur de connexion:', err);
             setError('Erreur de connexion');
         } finally {
             setLoading(false);
@@ -39,7 +62,7 @@ export default function TestBookingsPage() {
         setError('');
 
         try {
-            console.log('🧪 Création d\'une réservation de test...');
+            console.log('Création d\'une réservation de test...');
             const testBooking = {
                 type: 'apartment',
                 entity_id: 'test-apartment-id',
@@ -61,20 +84,20 @@ export default function TestBookingsPage() {
                 body: JSON.stringify(testBooking)
             });
 
-            console.log('📡 Réponse création:', response.status, response.ok);
+            console.log('Réponse création:', response.status, response.ok);
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('✅ Réservation créée:', data);
+                console.log('Réservation créée:', data);
                 // Recharger la liste
                 testBookingsAPI();
             } else {
                 const errorData = await response.json();
-                console.error('❌ Erreur création:', errorData);
+                console.error('Erreur création:', errorData);
                 setError(`Erreur création: ${errorData.error || 'Inconnue'}`);
             }
         } catch (err) {
-            console.error('❌ Erreur création:', err);
+            console.error('Erreur création:', err);
             setError('Erreur de connexion');
         } finally {
             setLoading(false);
@@ -83,8 +106,8 @@ export default function TestBookingsPage() {
 
     return (
         <Box sx={{ p: 4 }}>
-            <Typography variant="h4" sx={{ mb: 4 }}>
-                🧪 Test des Réservations
+            <Typography variant="h4" sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 1 }}>
+                <ScienceIcon /> Test des Réservations
             </Typography>
 
             <Box sx={{ mb: 4, display: 'flex', gap: 2 }}>
@@ -112,8 +135,8 @@ export default function TestBookingsPage() {
             )}
 
             <Box sx={{ mb: 2 }}>
-                <Typography variant="h6">
-                    📊 Résultats ({bookings.length} réservations)
+                <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <BarChartIcon /> Résultats ({bookings.length} réservations)
                 </Typography>
             </Box>
 

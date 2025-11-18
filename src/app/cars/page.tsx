@@ -29,6 +29,9 @@ import {
     Security as SecurityIcon,
     LocalGasStation as GasIcon,
     Smartphone as PhoneIcon,
+    Star as StarIcon,
+    WhatsApp as WhatsAppIcon,
+    Phone as PhoneCallIcon,
 } from '@mui/icons-material';
 import Image from 'next/image';
 import CarCard from '@/components/cars/CarCard';
@@ -294,10 +297,12 @@ export default function CarsPage() {
                                     color: theme.palette.text.primary,
                                 }}
                             >
-                                ⭐ Nos avantages
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <StarIcon /> Nos avantages
+                                </Box>
                             </Typography>
                             <Typography variant="h6" color="text.secondary">
-                                Une flotte moderne et un service d'exception
+                                Une flotte moderne et un service d&apos;exception
                             </Typography>
                         </Box>
                     </Fade>
@@ -582,7 +587,7 @@ export default function CarsPage() {
                     <Fade in timeout={1600}>
                         <Box textAlign="center">
                             <Typography variant="h3" sx={{ fontWeight: 800, mb: 3 }}>
-                                Besoin d'aide pour choisir ?
+                                Besoin d&apos;aide pour choisir ?
                             </Typography>
                             <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
                                 Notre équipe vous accompagne dans le choix du véhicule parfait
@@ -605,7 +610,9 @@ export default function CarsPage() {
                                             },
                                         }}
                                     >
-                                        💬 WhatsApp
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <WhatsAppIcon /> WhatsApp
+                                        </Box>
                                     </Button>
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={4}>
@@ -625,7 +632,9 @@ export default function CarsPage() {
                                             },
                                         }}
                                     >
-                                        📞 Appeler
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <PhoneCallIcon /> Appeler
+                                        </Box>
                                     </Button>
                                 </Grid>
                             </Grid>

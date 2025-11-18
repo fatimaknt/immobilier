@@ -36,6 +36,8 @@ import {
     Email as EmailIcon,
     Phone as PhoneIcon,
     Celebration as CelebrationIcon,
+    Home as HomeIcon,
+    Description as DescriptionIcon,
 } from '@mui/icons-material';
 import { apartments } from '@/data/apartments';
 import { cars } from '@/data/cars';
@@ -456,7 +458,7 @@ Message: ${formData.message}`;
                                                         setSelectedItem('');
                                                     }}
                                                 >
-                                                    <Typography sx={{ fontSize: '3rem', mb: 2 }}>🏠</Typography>
+                                                    <HomeIcon sx={{ fontSize: '3rem', mb: 2 }} />
                                                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
                                                         Appartement
                                                     </Typography>
@@ -700,7 +702,9 @@ Message: ${formData.message}`;
                                             }}
                                         >
                                             <Typography variant="h6" sx={{ fontWeight: 700, mb: 3 }}>
-                                                📋 Résumé de votre réservation
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <DescriptionIcon /> Résumé de votre réservation
+                                                </Box>
                                             </Typography>
                                             <Stack spacing={2}>
                                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

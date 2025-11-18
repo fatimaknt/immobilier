@@ -32,6 +32,7 @@ import {
     Delete as DeleteIcon,
     FilterList as FilterIcon,
     Refresh as RefreshIcon,
+    Home as HomeIcon,
 } from '@mui/icons-material';
 
 interface ContactMessage {
@@ -313,10 +314,10 @@ export default function MessagesPage() {
                         </Typography>
                         <Box sx={{ mt: 3, p: 2, backgroundColor: 'grey.100', borderRadius: 2 }}>
                             <Typography variant="body2" color="text.secondary">
-                                🔍 Debug: Total messages: {messages.length} | Filtres: {filteredMessages.length}
+                                Debug: Total messages: {messages.length} | Filtres: {filteredMessages.length}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                📡 Status: {loading ? 'Chargement...' : 'Terminé'} | Erreur: {error || 'Aucune'}
+                                Status: {loading ? 'Chargement...' : 'Terminé'} | Erreur: {error || 'Aucune'}
                             </Typography>
                         </Box>
                     </CardContent>
@@ -485,7 +486,9 @@ export default function MessagesPage() {
                                     <Grid item xs={12} sm={6}>
                                         <Box sx={{ p: 2, backgroundColor: 'primary.50', borderRadius: 2, border: '1px solid', borderColor: 'primary.200' }}>
                                             <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'primary.main', mb: 1 }}>
-                                                🏠 Appartements
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <HomeIcon /> Appartements
+                                                </Box>
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
                                                 • Studio: 15,000 - 20,000 FCFA/jour

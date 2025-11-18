@@ -23,7 +23,7 @@ interface BookingFormProps {
   open: boolean;
   onClose: () => void;
   type: 'apartment' | 'car';
-  item: any;
+  item: { id: string; title?: string; brand?: string; model?: string; price_per_day: number;[key: string]: unknown };
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({ open, onClose, type, item }) => {

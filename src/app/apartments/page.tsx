@@ -25,6 +25,10 @@ import {
     LocalParking as ParkingIcon,
     Security as SecurityIcon,
     Apartment as ApartmentIcon,
+    Star as StarIcon,
+    LocationOn as LocationIcon,
+    WhatsApp as WhatsAppIcon,
+    Phone as PhoneIcon,
 } from '@mui/icons-material';
 import Image from 'next/image';
 import { zones } from '@/data/zones';
@@ -223,7 +227,7 @@ export default function ApartmentsPage() {
                                     fontWeight: 500,
                                 }}
                             >
-                                Découvrez notre sélection d'appartements modernes dans les meilleurs quartiers de Dakar
+                                Découvrez notre sélection d&apos;appartements modernes dans les meilleurs quartiers de Dakar
                             </Typography>
 
                             {/* Indicateurs de carrousel */}
@@ -292,7 +296,9 @@ export default function ApartmentsPage() {
                                     color: theme.palette.text.primary,
                                 }}
                             >
-                                📍 Explorez par zone
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <LocationIcon /> Explorez par zone
+                                </Box>
                             </Typography>
                             <Typography variant="h6" color="text.secondary">
                                 {selectedZone
@@ -404,7 +410,7 @@ export default function ApartmentsPage() {
                             </Box>
                         )) : (
                             <Typography variant="h6" color="error" textAlign="center">
-                                Aucune zone trouvée. Problème d'import.
+                                Aucune zone trouvée. Problème d&apos;import.
                             </Typography>
                         )}
                     </Box>
@@ -424,7 +430,9 @@ export default function ApartmentsPage() {
                                     color: theme.palette.text.primary,
                                 }}
                             >
-                                ⭐ Nos équipements premium
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <StarIcon /> Nos équipements premium
+                                </Box>
                             </Typography>
                             <Typography variant="h6" color="text.secondary">
                                 Tous nos appartements incluent ces services
@@ -721,7 +729,9 @@ export default function ApartmentsPage() {
                                         },
                                     }}
                                 >
-                                    💬 WhatsApp
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        <WhatsAppIcon /> WhatsApp
+                                    </Box>
                                 </Button>
                                 <Button
                                     component="a"
@@ -739,7 +749,9 @@ export default function ApartmentsPage() {
                                         },
                                     }}
                                 >
-                                    📞 Appeler
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        <PhoneIcon /> Appeler
+                                    </Box>
                                 </Button>
                             </Box>
                         </Box>

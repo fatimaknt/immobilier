@@ -32,6 +32,7 @@ import {
     Verified as VerifiedIcon,
     Star as StarIcon,
     ArrowForward as ArrowIcon,
+    Favorite as FavoriteIcon,
 } from '@mui/icons-material';
 import Link from 'next/link';
 import Logo from '@/components/common/Logo';
@@ -96,7 +97,7 @@ const Footer: React.FC = () => {
                                 <Logo size="md" showText variant="white" />
                             </Box>
                             <Typography variant="body2" sx={{ mb: 3, opacity: 0.8, lineHeight: 1.6, textAlign: { xs: 'center', md: 'left' } }}>
-                                Résidence Cedo, votre partenaire de confiance pour la location d'appartements et de voitures à Dakar.
+                                Résidence Cedo, votre partenaire de confiance pour la location d&apos;appartements et de voitures à Dakar.
                                 Service professionnel, prix transparents, satisfaction garantie.
                             </Typography>
                             <Stack direction="row" spacing={1} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
@@ -291,7 +292,8 @@ const Footer: React.FC = () => {
                             © 2024 Résidence Cedo. Tous droits réservés.
                         </Typography>
                         <Chip
-                            label="Made with ❤️ in Dakar"
+                            icon={<FavoriteIcon />}
+                            label="Made with love in Dakar"
                             size="small"
                             sx={{
                                 background: 'rgba(255,107,107,0.1)',

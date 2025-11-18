@@ -24,6 +24,11 @@ import {
     ArrowForward as ArrowForwardIcon,
     PhotoLibrary as PhotoIcon,
     ZoomIn as ZoomIcon,
+    PhotoCamera as PhotoCameraIcon,
+    Home as HomeIcon,
+    DirectionsCar as CarIcon,
+    Star as StarIcon,
+    LocationOn as LocationIcon,
 } from '@mui/icons-material';
 import Image from 'next/image';
 
@@ -91,7 +96,9 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                                 color: theme.palette.text.primary,
                             }}
                         >
-                            📸 {title}
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <PhotoCameraIcon /> {title}
+                            </Box>
                         </Typography>
                         <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
                             {description}
@@ -115,7 +122,8 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                                 }}
                             />
                             <Chip
-                                label="🏠 Appartements"
+                                icon={<HomeIcon />}
+                                label="Appartements"
                                 onClick={() => setFilter('apartment')}
                                 variant={filter === 'apartment' ? 'filled' : 'outlined'}
                                 color={filter === 'apartment' ? 'primary' : 'default'}
@@ -129,7 +137,8 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                                 }}
                             />
                             <Chip
-                                label="🚗 Voitures"
+                                icon={<CarIcon />}
+                                label="Voitures"
                                 onClick={() => setFilter('car')}
                                 variant={filter === 'car' ? 'filled' : 'outlined'}
                                 color={filter === 'car' ? 'primary' : 'default'}
@@ -218,7 +227,8 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
                                         {/* Badge catégorie */}
                                         <Chip
-                                            label={photo.category === 'apartment' ? '🏠 Appartement' : '🚗 Voiture'}
+                                            icon={photo.category === 'apartment' ? <HomeIcon /> : <CarIcon />}
+                                            label={photo.category === 'apartment' ? 'Appartement' : 'Voiture'}
                                             size="small"
                                             sx={{
                                                 position: 'absolute',
@@ -233,7 +243,8 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                                         {/* Badge featured */}
                                         {photo.featured && (
                                             <Chip
-                                                label="⭐ Premium"
+                                                icon={<StarIcon />}
+                                                label="Premium"
                                                 size="small"
                                                 color="primary"
                                                 sx={{
@@ -254,7 +265,9 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                                         </Typography>
                                         {photo.location && (
                                             <Typography variant="body2" color="text.secondary">
-                                                📍 {photo.location}
+                                                <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}>
+                                                    <LocationIcon fontSize="small" /> {photo.location}
+                                                </Box>
                                             </Typography>
                                         )}
                                     </Box>
@@ -379,7 +392,9 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                                     </Typography>
                                     {currentPhoto.location && (
                                         <Typography variant="body1" sx={{ opacity: 0.8 }}>
-                                            📍 {currentPhoto.location}
+                                            <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}>
+                                                <LocationIcon fontSize="small" /> {currentPhoto.location}
+                                            </Box>
                                         </Typography>
                                     )}
                                     <Typography variant="body2" sx={{ mt: 1, opacity: 0.6 }}>

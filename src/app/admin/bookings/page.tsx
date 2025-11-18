@@ -90,11 +90,11 @@ export default function AdminBookings() {
                 cache: 'no-cache' // Éviter le cache
             });
 
-            console.log('📡 Réponse API réservations:', response.status, response.ok);
+            console.log('Réponse API réservations:', response.status, response.ok);
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('📊 Données reçues:', data);
+                console.log('Données reçues:', data);
 
                 // Nettoyer les données côté client aussi
                 const cleanedData = (data || []).map((booking: BookingData) => ({
@@ -107,18 +107,18 @@ export default function AdminBookings() {
 
                 setBookings(cleanedData);
                 setErrorMessage('');
-                console.log('✅ Réservations chargées:', cleanedData.length);
+                console.log('Réservations chargées:', cleanedData.length);
             } else {
                 const errorData = await response.json();
-                console.error('❌ Erreur API réservations:', errorData);
+                console.error('Erreur API réservations:', errorData);
                 setErrorMessage(`Erreur: ${errorData.error || 'Impossible de charger les réservations'}`);
             }
         } catch (error) {
-            console.error('❌ Erreur lors du chargement des réservations:', error);
+            console.error('Erreur lors du chargement des réservations:', error);
             setErrorMessage('Erreur de connexion au serveur');
         } finally {
             setLoading(false);
-            console.log('✅ Chargement des réservations terminé');
+            console.log('Chargement des réservations terminé');
         }
     };
 

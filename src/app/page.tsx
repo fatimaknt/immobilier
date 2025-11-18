@@ -25,6 +25,15 @@ import {
     Speed as SpeedIcon,
     AttachMoney as MoneyIcon,
     ExpandMore as ExpandMoreIcon,
+    Business as BusinessIcon,
+    DirectionsCar as CarIcon,
+    Star as StarIcon,
+    Person as PersonIcon,
+    Home as HomeIcon,
+    Bolt as BoltIcon,
+    Security as SecurityIcon,
+    RocketLaunch as RocketIcon,
+    PhotoCamera as PhotoIcon,
 } from '@mui/icons-material';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -111,10 +120,10 @@ export default function HomePage() {
     ];
 
     const stats = [
-        { number: '29+', label: 'Appartements', icon: '🏢' },
-        { number: '8+', label: 'Véhicules', icon: '🚗' },
-        { number: '500+', label: 'Clients satisfaits', icon: '⭐' },
-        { number: '24/7', label: 'Support', icon: '👨‍💼' },
+        { number: '29+', label: 'Appartements', icon: <BusinessIcon /> },
+        { number: '8+', label: 'Véhicules', icon: <CarIcon /> },
+        { number: '500+', label: 'Clients satisfaits', icon: <StarIcon /> },
+        { number: '24/7', label: 'Support', icon: <PersonIcon /> },
     ];
 
     const features = [
@@ -216,7 +225,9 @@ export default function HomePage() {
                                                 mx: { xs: 'auto', lg: 0 },
                                             }}
                                         >
-                                            🏠 Appartements premium • 🚗 Véhicules de luxe
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
+                                                <HomeIcon /> Appartements premium • <CarIcon /> Véhicules de luxe
+                                            </Box>
                                             <br />
                                             Dans les meilleurs quartiers de Dakar
                                         </Typography>
@@ -431,7 +442,9 @@ export default function HomePage() {
                                     gap: 2,
                                 }}
                             >
-                                🏠 Nos quartiers premium
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'center' }}>
+                                    <HomeIcon /> Nos quartiers premium
+                                </Box>
                             </Typography>
                             <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 700, mx: 'auto' }}>
                                 Découvrez nos logements dans les zones les plus prisées de Dakar,
@@ -566,7 +579,9 @@ export default function HomePage() {
                                     fontSize: { xs: '2rem', md: '2.5rem' }
                                 }}
                             >
-                                ⭐ Pourquoi nous choisir ?
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'center' }}>
+                                    <StarIcon /> Pourquoi nous choisir ?
+                                </Box>
                             </Typography>
                             <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 700, mx: 'auto' }}>
                                 Une expérience de location unique avec des services premium
@@ -714,7 +729,9 @@ export default function HomePage() {
                                 fontSize: { xs: '2.5rem', md: '3.5rem' },
                             }}
                         >
-                            🚀  Prêt à commencer ?
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'center' }}>
+                                <RocketIcon /> Prêt à commencer ?
+                            </Box>
                         </Typography>
                         <Typography
                             variant="h5"
@@ -789,7 +806,9 @@ export default function HomePage() {
                         </Stack>
 
                         <Typography variant="body1" sx={{ opacity: 0.8 }}>
-                            ⚡ Réponse garantie sous 30 minutes • 🛡️ Service sécurisé et fiable
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
+                                <BoltIcon /> Réponse garantie sous 30 minutes • <SecurityIcon /> Service sécurisé et fiable
+                            </Box>
                         </Typography>
                     </Container>
                 </Box>
@@ -800,7 +819,11 @@ export default function HomePage() {
                 {/* Galerie Photos HD */}
                 <PhotoGallery
                     photos={galleryPhotos}
-                    title="🏠 Galerie Photos HD & Vidéos"
+                    title={
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <PhotoIcon /> Galerie Photos HD & Vidéos
+                        </Box>
+                    }
                     description="Découvrez nos appartements et véhicules en haute qualité avec zoom"
                 />
 

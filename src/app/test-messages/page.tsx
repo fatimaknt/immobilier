@@ -2,9 +2,25 @@
 
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, Alert, CircularProgress } from '@mui/material';
+import {
+    Science as ScienceIcon,
+    Send as SendIcon,
+    Inbox as InboxIcon,
+    Error as ErrorIcon,
+    BarChart as BarChartIcon,
+} from '@mui/icons-material';
+
+interface MessageData {
+    id?: string;
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    created_at?: string;
+}
 
 export default function TestMessagesPage() {
-    const [messages, setMessages] = useState<any[]>([]);
+    const [messages, setMessages] = useState<MessageData[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -13,21 +29,21 @@ export default function TestMessagesPage() {
         setError('');
 
         try {
-            console.log('🧪 Test de l\'API /api/contact...');
+            console.log('Test de l\'API /api/contact...');
             const response = await fetch('/api/contact');
-            console.log('📡 Réponse:', response.status, response.ok);
+            console.log('Réponse:', response.status, response.ok);
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('📨 Données reçues:', data);
+                console.log('Données reçues:', data);
                 setMessages(data);
             } else {
                 const errorData = await response.json();
-                console.error('❌ Erreur:', errorData);
+                console.error('Erreur:', errorData);
                 setError(`Erreur ${response.status}: ${errorData.error || 'Inconnue'}`);
             }
         } catch (err) {
-            console.error('❌ Erreur de connexion:', err);
+            console.error('Erreur de connexion:', err);
             setError('Erreur de connexion');
         } finally {
             setLoading(false);
@@ -39,20 +55,20 @@ export default function TestMessagesPage() {
         setError('');
 
         try {
-            console.log('🧪 Test direct de Supabase...');
+            console.log('Test direct de Supabase...');
             const response = await fetch('/api/test-supabase');
-            console.log('📡 Réponse Supabase:', response.status, response.ok);
+            console.log('Réponse Supabase:', response.status, response.ok);
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('📨 Données Supabase:', data);
+                console.log('Données Supabase:', data);
             } else {
                 const errorData = await response.json();
-                console.error('❌ Erreur Supabase:', errorData);
+                console.error('Erreur Supabase:', errorData);
                 setError(`Erreur Supabase: ${errorData.error || 'Inconnue'}`);
             }
         } catch (err) {
-            console.error('❌ Erreur Supabase:', err);
+            console.error('Erreur Supabase:', err);
             setError('Erreur de connexion Supabase');
         } finally {
             setLoading(false);
@@ -61,8 +77,8 @@ export default function TestMessagesPage() {
 
     return (
         <Box sx={{ p: 4 }}>
-            <Typography variant="h4" sx={{ mb: 4 }}>
-                🧪 Test des Messages
+            <Typography variant="h4" sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 1 }}>
+                <ScienceIcon /> Test des Messages
             </Typography>
 
             <Box sx={{ mb: 4 }}>
@@ -91,8 +107,8 @@ export default function TestMessagesPage() {
             )}
 
             <Box sx={{ mb: 2 }}>
-                <Typography variant="h6">
-                    📊 Résultats ({messages.length} messages)
+                <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <BarChartIcon /> Résultats ({messages.length} messages)
                 </Typography>
             </Box>
 

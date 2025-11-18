@@ -154,7 +154,7 @@ const Header: React.FC = () => {
                                     href="/booking"
                                 >
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <Typography textAlign="center">🏠</Typography>
+                                        <HomeIcon />
                                         <Typography textAlign="center">Réserver</Typography>
                                     </Box>
                                 </MenuItem>

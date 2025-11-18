@@ -23,6 +23,11 @@ import {
     BookOnline as BookIcon,
     Close as CloseIcon,
     Home as HomeIcon,
+    Map as MapIcon,
+    LocationCity as CityIcon,
+    Bathtub as BathtubIcon,
+    AttachMoney as MoneyIcon,
+    SquareFoot as SquareFootIcon,
 } from '@mui/icons-material';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -65,7 +70,9 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ apartments }) => {
                                 color: theme.palette.text.primary,
                             }}
                         >
-                            🗺️ Carte Interactive des Appartements
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <MapIcon /> Carte Interactive des Appartements
+                            </Box>
                         </Typography>
                         <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
                             Découvrez l&apos;emplacement de nos appartements dans les différentes zones de Dakar
@@ -136,7 +143,9 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ apartments }) => {
                             zIndex: 1,
                         }}
                     >
-                        🏙️ Plan de Dakar - Nos Emplacements
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <CityIcon /> Plan de Dakar - Nos Emplacements
+                        </Box>
                     </Typography>
 
                     {/* Grille des appartements avec positions simulées */}
@@ -355,18 +364,26 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ apartments }) => {
                                     {/* Détails */}
                                     <Box>
                                         <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-                                            📍 {selectedApartment.address}
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <LocationIcon /> {selectedApartment.address}
+                                            </Box>
                                         </Typography>
 
                                         <Stack direction="row" spacing={4} sx={{ mb: 2 }}>
                                             <Typography variant="body2">
-                                                🏠 <strong>{selectedApartment.rooms}</strong> pièces
+                                                <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}>
+                                                    <HomeIcon /> <strong>{selectedApartment.rooms}</strong> pièces
+                                                </Box>
                                             </Typography>
                                             <Typography variant="body2">
-                                                🚿 <strong>{selectedApartment.bathrooms}</strong> SDB
+                                                <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}>
+                                                    <BathtubIcon /> <strong>{selectedApartment.bathrooms}</strong> SDB
+                                                </Box>
                                             </Typography>
                                             <Typography variant="body2">
-                                                📐 <strong>{selectedApartment.surface}</strong> m²
+                                                <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}>
+                                                    <SquareFootIcon /> <strong>{selectedApartment.surface}</strong> m²
+                                                </Box>
                                             </Typography>
                                         </Stack>
 

@@ -13,8 +13,10 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
+import { Apartment } from '@/types';
+
 interface MapProps {
-  apartments: any[];
+  apartments: Apartment[];
   height?: string;
 }
 

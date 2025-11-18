@@ -3,7 +3,7 @@ import { supabaseAdmin } from '@/lib/supabase';
 
 export async function GET() {
     try {
-        console.log('🧪 Test de connexion Supabase...');
+        console.log('Test de connexion Supabase...');
 
         // Test de connexion basique
         const { data, error } = await supabaseAdmin
@@ -11,10 +11,10 @@ export async function GET() {
             .select('id')
             .limit(1);
 
-        console.log('📊 Résultat du test Supabase:', { data, error });
+        console.log('Résultat du test Supabase:', { data, error });
 
         if (error) {
-            console.error('❌ Erreur Supabase:', error);
+            console.error('Erreur Supabase:', error);
             return NextResponse.json({
                 success: false,
                 error: error.message,
@@ -28,7 +28,7 @@ export async function GET() {
             .select('*')
             .limit(5);
 
-        console.log('📨 Messages de test:', { messages: messages?.length || 0, messagesError });
+        console.log('Messages de test:', { messages: messages?.length || 0, messagesError });
 
         return NextResponse.json({
             success: true,
@@ -39,7 +39,7 @@ export async function GET() {
         });
 
     } catch (error) {
-        console.error('❌ Erreur lors du test Supabase:', error);
+        console.error('Erreur lors du test Supabase:', error);
         return NextResponse.json({
             success: false,
             error: 'Erreur de connexion Supabase',

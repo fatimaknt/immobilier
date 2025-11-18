@@ -3,7 +3,7 @@ import { supabaseAdmin } from '@/lib/supabase'
 
 export async function GET() {
     try {
-        console.log('🔍 Récupération des réservations...');
+        console.log('Récupération des réservations...');
 
         // Requête complète avec tous les champs nécessaires
         const { data: bookings, error } = await supabaseAdmin
@@ -11,10 +11,10 @@ export async function GET() {
             .select('*')
             .order('created_at', { ascending: false });
 
-        console.log('📊 Résultat de la requête réservations:', { bookings: bookings?.length || 0, error });
+        console.log('Résultat de la requête réservations:', { bookings: bookings?.length || 0, error });
 
         if (error) {
-            console.error('❌ Erreur Supabase réservations:', error);
+            console.error('Erreur Supabase réservations:', error);
             return NextResponse.json({ error: error.message }, { status: 500 })
         }
 
@@ -27,10 +27,10 @@ export async function GET() {
             created_at: booking.created_at || new Date().toISOString()
         }));
 
-        console.log('✅ Réservations récupérées avec succès:', cleanedBookings.length);
+        console.log('Réservations récupérées avec succès:', cleanedBookings.length);
         return NextResponse.json(cleanedBookings)
     } catch (error) {
-        console.error('❌ Erreur lors de la récupération des réservations:', error);
+        console.error('Erreur lors de la récupération des réservations:', error);
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
     }
 }

@@ -16,6 +16,8 @@ import {
     DirectionsCar as CarIcon,
     LocalGasStation as GasIcon,
     Speed as SpeedIcon,
+    CalendarToday as CalendarIcon,
+    People as PeopleIcon,
 } from '@mui/icons-material';
 import { Car } from '../../types';
 import { formatPrice } from '@/utils/helpers';
@@ -148,7 +150,7 @@ const CarCard: React.FC<CarCardProps> = ({ car, onClick }) => {
                             alignItems: 'center',
                             gap: 1
                         }}>
-                            <Typography component="span" sx={{ fontSize: '1rem' }}>📅</Typography>
+                            <CalendarIcon sx={{ fontSize: '1rem' }} />
                             {car.year} • {car.type}
                         </Typography>
                     </Box>
@@ -167,7 +169,7 @@ const CarCard: React.FC<CarCardProps> = ({ car, onClick }) => {
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Typography sx={{ fontSize: 18 }}>👥</Typography>
+                            <PeopleIcon sx={{ fontSize: 18 }} />
                             <Typography variant="body2" sx={{ color: theme.palette.text.secondary, fontWeight: 500, fontSize: '0.85rem' }}>
                                 {car.seats} places
                             </Typography>

@@ -14,6 +14,15 @@ import {
 import {
     Send as SendIcon,
     AttachFile as AttachFileIcon,
+    Email as EmailIcon,
+    Person as PersonIcon,
+    Phone as PhoneIcon,
+    Subject as SubjectIcon,
+    Message as MessageIcon,
+    AttachMoney as MoneyIcon,
+    Home as HomeIcon,
+    DirectionsCar as CarIcon,
+    EditNote as EditNoteIcon,
 } from '@mui/icons-material';
 
 interface ContactFormData {
@@ -80,7 +89,7 @@ export default function ContactForm() {
                 setSuccess(true);
 
                 // Préparer le message WhatsApp avec informations sur les prix
-                const whatsappMessage = `📧 Nouveau message de contact:\n\n👤 Nom: ${formData.name}\n📧 Email: ${formData.email}\n📞 Téléphone: ${formData.phone}\n📋 Sujet: ${formData.subject}\n\n💬 Message:\n${formData.message}\n\n💰 Tarifs disponibles:\n🏠 Appartements: 15,000 - 60,000 FCFA/jour\n🚗 Voitures: 25,000 - 65,000 FCFA/jour\n\n📞 Contactez-nous pour plus d'informations!`;
+                const whatsappMessage = `Nouveau message de contact:\n\nNom: ${formData.name}\nEmail: ${formData.email}\nTéléphone: ${formData.phone}\nSujet: ${formData.subject}\n\nMessage:\n${formData.message}\n\nTarifs disponibles:\nAppartements: 15,000 - 60,000 FCFA/jour\nVoitures: 25,000 - 65,000 FCFA/jour\n\nContactez-nous pour plus d'informations!`;
 
                 // Ouvrir WhatsApp avec le message
                 setTimeout(() => {
@@ -127,7 +136,9 @@ export default function ContactForm() {
                     fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
                 }}
             >
-                📝 Nous Contacter
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <EditNoteIcon /> Nous Contacter
+                </Box>
             </Typography>
 
             <Box

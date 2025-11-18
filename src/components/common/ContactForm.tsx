@@ -83,7 +83,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
                         required
                     >
                         <option value="">Sélectionnez un sujet</option>
-                        <option value="apartment">Demande d'appartement</option>
+                        <option value="apartment">Demande d&apos;appartement</option>
                         <option value="car">Demande de voiture</option>
                         <option value="general">Question générale</option>
                         <option value="complaint">Réclamation</option>

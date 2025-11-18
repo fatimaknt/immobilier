@@ -1,5 +1,14 @@
 import React, { ReactNode } from 'react';
 import { useRouter } from 'next/router';
+import {
+    Dashboard as DashboardIcon,
+    Apartment as ApartmentIcon,
+    DirectionsCar as CarIcon,
+    CalendarToday as CalendarIcon,
+    People as PeopleIcon,
+    Settings as SettingsIcon,
+    ExitToApp as LogoutIcon,
+} from '@mui/icons-material';
 
 interface AdminLayoutProps {
     children: ReactNode;
@@ -9,12 +18,12 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     const router = useRouter();
 
     const menuItems = [
-        { path: '/admin', label: 'Tableau de bord', icon: '📊' },
-        { path: '/admin/apartments', label: 'Appartements', icon: '🏠' },
-        { path: '/admin/cars', label: 'Voitures', icon: '🚗' },
-        { path: '/admin/reservations', label: 'Réservations', icon: '📅' },
-        { path: '/admin/users', label: 'Utilisateurs', icon: '👥' },
-        { path: '/admin/settings', label: 'Paramètres', icon: '⚙️' },
+        { path: '/admin', label: 'Tableau de bord', icon: <DashboardIcon /> },
+        { path: '/admin/apartments', label: 'Appartements', icon: <ApartmentIcon /> },
+        { path: '/admin/cars', label: 'Voitures', icon: <CarIcon /> },
+        { path: '/admin/reservations', label: 'Réservations', icon: <CalendarIcon /> },
+        { path: '/admin/users', label: 'Utilisateurs', icon: <PeopleIcon /> },
+        { path: '/admin/settings', label: 'Paramètres', icon: <SettingsIcon /> },
     ];
 
     const isActivePath = (path: string) => {
@@ -41,7 +50,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                                     href={item.path}
                                     className={`nav-item ${isActivePath(item.path) ? 'active' : ''}`}
                                 >
-                                    <span className="nav-icon">{item.icon}</span>
+                                    <span className="nav-icon" style={{ display: 'flex', alignItems: 'center' }}>{item.icon}</span>
                                     <span className="nav-label">{item.label}</span>
                                 </a>
                             </li>
@@ -51,7 +60,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
                 <div className="sidebar-footer">
                     <button onClick={handleLogout} className="logout-btn">
-                        <span className="nav-icon">🚪</span>
+                        <span className="nav-icon" style={{ display: 'flex', alignItems: 'center' }}><LogoutIcon /></span>
                         <span className="nav-label">Déconnexion</span>
                     </button>
                 </div>
@@ -60,7 +69,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             <main className="admin-main">
                 <header className="admin-header">
                     <div className="header-content">
-                        <h1>Panneau d'administration</h1>
+                        <h1>Panneau d&apos;administration</h1>
                         <div className="header-actions">
                             <span className="admin-user">Admin User</span>
                         </div>

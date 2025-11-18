@@ -23,6 +23,9 @@ import {
     Facebook as FacebookIcon,
     Instagram as InstagramIcon,
     LinkedIn as LinkedInIcon,
+    Mail as MailIcon,
+    AccessTime as AccessTimeIcon,
+    Language as LanguageIcon,
 } from '@mui/icons-material';
 import ContactForm from '@/components/forms/ContactForm';
 
@@ -228,7 +231,9 @@ export default function ContactPage() {
                                     color: theme.palette.text.primary,
                                 }}
                             >
-                                📞 Nos Coordonnées
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'center' }}>
+                                    <PhoneIcon /> Nos Coordonnées
+                                </Box>
                             </Typography>
                         </Box>
                     </Fade>
@@ -303,7 +308,9 @@ export default function ContactPage() {
                                         fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' },
                                     }}
                                 >
-                                    ✉️ Envoyez-nous un message
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        <MailIcon /> Envoyez-nous un message
+                                    </Box>
                                 </Typography>
 
                                 <ContactForm />
@@ -338,7 +345,9 @@ export default function ContactPage() {
                             }}
                         >
                             <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, textAlign: 'center', color: theme.palette.text.primary }}>
-                                🕒 Horaires d'ouverture
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <AccessTimeIcon /> Horaires d&apos;ouverture
+                                </Box>
                             </Typography>
                             <Stack spacing={2}>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
@@ -373,7 +382,9 @@ export default function ContactPage() {
                             }}
                         >
                             <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: theme.palette.text.primary }}>
-                                🌐 Suivez-nous
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <LanguageIcon /> Suivez-nous
+                                </Box>
                             </Typography>
                             <Stack direction="row" spacing={2} justifyContent="center">
                                 {socialLinks.map((social) => (
@@ -420,7 +431,9 @@ export default function ContactPage() {
                             }}
                         >
                             <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: theme.palette.text.primary }}>
-                                💬 Contact Direct
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'center' }}>
+                                    <WhatsAppIcon /> Contact Direct
+                                </Box>
                             </Typography>
                             <Button
                                 href="https://wa.me/221784929439"

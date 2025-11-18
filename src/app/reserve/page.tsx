@@ -32,6 +32,8 @@ import {
     Person as PersonIcon,
     Email as EmailIcon,
     Phone as PhoneIcon,
+    Description as DescriptionIcon,
+    Home as HomeIcon,
 } from '@mui/icons-material';
 import { apartments } from '@/data/apartments';
 import { cars } from '@/data/cars';
@@ -536,14 +538,18 @@ export default function ReservePage() {
                                     }}
                                 >
                                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, textAlign: 'center' }}>
-                                        📋 Résumé de la réservation
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'center' }}>
+                                            <DescriptionIcon /> Résumé de la réservation
+                                        </Box>
                                     </Typography>
 
                                     {selectedItem ? (
                                         <Stack spacing={3}>
                                             <Box>
                                                 <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
-                                                    {reservationType === 'apartment' ? '🏠 Appartement' : '🚗 Véhicule'}
+                                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                        {reservationType === 'apartment' ? <><HomeIcon /> Appartement</> : <><CarIcon /> Véhicule</>}
+                                                    </Box>
                                                 </Typography>
                                                 <Typography variant="body2" color="text.secondary">
                                                     {getSelectedItemDetails() && getItemTitle(getSelectedItemDetails()!)}

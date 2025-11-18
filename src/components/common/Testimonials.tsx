@@ -77,7 +77,9 @@ const Testimonials: React.FC<TestimonialsProps> = ({
                                 color: theme.palette.text.primary,
                             }}
                         >
-                            ⭐ Ce que disent nos clients
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <StarIcon /> Ce que disent nos clients
+                            </Box>
                         </Typography>
                         <Typography variant="h6" color="text.secondary">
                             Découvrez les témoignages de nos clients satisfaits

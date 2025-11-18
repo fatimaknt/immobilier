@@ -42,6 +42,16 @@ import {
     ArrowBack as ArrowBackIcon,
     CloudUpload as UploadIcon,
     Delete as DeleteImageIcon,
+    CheckCircle as CheckIcon,
+    Cancel as CancelIcon,
+    PhotoCamera as PhotoIcon,
+    Build as BuildIcon,
+    Business as BusinessIcon,
+    Store as StoreIcon,
+    Home as HomeIcon,
+    Description as DescriptionIcon,
+    LocationOn as LocationIcon,
+    AttachMoney as MoneyIcon,
 } from '@mui/icons-material';
 import Link from 'next/link';
 
@@ -112,7 +122,7 @@ export default function AdminApartments() {
         setViewDialogOpen(true);
     };
 
-    const handleInputChange = (field: keyof Apartment, value: any) => {
+    const handleInputChange = (field: keyof Apartment, value: string | number | boolean) => {
         if (editingApartment) {
             setEditingApartment({ ...editingApartment, [field]: value });
         }
@@ -435,7 +445,7 @@ export default function AdminApartments() {
                                         <TableCell>
                                             <Chip
                                                 label={apartment.zone}
-                                                color={getZoneColor(apartment.zone) as any}
+                                                color={getZoneColor(apartment.zone) as 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'}
                                                 size="small"
                                                 sx={{
                                                     fontWeight: 600,
@@ -560,7 +570,9 @@ export default function AdminApartments() {
                         textAlign: 'center',
                         boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
                     }}>
-                        {editingApartment?.id ? '✏️ Modifier l\'appartement' : '➕ Ajouter un appartement'}
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            {editingApartment?.id ? <><EditIcon /> Modifier l&apos;appartement</> : <><AddIcon /> Ajouter un appartement</>}
+                        </Box>
                     </DialogTitle>
                     <DialogContent sx={{ p: 6, maxHeight: '75vh', overflowY: 'auto', backgroundColor: '#fafbfc' }}>
                         <Box sx={{ mt: 4, mb: 2 }}>
@@ -653,9 +665,21 @@ export default function AdminApartments() {
                                                 }
                                             }}
                                         >
-                                            <MenuItem value="Cité Mixta" sx={{ fontSize: '1rem', py: 1.5 }}>🏢 Cité Mixta</MenuItem>
-                                            <MenuItem value="Ouest-foire" sx={{ fontSize: '1rem', py: 1.5 }}>🏪 Ouest-foire</MenuItem>
-                                            <MenuItem value="Cité Kalia" sx={{ fontSize: '1rem', py: 1.5 }}>🏠 Cité Kalia</MenuItem>
+                                            <MenuItem value="Cité Mixta" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <BusinessIcon fontSize="small" /> Cité Mixta
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="Ouest-foire" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <StoreIcon fontSize="small" /> Ouest-foire
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="Cité Kalia" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <HomeIcon fontSize="small" /> Cité Kalia
+                                                </Box>
+                                            </MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
@@ -973,8 +997,8 @@ export default function AdminApartments() {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: '#374151' }}>
-                                        📸 Images de l'appartement
+                                    <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: '#374151', display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        <PhotoIcon /> Images de l&apos;appartement
                                     </Typography>
 
                                     {/* Upload d'images */}
@@ -1083,8 +1107,16 @@ export default function AdminApartments() {
                                                 }
                                             }}
                                         >
-                                            <MenuItem value="available" sx={{ fontSize: '1rem', py: 1.5 }}>✅ Disponible</MenuItem>
-                                            <MenuItem value="unavailable" sx={{ fontSize: '1rem', py: 1.5 }}>❌ Occupé</MenuItem>
+                                            <MenuItem value="available" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <CheckIcon fontSize="small" color="success" /> Disponible
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="unavailable" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <CancelIcon fontSize="small" color="error" /> Occupé
+                                                </Box>
+                                            </MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
@@ -1106,7 +1138,9 @@ export default function AdminApartments() {
                                 }
                             }}
                         >
-                            ❌ Annuler
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <CancelIcon /> Annuler
+                            </Box>
                         </Button>
                         <Button
                             variant="contained"
@@ -1127,7 +1161,9 @@ export default function AdminApartments() {
                                 transition: 'all 0.2s ease'
                             }}
                         >
-                            {editingApartment?.id ? '✏️ Mettre à jour' : '✅ Créer l\'appartement'}
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                {editingApartment?.id ? <><EditIcon /> Mettre à jour</> : <><CheckIcon /> Créer l&apos;appartement</>}
+                            </Box>
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -1152,7 +1188,9 @@ export default function AdminApartments() {
                         color: 'white',
                         py: 3
                     }}>
-                        📋 Détails de l'appartement
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <DescriptionIcon /> Détails de l&apos;appartement
+                        </Box>
                     </DialogTitle>
                     <DialogContent sx={{ p: 4 }}>
                         {viewingApartment && (
@@ -1174,7 +1212,9 @@ export default function AdminApartments() {
                                         border: '1px solid #e2e8f0'
                                     }}>
                                         <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                                            📍 Informations générales
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <LocationIcon /> Informations générales
+                                            </Box>
                                         </Typography>
                                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                                             <Typography><strong>Zone:</strong> {viewingApartment.zone}</Typography>
@@ -1194,7 +1234,9 @@ export default function AdminApartments() {
                                         border: '1px solid #e2e8f0'
                                     }}>
                                         <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                                            💰 Tarifs
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <MoneyIcon /> Tarifs
+                                            </Box>
                                         </Typography>
                                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                                             <Typography><strong>Prix/jour:</strong> {formatPrice(viewingApartment.price_per_day)}</Typography>
@@ -1220,8 +1262,8 @@ export default function AdminApartments() {
                                             backgroundColor: '#f8fafc',
                                             border: '1px solid #e2e8f0'
                                         }}>
-                                            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                                                🛠️ Équipements
+                                            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <BuildIcon /> Équipements
                                             </Typography>
                                             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                                                 {viewingApartment.equipment.map((item, index) => (
@@ -1245,8 +1287,8 @@ export default function AdminApartments() {
                                             backgroundColor: '#f8fafc',
                                             border: '1px solid #e2e8f0'
                                         }}>
-                                            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                                                📸 Images ({viewingApartment.images.length})
+                                            <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <PhotoIcon /> Images ({viewingApartment.images.length})
                                             </Typography>
                                             <ImageList sx={{ width: '100%', height: 300 }} cols={3} rowHeight={150}>
                                                 {viewingApartment.images.map((image, index) => (

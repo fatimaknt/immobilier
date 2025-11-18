@@ -10,7 +10,6 @@ import {
     Stack,
     useTheme,
     Fade,
-    Grow,
 } from '@mui/material';
 import {
     Business as BusinessIcon,
@@ -22,6 +21,9 @@ import {
     SupportAgent as SupportIcon,
     Apartment as ApartmentIcon,
     DirectionsCar as CarIcon,
+    BarChart as BarChartIcon,
+    MenuBook as MenuBookIcon,
+    Diamond as DiamondIcon,
 } from '@mui/icons-material';
 
 export default function AboutPage() {
@@ -178,7 +180,7 @@ export default function AboutPage() {
                                     textShadow: '0 3px 6px rgba(0,0,0,0.5)',
                                 }}
                             >
-                                Votre partenaire de confiance pour la location d'appartements et de véhicules à Dakar.
+                                Votre partenaire de confiance pour la location d&apos;appartements et de véhicules à Dakar.
                                 Excellence, fiabilité et service client exceptionnel depuis plus de 5 ans.
                             </Typography>
 
@@ -249,7 +251,9 @@ export default function AboutPage() {
                                     color: theme.palette.text.primary,
                                 }}
                             >
-                                📊 Nos Chiffres Clés
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <BarChartIcon /> Nos Chiffres Clés
+                                </Box>
                             </Typography>
                         </div>
                     </Fade>
@@ -316,19 +320,21 @@ export default function AboutPage() {
                                                 color: theme.palette.text.primary,
                                             }}
                                         >
-                                            📖 Notre Histoire
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <MenuBookIcon /> Notre Histoire
+                                            </Box>
                                         </Typography>
                                         <Typography variant="body1" sx={{ mb: 1.5, lineHeight: 1.6, fontSize: '1rem' }}>
-                                            Fondée en 2019, <strong>Résidence Cedo</strong> est née de la vision d'offrir aux habitants et visiteurs de Dakar
+                                            Fondée en 2019, <strong>Résidence Cedo</strong> est née de la vision d&apos;offrir aux habitants et visiteurs de Dakar
                                             des solutions de logement et de transport de qualité supérieure.
                                         </Typography>
                                         <Typography variant="body1" sx={{ mb: 1.5, lineHeight: 1.6, fontSize: '1rem' }}>
-                                            Depuis nos débuts, nous avons grandi pour devenir l'un des acteurs de référence dans la location
-                                            d'appartements meublés et de véhicules à Dakar, en maintenant toujours nos valeurs fondamentales
+                                            Depuis nos débuts, nous avons grandi pour devenir l&apos;un des acteurs de référence dans la location
+                                            d&apos;appartements meublés et de véhicules à Dakar, en maintenant toujours nos valeurs fondamentales
                                             de transparence, fiabilité et excellence du service.
                                         </Typography>
                                         <Typography variant="body1" sx={{ mb: 0, lineHeight: 1.6, fontSize: '1rem' }}>
-                                            Aujourd'hui, avec plus de 500 clients satisfaits, nous continuons d'innover pour vous offrir
+                                            Aujourd&apos;hui, avec plus de 500 clients satisfaits, nous continuons d&apos;innover pour vous offrir
                                             la meilleure expérience possible.
                                         </Typography>
                                     </Box>
@@ -365,7 +371,9 @@ export default function AboutPage() {
                                     color: theme.palette.text.primary,
                                 }}
                             >
-                                💎 Nos Valeurs
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <DiamondIcon /> Nos Valeurs
+                                </Box>
                             </Typography>
                         </div>
                     </Fade>

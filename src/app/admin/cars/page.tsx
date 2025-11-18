@@ -38,6 +38,17 @@ import {
     DirectionsCar as CarIcon,
     CloudUpload as UploadIcon,
     Delete as DeleteImageIcon,
+    CheckCircle as CheckIcon,
+    Cancel as CancelIcon,
+    PhotoCamera as PhotoIcon,
+    Build as BuildIcon,
+    Settings as SettingsIcon,
+    SmartToy as AutoIcon,
+    Description as DescriptionIcon,
+    Bolt as BoltIcon,
+    LocalGasStation as LocalGasStationIcon,
+    BatteryChargingFull as BatteryIcon,
+    AttachMoney as MoneyIcon,
 } from '@mui/icons-material';
 
 interface Car {
@@ -353,7 +364,9 @@ export default function AdminCars() {
                             transition: 'all 0.2s ease'
                         }}
                     >
-                        🚗 Ajouter une Voiture
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <CarIcon /> Ajouter une Voiture
+                        </Box>
                     </Button>
                 </Box>
 
@@ -514,7 +527,9 @@ export default function AdminCars() {
                         textAlign: 'center',
                         boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
                     }}>
-                        {editingCar?.id ? '✏️ Modifier la voiture' : '🚗 Ajouter une voiture'}
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            {editingCar?.id ? <><EditIcon /> Modifier la voiture</> : <><CarIcon /> Ajouter une voiture</>}
+                        </Box>
                     </DialogTitle>
                     <DialogContent sx={{ p: 6, maxHeight: '75vh', overflowY: 'auto', backgroundColor: '#fafbfc' }}>
                         <Box sx={{ mt: 4, mb: 2 }}>
@@ -615,11 +630,19 @@ export default function AdminCars() {
                                                 }
                                             }}
                                         >
-                                            <MenuItem value="Berline" sx={{ fontSize: '1rem', py: 1.5 }}>🚗 Berline</MenuItem>
-                                            <MenuItem value="SUV" sx={{ fontSize: '1rem', py: 1.5 }}>🚙 SUV</MenuItem>
-                                            <MenuItem value="Break" sx={{ fontSize: '1rem', py: 1.5 }}>🚐 Break</MenuItem>
-                                            <MenuItem value="Cabriolet" sx={{ fontSize: '1rem', py: 1.5 }}>🚗 Cabriolet</MenuItem>
-                                            <MenuItem value="Monospace" sx={{ fontSize: '1rem', py: 1.5 }}>🚐 Monospace</MenuItem>
+                                            <MenuItem value="Berline" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <CarIcon fontSize="small" /> Berline
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="SUV" sx={{ fontSize: '1rem', py: 1.5 }}>SUV</MenuItem>
+                                            <MenuItem value="Break" sx={{ fontSize: '1rem', py: 1.5 }}>Break</MenuItem>
+                                            <MenuItem value="Cabriolet" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <CarIcon fontSize="small" /> Cabriolet
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="Monospace" sx={{ fontSize: '1rem', py: 1.5 }}>Monospace</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
@@ -758,8 +781,16 @@ export default function AdminCars() {
                                                 }
                                             }}
                                         >
-                                            <MenuItem value="available" sx={{ fontSize: '1rem', py: 1.5 }}>✅ Disponible</MenuItem>
-                                            <MenuItem value="unavailable" sx={{ fontSize: '1rem', py: 1.5 }}>❌ Occupée</MenuItem>
+                                            <MenuItem value="available" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <CheckIcon fontSize="small" color="success" /> Disponible
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="unavailable" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <CancelIcon fontSize="small" color="error" /> Occupée
+                                                </Box>
+                                            </MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
@@ -824,10 +855,26 @@ export default function AdminCars() {
                                                 }
                                             }}
                                         >
-                                            <MenuItem value="Essence" sx={{ fontSize: '1rem', py: 1.5 }}>⛽ Essence</MenuItem>
-                                            <MenuItem value="Diesel" sx={{ fontSize: '1rem', py: 1.5 }}>⛽ Diesel</MenuItem>
-                                            <MenuItem value="Hybride" sx={{ fontSize: '1rem', py: 1.5 }}>🔋 Hybride</MenuItem>
-                                            <MenuItem value="Électrique" sx={{ fontSize: '1rem', py: 1.5 }}>⚡ Électrique</MenuItem>
+                                            <MenuItem value="Essence" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <LocalGasStationIcon fontSize="small" /> Essence
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="Diesel" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <LocalGasStationIcon fontSize="small" /> Diesel
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="Hybride" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <BatteryIcon fontSize="small" /> Hybride
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="Électrique" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <BoltIcon fontSize="small" /> Électrique
+                                                </Box>
+                                            </MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
@@ -856,8 +903,16 @@ export default function AdminCars() {
                                                 }
                                             }}
                                         >
-                                            <MenuItem value="Manuel" sx={{ fontSize: '1rem', py: 1.5 }}>⚙️ Manuel</MenuItem>
-                                            <MenuItem value="Automatique" sx={{ fontSize: '1rem', py: 1.5 }}>🤖 Automatique</MenuItem>
+                                            <MenuItem value="Manuel" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <SettingsIcon fontSize="small" /> Manuel
+                                                </Box>
+                                            </MenuItem>
+                                            <MenuItem value="Automatique" sx={{ fontSize: '1rem', py: 1.5 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <AutoIcon fontSize="small" /> Automatique
+                                                </Box>
+                                            </MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
@@ -980,7 +1035,9 @@ export default function AdminCars() {
                                 {/* Section Images */}
                                 <Grid item xs={12}>
                                     <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: '#374151' }}>
-                                        📸 Images de la voiture
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <PhotoIcon /> Images de la voiture
+                                        </Box>
                                     </Typography>
 
                                     {/* Upload d'images */}
@@ -1087,7 +1144,9 @@ export default function AdminCars() {
                                 transition: 'all 0.2s ease'
                             }}
                         >
-                            ❌ Annuler
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <CancelIcon /> Annuler
+                            </Box>
                         </Button>
                         <Button
                             variant="contained"
@@ -1108,7 +1167,9 @@ export default function AdminCars() {
                                 transition: 'all 0.2s ease'
                             }}
                         >
-                            {editingCar?.id ? '✏️ Mettre à jour' : '🚗 Créer la voiture'}
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                {editingCar?.id ? <><EditIcon /> Mettre à jour</> : <><CarIcon /> Créer la voiture</>}
+                            </Box>
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -1133,7 +1194,9 @@ export default function AdminCars() {
                         color: 'white',
                         py: 3
                     }}>
-                        🚗 Détails de la voiture
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <DescriptionIcon /> Détails de la voiture
+                        </Box>
                     </DialogTitle>
                     <DialogContent sx={{ p: 4 }}>
                         {viewingCar && (
@@ -1155,7 +1218,9 @@ export default function AdminCars() {
                                         border: '1px solid #e2e8f0'
                                     }}>
                                         <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                                            🚗 Informations générales
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <CarIcon /> Informations générales
+                                            </Box>
                                         </Typography>
                                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                                             <Typography><strong>Type:</strong> {viewingCar.type}</Typography>
@@ -1176,7 +1241,9 @@ export default function AdminCars() {
                                         border: '1px solid #e2e8f0'
                                     }}>
                                         <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                                            💰 Tarifs
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <MoneyIcon /> Tarifs
+                                            </Box>
                                         </Typography>
                                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                                             <Typography><strong>Prix/jour:</strong> {formatPrice(viewingCar.price_per_day)}</Typography>
@@ -1204,7 +1271,9 @@ export default function AdminCars() {
                                             border: '1px solid #e2e8f0'
                                         }}>
                                             <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                                                🛠️ Équipements
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <BuildIcon /> Équipements
+                                                </Box>
                                             </Typography>
                                             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                                                 {viewingCar.features.map((feature, index) => (
@@ -1233,7 +1302,9 @@ export default function AdminCars() {
                                         border: '1px solid #e2e8f0'
                                     }}>
                                         <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
-                                            📸 Images ({viewingCar.images?.length || 0})
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <PhotoIcon /> Images ({viewingCar.images?.length || 0})
+                                            </Box>
                                         </Typography>
                                         {viewingCar.images && viewingCar.images.length > 0 ? (
                                             <ImageList sx={{ width: '100%', height: 300 }} cols={3} rowHeight={150}>
@@ -1266,7 +1337,7 @@ export default function AdminCars() {
                                                     Aucune image disponible pour cette voiture
                                                 </Typography>
                                                 <Typography variant="body2" sx={{ mt: 1 }}>
-                                                    Utilisez le bouton "Modifier" pour ajouter des images
+                                                    Utilisez le bouton &quot;Modifier&quot; pour ajouter des images
                                                 </Typography>
                                             </Box>
                                         )}
