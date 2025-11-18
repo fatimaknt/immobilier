@@ -138,7 +138,7 @@ export default function AdminCars() {
 
             // Vérifier la taille du fichier (max 5MB)
             if (file.size > 5 * 1024 * 1024) {
-                alert(`L'image ${file.name} est trop grande (max 5MB)`);
+                alert(`L&apos;image ${file.name} est trop grande (max 5MB)`);
                 continue;
             }
 

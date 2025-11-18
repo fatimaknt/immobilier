@@ -580,7 +580,7 @@ export default function AdminApartments() {
                                 <Grid item xs={12}>
                                     <TextField
                                         fullWidth
-                                        label="Titre de l'appartement"
+                                        label="Titre de l&apos;appartement"
                                         value={editingApartment?.title || ''}
                                         onChange={(e) => handleInputChange('title', e.target.value)}
                                         variant="outlined"
