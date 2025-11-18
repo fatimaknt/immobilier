@@ -260,7 +260,7 @@ export default function AboutPage() {
 
                     <Grid container spacing={4} justifyContent="center">
                         {stats.map((stat, index) => (
-                            <Grid item xs={12} sm={6} md={3} key={index}>
+                            <Grid item xs={12} sm={6} md={3} key={index} component="div">
                                 <Card
                                     sx={{
                                         p: 6,
@@ -308,7 +308,7 @@ export default function AboutPage() {
             <Box sx={{ py: 4, backgroundColor: '#f8f9fa' }}>
                 <Container maxWidth="lg">
                     <Grid container spacing={3} alignItems="center">
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={6} component="div">
                             <Fade in timeout={1400}>
                                 <div>
                                     <Box>
@@ -341,7 +341,7 @@ export default function AboutPage() {
                                 </div>
                             </Fade>
                         </Grid>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={6} component="div">
                             <Box
                                 sx={{
                                     height: { xs: 200, md: 250 },
@@ -380,7 +380,7 @@ export default function AboutPage() {
 
                     <Grid container spacing={8} justifyContent="center" sx={{ px: 4 }}>
                         {values.map((value, index) => (
-                            <Grid item xs={12} sm={6} md={6} lg={3} key={index}>
+                            <Grid item xs={12} sm={6} md={6} lg={3} key={index} component="div">
                                 <Card
                                     elevation={0}
                                     sx={{
