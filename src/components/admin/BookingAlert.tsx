@@ -45,7 +45,7 @@ export default function BookingAlert({ onViewBookings }: BookingAlertProps) {
 
                     const recentBookings = data.filter((booking: Booking) =>
                         booking.status === 'pending' &&
-                        new Date(booking.created_at) > oneHourAgo
+                        new Date(booking.createdAt) > oneHourAgo
                     );
 
                     if (recentBookings.length > 0) {
@@ -140,17 +140,17 @@ export default function BookingAlert({ onViewBookings }: BookingAlertProps) {
                                     <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
                                         <Box>
                                             <Typography variant="subtitle2" gutterBottom>
-                                                {booking.user_name}
+                                                {booking.customerName}
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
-                                                {booking.type === 'apartment' ? 'Appartement' : 'Voiture'}
+                                                {booking.type === 'Apartment' ? 'Appartement' : 'Voiture'}
                                             </Typography>
                                             <Typography variant="body2" color="primary" fontWeight="bold">
-                                                {formatPrice(booking.total_amount)}
+                                                {formatPrice(booking.totalPrice)}
                                             </Typography>
                                         </Box>
                                         <Typography variant="caption" color="text.secondary">
-                                            {formatTime(booking.created_at)}
+                                            {formatTime(booking.createdAt)}
                                         </Typography>
                                     </Stack>
                                 </Box>

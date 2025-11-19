@@ -11,8 +11,8 @@ export const apartments: Apartment[] = [
     rooms: 3,
     bathrooms: 2,
     surface: 120,
-    pricePerDay: 25000,
-    pricePerWeek: 150000,
+    price_per_day: 25000,
+    price_per_week: 150000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking privé', 'Balcon'],
     images: [
@@ -20,7 +20,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.716677,
       lng: -17.467686
     }
@@ -34,8 +34,8 @@ export const apartments: Apartment[] = [
     rooms: 1,
     bathrooms: 1,
     surface: 45,
-    pricePerDay: 15000,
-    pricePerWeek: 90000,
+    price_per_day: 15000,
+    price_per_week: 90000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Kitchenette', 'TV', 'Parking'],
     images: [
@@ -43,7 +43,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1571624436279-b272aff752b5',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6'
     ],
-    location: {
+    coordinates: {
       lat: 14.717200,
       lng: -17.467200
     }
@@ -57,8 +57,8 @@ export const apartments: Apartment[] = [
     rooms: 4,
     bathrooms: 3,
     surface: 140,
-    pricePerDay: 30000,
-    pricePerWeek: 180000,
+    price_per_day: 30000,
+    price_per_week: 180000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Balcon', 'Machine à laver'],
     images: [
@@ -66,7 +66,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
       'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8'
     ],
-    location: {
+    coordinates: {
       lat: 14.717800,
       lng: -17.466800
     }
@@ -80,8 +80,8 @@ export const apartments: Apartment[] = [
     rooms: 5,
     bathrooms: 3,
     surface: 180,
-    pricePerDay: 40000,
-    pricePerWeek: 240000,
+    price_per_day: 40000,
+    price_per_week: 240000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Terrasse', 'Machine à laver', 'Jardin'],
     images: [
@@ -89,7 +89,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.718200,
       lng: -17.466400
     }
@@ -103,8 +103,8 @@ export const apartments: Apartment[] = [
     rooms: 2,
     bathrooms: 1,
     surface: 75,
-    pricePerDay: 18000,
-    pricePerWeek: 108000,
+    price_per_day: 18000,
+    price_per_week: 108000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV', 'Parking'],
     images: [
@@ -112,7 +112,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1571624436279-b272aff752b5',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6'
     ],
-    location: {
+    coordinates: {
       lat: 14.716400,
       lng: -17.467900
     }
@@ -126,8 +126,8 @@ export const apartments: Apartment[] = [
     rooms: 1,
     bathrooms: 1,
     surface: 50,
-    pricePerDay: 20000,
-    pricePerWeek: 120000,
+    price_per_day: 20000,
+    price_per_week: 120000,
     available: false,
     equipment: ['Climatisation', 'Wi-Fi haut débit', 'Kitchenette', 'TV LED', 'Parking', 'Bureau'],
     images: [
@@ -135,7 +135,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.716000,
       lng: -17.468200
     }
@@ -149,8 +149,8 @@ export const apartments: Apartment[] = [
     rooms: 3,
     bathrooms: 2,
     surface: 110,
-    pricePerDay: 28000,
-    pricePerWeek: 168000,
+    price_per_day: 28000,
+    price_per_week: 168000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Balcon vue mer'],
     images: [
@@ -158,7 +158,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
       'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8'
     ],
-    location: {
+    coordinates: {
       lat: 14.719000,
       lng: -17.465800
     }
@@ -172,8 +172,8 @@ export const apartments: Apartment[] = [
     rooms: 2,
     bathrooms: 2,
     surface: 95,
-    pricePerDay: 22000,
-    pricePerWeek: 132000,
+    price_per_day: 22000,
+    price_per_week: 132000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine ouverte', 'TV LED', 'Parking', 'Mezzanine'],
     images: [
@@ -181,7 +181,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1571624436279-b272aff752b5',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6'
     ],
-    location: {
+    coordinates: {
       lat: 14.717500,
       lng: -17.467000
     }
@@ -195,8 +195,8 @@ export const apartments: Apartment[] = [
     rooms: 3,
     bathrooms: 2,
     surface: 125,
-    pricePerDay: 26000,
-    pricePerWeek: 156000,
+    price_per_day: 26000,
+    price_per_week: 156000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Grande terrasse', 'Barbecue'],
     images: [
@@ -204,7 +204,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.718500,
       lng: -17.466200
     }
@@ -218,8 +218,8 @@ export const apartments: Apartment[] = [
     rooms: 1,
     bathrooms: 1,
     surface: 55,
-    pricePerDay: 17000,
-    pricePerWeek: 102000,
+    price_per_day: 17000,
+    price_per_week: 102000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Kitchenette', 'TV', 'Parking', 'Coin nuit'],
     images: [
@@ -227,7 +227,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
       'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8'
     ],
-    location: {
+    coordinates: {
       lat: 14.716800,
       lng: -17.467500
     }
@@ -241,8 +241,8 @@ export const apartments: Apartment[] = [
     rooms: 4,
     bathrooms: 2,
     surface: 135,
-    pricePerDay: 32000,
-    pricePerWeek: 192000,
+    price_per_day: 32000,
+    price_per_week: 192000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Jardin privé', 'Machine à laver'],
     images: [
@@ -250,7 +250,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1571624436279-b272aff752b5',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6'
     ],
-    location: {
+    coordinates: {
       lat: 14.717000,
       lng: -17.467800
     }
@@ -264,8 +264,8 @@ export const apartments: Apartment[] = [
     rooms: 5,
     bathrooms: 3,
     surface: 200,
-    pricePerDay: 50000,
-    pricePerWeek: 300000,
+    price_per_day: 50000,
+    price_per_week: 300000,
     available: false,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Terrasse toit', 'Jacuzzi', 'Machine à laver'],
     images: [
@@ -273,7 +273,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.719500,
       lng: -17.465200
     }
@@ -287,8 +287,8 @@ export const apartments: Apartment[] = [
     rooms: 2,
     bathrooms: 1,
     surface: 80,
-    pricePerDay: 19000,
-    pricePerWeek: 114000,
+    price_per_day: 19000,
+    price_per_week: 114000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi haut débit', 'Cuisine équipée', 'TV', 'Parking', 'Bureau équipé', 'Imprimante'],
     images: [
@@ -296,7 +296,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
       'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8'
     ],
-    location: {
+    coordinates: {
       lat: 14.717300,
       lng: -17.467300
     }
@@ -310,8 +310,8 @@ export const apartments: Apartment[] = [
     rooms: 3,
     bathrooms: 2,
     surface: 115,
-    pricePerDay: 24000,
-    pricePerWeek: 144000,
+    price_per_day: 24000,
+    price_per_week: 144000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Décoration design', 'Balcon'],
     images: [
@@ -319,7 +319,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1571624436279-b272aff752b5',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6'
     ],
-    location: {
+    coordinates: {
       lat: 14.716600,
       lng: -17.467700
     }
@@ -335,8 +335,8 @@ export const apartments: Apartment[] = [
     rooms: 4,
     bathrooms: 3,
     surface: 160,
-    pricePerDay: 35000,
-    pricePerWeek: 210000,
+    price_per_day: 35000,
+    price_per_week: 210000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Piscine', 'Jardin', 'Machine à laver'],
     images: [
@@ -344,7 +344,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.715677,
       lng: -17.475686
     }
@@ -358,8 +358,8 @@ export const apartments: Apartment[] = [
     rooms: 3,
     bathrooms: 2,
     surface: 130,
-    pricePerDay: 27000,
-    pricePerWeek: 162000,
+    price_per_day: 27000,
+    price_per_week: 162000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Balcon'],
     images: [
@@ -367,7 +367,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1571624436279-b272aff752b5',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6'
     ],
-    location: {
+    coordinates: {
       lat: 14.716200,
       lng: -17.475200
     }
@@ -381,8 +381,8 @@ export const apartments: Apartment[] = [
     rooms: 1,
     bathrooms: 1,
     surface: 60,
-    pricePerDay: 20000,
-    pricePerWeek: 120000,
+    price_per_day: 20000,
+    price_per_week: 120000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi haut débit', 'Kitchenette premium', 'TV LED', 'Parking', 'Balcon'],
     images: [
@@ -390,7 +390,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
       'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8'
     ],
-    location: {
+    coordinates: {
       lat: 14.715800,
       lng: -17.475800
     }
@@ -404,8 +404,8 @@ export const apartments: Apartment[] = [
     rooms: 4,
     bathrooms: 3,
     surface: 150,
-    pricePerDay: 33000,
-    pricePerWeek: 198000,
+    price_per_day: 33000,
+    price_per_week: 198000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Balcon', 'Machine à laver', 'Lave-vaisselle'],
     images: [
@@ -413,7 +413,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.716800,
       lng: -17.474800
     }
@@ -427,8 +427,8 @@ export const apartments: Apartment[] = [
     rooms: 2,
     bathrooms: 2,
     surface: 100,
-    pricePerDay: 25000,
-    pricePerWeek: 150000,
+    price_per_day: 25000,
+    price_per_week: 150000,
     available: false,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine ouverte', 'TV LED', 'Parking', 'Espace artistique', 'Terrasse'],
     images: [
@@ -436,7 +436,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1571624436279-b272aff752b5',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6'
     ],
-    location: {
+    coordinates: {
       lat: 14.717200,
       lng: -17.474400
     }
@@ -450,8 +450,8 @@ export const apartments: Apartment[] = [
     rooms: 3,
     bathrooms: 2,
     surface: 120,
-    pricePerDay: 26000,
-    pricePerWeek: 156000,
+    price_per_day: 26000,
+    price_per_week: 156000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Balcon'],
     images: [
@@ -459,7 +459,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
       'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8'
     ],
-    location: {
+    coordinates: {
       lat: 14.715400,
       lng: -17.476000
     }
@@ -473,8 +473,8 @@ export const apartments: Apartment[] = [
     rooms: 1,
     bathrooms: 1,
     surface: 40,
-    pricePerDay: 16000,
-    pricePerWeek: 96000,
+    price_per_day: 16000,
+    price_per_week: 96000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Kitchenette', 'TV', 'Parking'],
     images: [
@@ -482,7 +482,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.715000,
       lng: -17.476400
     }
@@ -496,8 +496,8 @@ export const apartments: Apartment[] = [
     rooms: 5,
     bathrooms: 3,
     surface: 180,
-    pricePerDay: 45000,
-    pricePerWeek: 270000,
+    price_per_day: 45000,
+    price_per_week: 270000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Terrasse', 'Machine à laver', 'Lave-vaisselle'],
     images: [
@@ -505,7 +505,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1571624436279-b272aff752b5',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6'
     ],
-    location: {
+    coordinates: {
       lat: 14.717800,
       lng: -17.473800
     }
@@ -519,8 +519,8 @@ export const apartments: Apartment[] = [
     rooms: 2,
     bathrooms: 1,
     surface: 85,
-    pricePerDay: 21000,
-    pricePerWeek: 126000,
+    price_per_day: 21000,
+    price_per_week: 126000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking'],
     images: [
@@ -528,7 +528,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
       'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8'
     ],
-    location: {
+    coordinates: {
       lat: 14.716400,
       lng: -17.475600
     }
@@ -542,8 +542,8 @@ export const apartments: Apartment[] = [
     rooms: 4,
     bathrooms: 3,
     surface: 170,
-    pricePerDay: 55000,
-    pricePerWeek: 330000,
+    price_per_day: 55000,
+    price_per_week: 330000,
     available: false,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Terrasse vue mer', 'Jacuzzi', 'Machine à laver'],
     images: [
@@ -551,7 +551,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.718200,
       lng: -17.473400
     }
@@ -565,8 +565,8 @@ export const apartments: Apartment[] = [
     rooms: 2,
     bathrooms: 1,
     surface: 75,
-    pricePerDay: 19000,
-    pricePerWeek: 114000,
+    price_per_day: 19000,
+    price_per_week: 114000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV', 'Parking', 'Balcon'],
     images: [
@@ -574,7 +574,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1571624436279-b272aff752b5',
       'https://images.unsplash.com/photo-1564013799919-ab600027ffc6'
     ],
-    location: {
+    coordinates: {
       lat: 14.715600,
       lng: -17.476200
     }
@@ -588,8 +588,8 @@ export const apartments: Apartment[] = [
     rooms: 6,
     bathrooms: 4,
     surface: 220,
-    pricePerDay: 60000,
-    pricePerWeek: 360000,
+    price_per_day: 60000,
+    price_per_week: 360000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking', 'Piscine privée', 'Jardin', 'Machine à laver', 'Barbecue'],
     images: [
@@ -597,7 +597,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
       'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8'
     ],
-    location: {
+    coordinates: {
       lat: 14.718600,
       lng: -17.473000
     }
@@ -611,8 +611,8 @@ export const apartments: Apartment[] = [
     rooms: 1,
     bathrooms: 1,
     surface: 50,
-    pricePerDay: 18000,
-    pricePerWeek: 108000,
+    price_per_day: 18000,
+    price_per_week: 108000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi haut débit', 'Kitchenette', 'TV', 'Parking', 'Bureau équipé'],
     images: [
@@ -620,7 +620,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.717000,
       lng: -17.474600
     }
@@ -636,8 +636,8 @@ export const apartments: Apartment[] = [
     rooms: 5,
     bathrooms: 3,
     surface: 250,
-    pricePerDay: 45000,
-    pricePerWeek: 270000,
+    price_per_day: 45000,
+    price_per_week: 270000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking privé', 'Piscine', 'Jardin tropical', 'Machine à laver', 'Lave-vaisselle', 'Barbecue'],
     images: [
@@ -645,7 +645,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1568605114967-8130f3a36994',
       'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8'
     ],
-    location: {
+    coordinates: {
       lat: 14.720677,
       lng: -17.460686
     }
@@ -659,8 +659,8 @@ export const apartments: Apartment[] = [
     rooms: 4,
     bathrooms: 3,
     surface: 200,
-    pricePerDay: 40000,
-    pricePerWeek: 240000,
+    price_per_day: 40000,
+    price_per_week: 240000,
     available: true,
     equipment: ['Climatisation', 'Wi-Fi', 'Cuisine équipée', 'TV LED', 'Parking sécurisé', 'Balcon', 'Machine à laver', 'Sécurité 24h', 'Conciergerie'],
     images: [
@@ -668,7 +668,7 @@ export const apartments: Apartment[] = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
       'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e'
     ],
-    location: {
+    coordinates: {
       lat: 14.721200,
       lng: -17.460200
     }

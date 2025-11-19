@@ -175,7 +175,7 @@ export default function TestBookingsPage() {
                                     </Typography>
                                 )}
                                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                                    <strong>Créé le:</strong> {new Date(booking.created_at).toLocaleString('fr-FR')}
+                                    <strong>Créé le:</strong> {booking.created_at ? new Date(booking.created_at).toLocaleString('fr-FR') : 'N/A'}
                                 </Typography>
                             </CardContent>
                         </Card>

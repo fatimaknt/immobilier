@@ -40,17 +40,24 @@ const CarManager: React.FC<CarManagerProps> = ({
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        const carData = {
-            ...formData,
-            year: parseInt(formData.year),
-            seats: parseInt(formData.seats),
-            pricePerDay: parseInt(formData.pricePerDay)
+        const carData: Partial<Car> = {
+            brand: formData.brand,
+            model: formData.model,
+            type: '', // Default type, should be from form
+            year: parseInt(formData.year) || 0,
+            seats: parseInt(formData.seats) || 0,
+            transmission: formData.transmission as 'Manuel' | 'Automatique',
+            price_per_day: parseInt(formData.pricePerDay) || 0,
+            fuel_type: formData.fuelType || undefined,
+            description: formData.description || undefined,
+            available: formData.available,
+            images: formData.images
         };
 
         if (editingCar) {
             onUpdateCar(editingCar.id, carData);
         } else {
-            onAddCar(carData);
+            onAddCar(carData as Omit<Car, 'id'>);
         }
 
         resetForm();
@@ -78,11 +85,11 @@ const CarManager: React.FC<CarManagerProps> = ({
             brand: car.brand,
             model: car.model,
             year: car.year.toString(),
-            fuelType: car.fuelType,
+            fuelType: car.fuel_type || '',
             transmission: car.transmission,
             seats: car.seats.toString(),
-            pricePerDay: car.pricePerDay.toString(),
-            description: car.description,
+            pricePerDay: car.price_per_day.toString(),
+            description: car.description || '',
             available: car.available,
             images: car.images
         });
@@ -264,7 +271,7 @@ const CarManager: React.FC<CarManagerProps> = ({
                             <div className="car-info">
                                 <h4>{car.brand} {car.model}</h4>
                                 <p>Année: {car.year}</p>
-                                <p>{car.pricePerDay}€/jour</p>
+                                <p>{car.price_per_day}€/jour</p>
                                 <span className={`status ${car.available ? 'available' : 'unavailable'}`}>
                                     {car.available ? 'Disponible' : 'Indisponible'}
                                 </span>

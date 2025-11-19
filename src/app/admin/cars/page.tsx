@@ -186,7 +186,7 @@ export default function AdminCars() {
                 year: editingCar.year,
                 mileage: editingCar.mileage,
                 features: typeof editingCar.features === 'string'
-                    ? editingCar.features.split(',').map(item => item.trim()).filter(item => item)
+                    ? (editingCar.features as string).split(',').map(item => item.trim()).filter(item => item)
                     : editingCar.features
             };
 
@@ -533,9 +533,9 @@ export default function AdminCars() {
                     </DialogTitle>
                     <DialogContent sx={{ p: 6, maxHeight: '75vh', overflowY: 'auto', backgroundColor: '#fafbfc' }}>
                         <Box sx={{ mt: 4, mb: 2 }}>
-                            <Grid container spacing={4}>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                                 {/* Marque */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Marque"
@@ -549,9 +549,8 @@ export default function AdminCars() {
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
                                                 backgroundColor: '#ffffff',
-                                                fontSize: '1rem',
-                                                minHeight: '70px',
                                                 fontSize: '1.1rem',
+                                                minHeight: '70px',
                                                 '&:hover': {
                                                     backgroundColor: '#f8fafc',
                                                     borderColor: '#3b82f6'
@@ -568,10 +567,10 @@ export default function AdminCars() {
                                             }
                                         }}
                                     />
-                                </Grid>
+                                </Box>
 
                                 {/* Modèle */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Modèle"
@@ -585,9 +584,8 @@ export default function AdminCars() {
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
                                                 backgroundColor: '#ffffff',
-                                                fontSize: '1rem',
-                                                minHeight: '70px',
                                                 fontSize: '1.1rem',
+                                                minHeight: '70px',
                                                 '&:hover': {
                                                     backgroundColor: '#f8fafc',
                                                     borderColor: '#3b82f6'
@@ -604,10 +602,10 @@ export default function AdminCars() {
                                             }
                                         }}
                                     />
-                                </Grid>
+                                </Box>
 
                                 {/* Type */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <FormControl fullWidth required size="medium">
                                         <InputLabel sx={{ fontSize: '1rem', fontWeight: 600 }}>Type de véhicule</InputLabel>
                                         <Select
@@ -645,10 +643,10 @@ export default function AdminCars() {
                                             <MenuItem value="Monospace" sx={{ fontSize: '1rem', py: 1.5 }}>Monospace</MenuItem>
                                         </Select>
                                     </FormControl>
-                                </Grid>
+                                </Box>
 
                                 {/* Année */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Année"
@@ -662,9 +660,8 @@ export default function AdminCars() {
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
                                                 backgroundColor: '#ffffff',
-                                                fontSize: '1rem',
-                                                minHeight: '70px',
                                                 fontSize: '1.1rem',
+                                                minHeight: '70px',
                                                 '&:hover': {
                                                     backgroundColor: '#f8fafc',
                                                     borderColor: '#3b82f6'
@@ -681,10 +678,10 @@ export default function AdminCars() {
                                             }
                                         }}
                                     />
-                                </Grid>
+                                </Box>
 
                                 {/* Prix par jour */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Prix par jour (FCFA)"
@@ -699,9 +696,8 @@ export default function AdminCars() {
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
                                                 backgroundColor: '#ffffff',
-                                                fontSize: '1rem',
-                                                minHeight: '70px',
                                                 fontSize: '1.1rem',
+                                                minHeight: '70px',
                                                 '&:hover': {
                                                     backgroundColor: '#f8fafc',
                                                     borderColor: '#3b82f6'
@@ -718,10 +714,10 @@ export default function AdminCars() {
                                             }
                                         }}
                                     />
-                                </Grid>
+                                </Box>
 
                                 {/* Prix par semaine */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Prix par semaine (FCFA)"
@@ -736,9 +732,8 @@ export default function AdminCars() {
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
                                                 backgroundColor: '#ffffff',
-                                                fontSize: '1rem',
-                                                minHeight: '70px',
                                                 fontSize: '1.1rem',
+                                                minHeight: '70px',
                                                 '&:hover': {
                                                     backgroundColor: '#f8fafc',
                                                     borderColor: '#3b82f6'
@@ -755,10 +750,10 @@ export default function AdminCars() {
                                             }
                                         }}
                                     />
-                                </Grid>
+                                </Box>
 
                                 {/* Statut */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <FormControl fullWidth required size="medium">
                                         <InputLabel sx={{ fontSize: '1rem', fontWeight: 600 }}>Statut de disponibilité</InputLabel>
                                         <Select
@@ -793,10 +788,10 @@ export default function AdminCars() {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
-                                </Grid>
+                                </Box>
 
                                 {/* Places */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Nombre de places"
@@ -810,9 +805,8 @@ export default function AdminCars() {
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
                                                 backgroundColor: '#ffffff',
-                                                fontSize: '1rem',
-                                                minHeight: '70px',
                                                 fontSize: '1.1rem',
+                                                minHeight: '70px',
                                                 '&:hover': {
                                                     backgroundColor: '#f8fafc',
                                                     borderColor: '#3b82f6'
@@ -829,10 +823,10 @@ export default function AdminCars() {
                                             }
                                         }}
                                     />
-                                </Grid>
+                                </Box>
 
                                 {/* Carburant */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <FormControl fullWidth required size="medium">
                                         <InputLabel sx={{ fontSize: '1rem', fontWeight: 600 }}>Type de carburant</InputLabel>
                                         <Select
@@ -877,10 +871,10 @@ export default function AdminCars() {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
-                                </Grid>
+                                </Box>
 
                                 {/* Transmission */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <FormControl fullWidth required size="medium">
                                         <InputLabel sx={{ fontSize: '1rem', fontWeight: 600 }}>Transmission</InputLabel>
                                         <Select
@@ -915,10 +909,10 @@ export default function AdminCars() {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
-                                </Grid>
+                                </Box>
 
                                 {/* Kilométrage */}
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Kilométrage (km)"
@@ -932,9 +926,8 @@ export default function AdminCars() {
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
                                                 backgroundColor: '#ffffff',
-                                                fontSize: '1rem',
-                                                minHeight: '70px',
                                                 fontSize: '1.1rem',
+                                                minHeight: '70px',
                                                 '&:hover': {
                                                     backgroundColor: '#f8fafc',
                                                     borderColor: '#3b82f6'
@@ -951,10 +944,10 @@ export default function AdminCars() {
                                             }
                                         }}
                                     />
-                                </Grid>
+                                </Box>
 
                                 {/* Équipements */}
-                                <Grid item xs={12}>
+                                <Box>
                                     <TextField
                                         fullWidth
                                         label="Équipements (séparés par des virgules)"
@@ -967,7 +960,7 @@ export default function AdminCars() {
                                         onChange={(e) => {
                                             const value = e.target.value;
                                             if (editingCar) {
-                                                setEditingCar({ ...editingCar, features: value });
+                                                setEditingCar({ ...editingCar, features: value.split(',').map(item => item.trim()).filter(item => item) });
                                             }
                                         }}
                                         variant="outlined"
@@ -995,10 +988,10 @@ export default function AdminCars() {
                                             }
                                         }}
                                     />
-                                </Grid>
+                                </Box>
 
                                 {/* Description */}
-                                <Grid item xs={12}>
+                                <Box>
                                     <TextField
                                         fullWidth
                                         label="Description détaillée"
@@ -1030,10 +1023,10 @@ export default function AdminCars() {
                                             }
                                         }}
                                     />
-                                </Grid>
+                                </Box>
 
                                 {/* Section Images */}
-                                <Grid item xs={12}>
+                                <Box>
                                     <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: '#374151' }}>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <PhotoIcon /> Images de la voiture
@@ -1122,8 +1115,8 @@ export default function AdminCars() {
                                             </ImageList>
                                         </Box>
                                     )}
-                                </Grid>
-                            </Grid>
+                                </Box>
+                            </Box>
                         </Box>
                     </DialogContent>
                     <DialogActions sx={{ p: 4, justifyContent: 'space-between' }}>
@@ -1200,17 +1193,17 @@ export default function AdminCars() {
                     </DialogTitle>
                     <DialogContent sx={{ p: 4 }}>
                         {viewingCar && (
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                                <Box>
                                     <Typography variant="h4" sx={{ fontWeight: 800, mb: 2, color: '#1e293b' }}>
                                         {viewingCar.brand} {viewingCar.model}
                                     </Typography>
                                     <Typography variant="body1" sx={{ color: '#64748b', mb: 3 }}>
                                         {viewingCar.description}
                                     </Typography>
-                                </Grid>
+                                </Box>
 
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <Box sx={{
                                         p: 3,
                                         borderRadius: 2,
@@ -1231,9 +1224,9 @@ export default function AdminCars() {
                                             <Typography><strong>Transmission:</strong> {viewingCar.transmission}</Typography>
                                         </Box>
                                     </Box>
-                                </Grid>
+                                </Box>
 
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <Box sx={{
                                         p: 3,
                                         borderRadius: 2,
@@ -1259,11 +1252,11 @@ export default function AdminCars() {
                                             </Typography>
                                         </Box>
                                     </Box>
-                                </Grid>
+                                </Box>
 
                                 {/* Équipements */}
                                 {viewingCar.features && viewingCar.features.length > 0 && (
-                                    <Grid item xs={12}>
+                                    <Box>
                                         <Box sx={{
                                             p: 3,
                                             borderRadius: 2,
@@ -1291,10 +1284,10 @@ export default function AdminCars() {
                                                 ))}
                                             </Box>
                                         </Box>
-                                    </Grid>
+                                    </Box>
                                 )}
 
-                                <Grid item xs={12}>
+                                <Box>
                                     <Box sx={{
                                         p: 3,
                                         borderRadius: 2,
@@ -1342,8 +1335,8 @@ export default function AdminCars() {
                                             </Box>
                                         )}
                                     </Box>
-                                </Grid>
-                            </Grid>
+                                </Box>
+                            </Box>
                         )}
                     </DialogContent>
                     <DialogActions sx={{ p: 3, justifyContent: 'center' }}>
@@ -1366,7 +1359,7 @@ export default function AdminCars() {
                         </Button>
                     </DialogActions>
                 </Dialog>
-            </Container>
-        </Box>
+            </Container >
+        </Box >
     );
 }

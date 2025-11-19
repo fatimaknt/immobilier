@@ -5,7 +5,6 @@ import {
     Box,
     Container,
     Typography,
-    Grid,
     Card,
     FormControl,
     InputLabel,
@@ -33,7 +32,6 @@ import {
     WhatsApp as WhatsAppIcon,
     Phone as PhoneCallIcon,
 } from '@mui/icons-material';
-import Image from 'next/image';
 import CarCard from '@/components/cars/CarCard';
 import { Car } from '@/types';
 
@@ -366,8 +364,8 @@ export default function CarsPage() {
                                 </Typography>
                             </Box>
 
-                            <Grid container spacing={3} alignItems="flex-end">
-                                <Grid item xs={12} sm={6} md={3}>
+                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, alignItems: 'flex-end' }}>
+                                <Box sx={{ width: { xs: '100%', sm: '50%', md: '25%' } }}>
                                     <FormControl fullWidth>
                                         <InputLabel sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Type de véhicule</InputLabel>
                                         <Select
@@ -397,9 +395,9 @@ export default function CarsPage() {
                                             ))}
                                         </Select>
                                     </FormControl>
-                                </Grid>
+                                </Box>
 
-                                <Grid item xs={12} sm={6} md={3}>
+                                <Box sx={{ width: { xs: '100%', sm: '50%', md: '25%' } }}>
                                     <FormControl fullWidth>
                                         <InputLabel sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Transmission</InputLabel>
                                         <Select
@@ -429,9 +427,9 @@ export default function CarsPage() {
                                             ))}
                                         </Select>
                                     </FormControl>
-                                </Grid>
+                                </Box>
 
-                                <Grid item xs={12} sm={6} md={3}>
+                                <Box sx={{ width: { xs: '100%', sm: '50%', md: '25%' } }}>
                                     <FormControl fullWidth>
                                         <InputLabel sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Trier par</InputLabel>
                                         <Select
@@ -460,9 +458,9 @@ export default function CarsPage() {
                                             <MenuItem value="brand" sx={{ fontSize: '1.1rem', fontWeight: 600 }}>Marque A-Z</MenuItem>
                                         </Select>
                                     </FormControl>
-                                </Grid>
+                                </Box>
 
-                                <Grid item xs={12} sm={6} md={3}>
+                                <Box sx={{ width: { xs: '100%', sm: '50%', md: '25%' } }}>
                                     <Button
                                         fullWidth
                                         variant="outlined"
@@ -481,8 +479,8 @@ export default function CarsPage() {
                                     >
                                         Réinitialiser
                                     </Button>
-                                </Grid>
-                            </Grid>
+                                </Box>
+                            </Box>
 
                             {/* Checkbox "Disponibles uniquement" en dessous */}
                             <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-start' }}>
@@ -592,8 +590,8 @@ export default function CarsPage() {
                             <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
                                 Notre équipe vous accompagne dans le choix du véhicule parfait
                             </Typography>
-                            <Grid container spacing={3} justifyContent="center">
-                                <Grid item xs={12} sm={6} md={4}>
+                            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 3, justifyContent: 'center' }}>
+                                <Box sx={{ width: { xs: '100%', sm: '50%', md: '33.333%' } }}>
                                     <Button
                                         component="a"
                                         href="https://wa.me/221784929439?text=Bonjour,%20j'aimerais%20avoir%20des%20conseils%20pour%20choisir%20une%20voiture."
@@ -614,8 +612,8 @@ export default function CarsPage() {
                                             <WhatsAppIcon /> WhatsApp
                                         </Box>
                                     </Button>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4}>
+                                </Box>
+                                <Box sx={{ width: { xs: '100%', sm: '50%', md: '33.333%' } }}>
                                     <Button
                                         component="a"
                                         href="tel:+221784929439"
@@ -636,12 +634,12 @@ export default function CarsPage() {
                                             <PhoneCallIcon /> Appeler
                                         </Box>
                                     </Button>
-                                </Grid>
-                            </Grid>
+                                </Box>
+                            </Box>
                         </Box>
                     </Fade>
                 </Container>
             </Box>
-        </Box>
+        </Box >
     );
 }

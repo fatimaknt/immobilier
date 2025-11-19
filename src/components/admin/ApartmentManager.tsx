@@ -38,12 +38,19 @@ const ApartmentManager: React.FC<ApartmentManagerProps> = ({
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        const apartmentData = {
-            ...formData,
-            price: parseInt(formData.price),
-            bedrooms: parseInt(formData.bedrooms),
-            bathrooms: parseInt(formData.bathrooms),
-            size: parseInt(formData.size)
+        const apartmentData: Omit<Apartment, 'id'> = {
+            title: formData.title,
+            description: formData.description,
+            zone: 'Ouest-foire' as Apartment['zone'], // Default zone, should be from form
+            address: formData.location,
+            rooms: parseInt(formData.bedrooms) || 0,
+            bathrooms: parseInt(formData.bathrooms) || 0,
+            surface: parseInt(formData.size) || 0,
+            price_per_day: parseInt(formData.price) || 0,
+            price_per_week: parseInt(formData.price) * 7 || 0, // Default to 7x daily price
+            available: true,
+            equipment: [],
+            images: formData.images
         };
 
         if (editingApartment) {
@@ -74,11 +81,11 @@ const ApartmentManager: React.FC<ApartmentManagerProps> = ({
         setFormData({
             title: apartment.title,
             description: apartment.description,
-            location: apartment.location,
-            price: apartment.price.toString(),
-            bedrooms: apartment.bedrooms.toString(),
+            location: apartment.address,
+            price: apartment.price_per_day.toString(),
+            bedrooms: apartment.rooms.toString(),
             bathrooms: apartment.bathrooms.toString(),
-            size: apartment.size.toString(),
+            size: apartment.surface.toString(),
             images: apartment.images
         });
         setEditingApartment(apartment);
@@ -219,8 +226,8 @@ const ApartmentManager: React.FC<ApartmentManagerProps> = ({
                         <div key={apartment.id} className="apartment-item">
                             <div className="apartment-info">
                                 <h4>{apartment.title}</h4>
-                                <p>{apartment.location}</p>
-                                <p>{apartment.price}€/mois</p>
+                                <p>{apartment.address}</p>
+                                <p>{apartment.price_per_day}€/jour</p>
                             </div>
                             <div className="apartment-actions">
                                 <button onClick={() => handleEdit(apartment)} className="edit-btn">

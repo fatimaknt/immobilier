@@ -6,7 +6,8 @@ import 'leaflet/dist/leaflet.css';
 
 // Fix for default markers in react-leaflet
 import L from 'leaflet';
-delete L.Icon.Default.prototype._getIconUrl;
+// @ts-expect-error - _getIconUrl is a private property that needs to be deleted
+delete (L.Icon.Default.prototype as Record<string, unknown>)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
@@ -39,7 +40,7 @@ const InteractiveMap: React.FC<MapProps> = ({ apartments, height = '400px' }) =>
         {apartments.map(apartment => (
           <Marker
             key={apartment.id}
-            position={[apartment.location.lat, apartment.location.lng]}
+            position={apartment.coordinates ? [apartment.coordinates.lat, apartment.coordinates.lng] : [0, 0]}
           >
             <Popup>
               <Typography variant="h6" gutterBottom>
@@ -49,7 +50,7 @@ const InteractiveMap: React.FC<MapProps> = ({ apartments, height = '400px' }) =>
                 {apartment.zone} • {apartment.rooms} chambres
               </Typography>
               <Typography variant="body2" fontWeight="bold" gutterBottom>
-                {apartment.pricePerDay.toLocaleString()} FCFA/jour
+                {apartment.price_per_day.toLocaleString()} FCFA/jour
               </Typography>
               <Button
                 variant="contained"

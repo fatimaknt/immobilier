@@ -4,7 +4,6 @@ import React from 'react';
 import {
     Box,
     Container,
-    Grid,
     Typography,
     Button,
     IconButton,
@@ -90,9 +89,16 @@ const Footer: React.FC = () => {
             <Container maxWidth="lg">
                 {/* Contenu principal du footer */}
                 <Box sx={{ py: 6 }}>
-                    <Grid container spacing={6} justifyContent="space-between">
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: '2fr 1fr 1fr 2fr' },
+                            gap: 6,
+                            justifyContent: 'space-between'
+                        }}
+                    >
                         {/* Logo et description */}
-                        <Grid item xs={12} md={4}>
+                        <Box>
                             <Box sx={{ mb: 3, textAlign: { xs: 'center', md: 'left' } }}>
                                 <Logo size="md" showText variant="white" />
                             </Box>
@@ -118,10 +124,10 @@ const Footer: React.FC = () => {
                                     </IconButton>
                                 ))}
                             </Stack>
-                        </Grid>
+                        </Box>
 
                         {/* Services */}
-                        <Grid item xs={12} sm={4} md={2}>
+                        <Box>
                             <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, textAlign: { xs: 'center', md: 'left' } }}>
                                 Services
                             </Typography>
@@ -184,10 +190,10 @@ const Footer: React.FC = () => {
                                     Réservation
                                 </Button>
                             </Stack>
-                        </Grid>
+                        </Box>
 
                         {/* Entreprise */}
-                        <Grid item xs={12} sm={4} md={2}>
+                        <Box>
                             <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, textAlign: { xs: 'center', md: 'center' } }}>
                                 Entreprise
                             </Typography>
@@ -219,10 +225,10 @@ const Footer: React.FC = () => {
                                     </Button>
                                 ))}
                             </Stack>
-                        </Grid>
+                        </Box>
 
                         {/* Contact */}
-                        <Grid item xs={12} sm={4} md={4}>
+                        <Box>
                             <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, textAlign: { xs: 'center', md: 'right' } }}>
                                 Contactez-nous
                             </Typography>
@@ -263,8 +269,8 @@ const Footer: React.FC = () => {
                                     WhatsApp
                                 </Button>
                             </Stack>
-                        </Grid>
-                    </Grid>
+                        </Box>
+                    </Box>
                 </Box>
 
                 {/* Séparateur avec dégradé */}

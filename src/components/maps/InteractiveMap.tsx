@@ -393,10 +393,10 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ apartments }) => {
 
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, mb: 3 }}>
                                             <Typography variant="h5" color="primary" sx={{ fontWeight: 700 }}>
-                                                {formatPrice(selectedApartment.pricePerDay)}/jour
+                                                {formatPrice(selectedApartment.price_per_day)}/jour
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
-                                                {formatPrice(selectedApartment.pricePerWeek)}/semaine
+                                                {formatPrice(selectedApartment.price_per_week || selectedApartment.price_per_day * 7)}/semaine
                                             </Typography>
                                         </Box>
                                     </Box>

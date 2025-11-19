@@ -6,7 +6,6 @@ import {
     Container,
     Typography,
     Button,
-    Grid,
     Card,
     CardContent,
     Paper,
@@ -188,9 +187,17 @@ export default function HomePage() {
                     }}
                 >
                     <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
-                        <Grid container spacing={4} alignItems="center" sx={{ minHeight: '80vh' }}>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: { xs: '1fr', lg: '2fr 1fr' },
+                                gap: 4,
+                                alignItems: 'center',
+                                minHeight: '80vh'
+                            }}
+                        >
                             {/* Contenu principal - centré mais équilibré */}
-                            <Grid item xs={12} lg={8}>
+                            <Box>
                                 <Fade in timeout={1000}>
                                     <Box sx={{ textAlign: { xs: 'center', lg: 'left' }, pl: { lg: 4 } }}>
                                         <Typography
@@ -345,10 +352,10 @@ export default function HomePage() {
                                         </Stack>
                                     </Box>
                                 </Fade>
-                            </Grid>
+                            </Box>
 
                             {/* Stats à droite - design équilibré */}
-                            <Grid item xs={12} lg={4} sx={{
+                            <Box sx={{
                                 display: 'flex',
                                 alignItems: { xs: 'flex-start', lg: 'center' },
                                 mt: { xs: -4, lg: 0 }
@@ -400,8 +407,8 @@ export default function HomePage() {
                                         ))}
                                     </Box>
                                 </Fade>
-                            </Grid>
-                        </Grid>
+                            </Box>
+                        </Box>
                     </Container>
 
                     {/* Scroll indicator */}
@@ -453,9 +460,17 @@ export default function HomePage() {
                         </Box>
 
                         {/* 3 cartes alignées sur une seule ligne */}
-                        <Grid container spacing={6} justifyContent="center" sx={{ px: { md: 6 } }}>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: { xs: '1fr', sm: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' },
+                                gap: 6,
+                                justifyContent: 'center',
+                                px: { md: 6 }
+                            }}
+                        >
                             {zones.map((zone, index) => (
-                                <Grid item xs={12} sm={10} md={4.2} key={zone.name}>
+                                <Box key={zone.name} sx={{ maxWidth: { sm: '90%', md: '100%' }, mx: { sm: 'auto', md: 0 } }}>
                                     <Grow in timeout={1000 + index * 200}>
                                         <div>
                                             <Card
@@ -560,9 +575,9 @@ export default function HomePage() {
                                             </Card>
                                         </div>
                                     </Grow>
-                                </Grid>
+                                </Box>
                             ))}
-                        </Grid>
+                        </Box>
                     </Container>
                 </Box>
 
@@ -819,11 +834,7 @@ export default function HomePage() {
                 {/* Galerie Photos HD */}
                 <PhotoGallery
                     photos={galleryPhotos}
-                    title={
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <PhotoIcon /> Galerie Photos HD & Vidéos
-                        </Box>
-                    }
+                    title="Galerie Photos HD & Vidéos"
                     description="Découvrez nos appartements et véhicules en haute qualité avec zoom"
                 />
 

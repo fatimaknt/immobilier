@@ -5,7 +5,6 @@ import {
     Box,
     Container,
     Typography,
-    Grid,
     Card,
     Stack,
     useTheme,
@@ -238,9 +237,16 @@ export default function ContactPage() {
                         </Box>
                     </Fade>
 
-                    <Grid container spacing={4} justifyContent="center">
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
+                            gap: 4,
+                            justifyContent: 'center'
+                        }}
+                    >
                         {contactInfo.map((contact, index) => (
-                            <Grid item xs={12} sm={6} md={3} key={index}>
+                            <Box key={index}>
                                 <Card
                                     sx={{
                                         p: 4,
@@ -277,9 +283,9 @@ export default function ContactPage() {
                                         {contact.info}
                                     </Typography>
                                 </Card>
-                            </Grid>
+                            </Box>
                         ))}
-                    </Grid>
+                    </Box>
                 </Container>
             </Box>
 

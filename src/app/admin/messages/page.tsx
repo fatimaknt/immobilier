@@ -210,8 +210,8 @@ export default function MessagesPage() {
                     </Alert>
                 )}
 
-                <Grid container spacing={3} sx={{ mb: 4 }}>
-                    <Grid item xs={12} md={6} component="div">
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, mb: 4 }}>
+                    <Box sx={{ width: { xs: '100%', md: '50%' } }}>
                         <TextField
                             fullWidth
                             placeholder="Rechercher dans les messages..."
@@ -230,8 +230,8 @@ export default function MessagesPage() {
                                 },
                             }}
                         />
-                    </Grid>
-                    <Grid item xs={12} md={3} component="div">
+                    </Box>
+                    <Box sx={{ width: { xs: '100%', md: '25%' } }}>
                         <TextField
                             fullWidth
                             select
@@ -251,8 +251,8 @@ export default function MessagesPage() {
                             <option value="read">Lus</option>
                             <option value="replied">Répondus</option>
                         </TextField>
-                    </Grid>
-                    <Grid item xs={12} md={3} component="div">
+                    </Box>
+                    <Box sx={{ width: { xs: '100%', md: '25%' } }}>
                         <Button
                             fullWidth
                             variant="outlined"
@@ -267,8 +267,8 @@ export default function MessagesPage() {
                         >
                             Actualiser
                         </Button>
-                    </Grid>
-                </Grid>
+                    </Box>
+                </Box>
 
                 <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
                     <Chip
@@ -323,9 +323,9 @@ export default function MessagesPage() {
                     </CardContent>
                 </Card>
             ) : (
-                <Grid container spacing={3}>
+                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }, gap: 3 }}>
                     {filteredMessages.map((message) => (
-                        <Grid item xs={12} md={6} lg={4} key={message.id} component="div">
+                        <Box key={message.id}>
                             <Card
                                 sx={{
                                     height: '100%',
@@ -394,9 +394,9 @@ export default function MessagesPage() {
                                     </Typography>
                                 </CardContent>
                             </Card>
-                        </Grid>
+                        </Box>
                     ))}
-                </Grid>
+                </Box>
             )}
 
             {/* Dialog pour afficher le message complet */}
@@ -429,40 +429,40 @@ export default function MessagesPage() {
                                 <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
                                     Informations du contact
                                 </Typography>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} sm={6} component="div">
+                                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 2 }}>
+                                    <Box>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <PersonIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
                                             <Typography variant="body1">
                                                 <strong>Nom:</strong> {selectedMessage.name}
                                             </Typography>
                                         </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} component="div">
+                                    </Box>
+                                    <Box>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <EmailIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
                                             <Typography variant="body1">
                                                 <strong>Email:</strong> {selectedMessage.email}
                                             </Typography>
                                         </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} component="div">
+                                    </Box>
+                                    <Box>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <PhoneIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
                                             <Typography variant="body1">
                                                 <strong>Téléphone:</strong> {selectedMessage.phone}
                                             </Typography>
                                         </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6} component="div">
+                                    </Box>
+                                    <Box>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <SubjectIcon sx={{ fontSize: 20, color: 'text.secondary' }} />
                                             <Typography variant="body1">
                                                 <strong>Sujet:</strong> {selectedMessage.subject}
                                             </Typography>
                                         </Box>
-                                    </Grid>
-                                </Grid>
+                                    </Box>
+                                </Box>
                             </Box>
 
                             <Divider />
@@ -482,8 +482,8 @@ export default function MessagesPage() {
                                 <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
                                     💰 Tarifs disponibles
                                 </Typography>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 2 }}>
+                                    <Box>
                                         <Box sx={{ p: 2, backgroundColor: 'primary.50', borderRadius: 2, border: '1px solid', borderColor: 'primary.200' }}>
                                             <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'primary.main', mb: 1 }}>
                                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -500,8 +500,8 @@ export default function MessagesPage() {
                                                 • 4+ pièces: 30,000 - 60,000 FCFA/jour
                                             </Typography>
                                         </Box>
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
+                                    </Box>
+                                    <Box>
                                         <Box sx={{ p: 2, backgroundColor: 'secondary.50', borderRadius: 2, border: '1px solid', borderColor: 'secondary.200' }}>
                                             <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'secondary.main', mb: 1 }}>
                                                 🚗 Voitures
@@ -516,22 +516,23 @@ export default function MessagesPage() {
                                                 • Premium: 50,000 - 65,000 FCFA/jour
                                             </Typography>
                                         </Box>
-                                    </Grid>
-                                </Grid>
+                                    </Box>
+                                </Box>
                             </Box>
 
                             <Typography variant="caption" color="text.secondary">
                                 Reçu le {formatDate(selectedMessage.created_at)}
                             </Typography>
                         </Stack>
-                    )}
-                </DialogContent>
+                    )
+                    }
+                </DialogContent >
                 <DialogActions>
                     <Button onClick={() => setOpenDialog(false)}>
                         Fermer
                     </Button>
                 </DialogActions>
-            </Dialog>
-        </Container>
+            </Dialog >
+        </Container >
     );
 }

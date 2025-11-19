@@ -122,7 +122,7 @@ export default function AdminApartments() {
         setViewDialogOpen(true);
     };
 
-    const handleInputChange = (field: keyof Apartment, value: string | number | boolean) => {
+    const handleInputChange = (field: keyof Apartment, value: string | number | boolean | { lat: number; lng?: number }) => {
         if (editingApartment) {
             setEditingApartment({ ...editingApartment, [field]: value });
         }
@@ -193,7 +193,7 @@ export default function AdminApartments() {
                 price_per_week: editingApartment.price_per_week,
                 available: editingApartment.available,
                 equipment: typeof editingApartment.equipment === 'string'
-                    ? editingApartment.equipment.split(',').map(item => item.trim()).filter(item => item)
+                    ? (editingApartment.equipment as string).split(',').map(item => item.trim()).filter(item => item)
                     : editingApartment.equipment,
                 images: editingApartment.images,
                 coordinates: editingApartment.coordinates
@@ -576,8 +576,8 @@ export default function AdminApartments() {
                     </DialogTitle>
                     <DialogContent sx={{ p: 6, maxHeight: '75vh', overflowY: 'auto', backgroundColor: '#fafbfc' }}>
                         <Box sx={{ mt: 4, mb: 2 }}>
-                            <Grid container spacing={4}>
-                                <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                                <Box>
                                     <TextField
                                         fullWidth
                                         label="Titre de l&apos;appartement"
@@ -585,7 +585,7 @@ export default function AdminApartments() {
                                         onChange={(e) => handleInputChange('title', e.target.value)}
                                         variant="outlined"
                                         required
-                                        size="large"
+                                        size="medium"
                                         sx={{
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
@@ -608,8 +608,8 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12}>
+                                </Box>
+                                <Box>
                                     <TextField
                                         fullWidth
                                         label="Description détaillée"
@@ -641,9 +641,9 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <FormControl fullWidth required size="large">
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
+                                    <FormControl fullWidth required size="medium">
                                         <InputLabel sx={{ fontSize: '1rem', fontWeight: 600 }}>Zone géographique</InputLabel>
                                         <Select
                                             value={editingApartment?.zone || ''}
@@ -682,8 +682,8 @@ export default function AdminApartments() {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Adresse complète"
@@ -691,7 +691,7 @@ export default function AdminApartments() {
                                         onChange={(e) => handleInputChange('address', e.target.value)}
                                         variant="outlined"
                                         required
-                                        size="large"
+                                        size="medium"
                                         placeholder="Ex: 123 Rue de la Paix, Dakar, Sénégal"
                                         sx={{
                                             '& .MuiOutlinedInput-root': {
@@ -715,8 +715,8 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={4}>
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(33.333% - 11px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Nombre de pièces"
@@ -725,7 +725,7 @@ export default function AdminApartments() {
                                         onChange={(e) => handleInputChange('rooms', parseInt(e.target.value) || 1)}
                                         inputProps={{ min: 1 }}
                                         required
-                                        size="large"
+                                        size="medium"
                                         sx={{
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
@@ -748,8 +748,8 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={4}>
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(33.333% - 11px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Nombre de salles de bain"
@@ -758,7 +758,7 @@ export default function AdminApartments() {
                                         onChange={(e) => handleInputChange('bathrooms', parseInt(e.target.value) || 1)}
                                         inputProps={{ min: 1 }}
                                         required
-                                        size="large"
+                                        size="medium"
                                         sx={{
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
@@ -781,8 +781,8 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={4}>
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(33.333% - 11px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Surface (m²)"
@@ -790,7 +790,7 @@ export default function AdminApartments() {
                                         value={editingApartment?.surface || 1}
                                         onChange={(e) => handleInputChange('surface', parseInt(e.target.value) || 1)}
                                         inputProps={{ min: 1 }}
-                                        size="large"
+                                        size="medium"
                                         sx={{
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
@@ -813,8 +813,8 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Prix par jour (FCFA)"
@@ -823,7 +823,7 @@ export default function AdminApartments() {
                                         onChange={(e) => handleInputChange('price_per_day', parseInt(e.target.value) || 0)}
                                         inputProps={{ min: 0 }}
                                         required
-                                        size="large"
+                                        size="medium"
                                         placeholder="Ex: 25000"
                                         sx={{
                                             '& .MuiOutlinedInput-root': {
@@ -847,8 +847,8 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Prix par semaine (FCFA)"
@@ -857,7 +857,7 @@ export default function AdminApartments() {
                                         onChange={(e) => handleInputChange('price_per_week', parseInt(e.target.value) || 0)}
                                         inputProps={{ min: 0 }}
                                         required
-                                        size="large"
+                                        size="medium"
                                         placeholder="Ex: 150000"
                                         sx={{
                                             '& .MuiOutlinedInput-root': {
@@ -881,20 +881,20 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Latitude"
                                         type="number"
-                                        step="0.000001"
+                                        inputProps={{ step: 0.000001 }}
                                         value={editingApartment?.coordinates?.lat || 0}
                                         onChange={(e) => handleInputChange('coordinates', {
-                                            ...editingApartment?.coordinates,
-                                            lat: parseFloat(e.target.value) || 0
+                                            lat: parseFloat(e.target.value) || 0,
+                                            lng: editingApartment?.coordinates?.lng || 0
                                         })}
                                         placeholder="Ex: 14.7167"
-                                        size="large"
+                                        size="medium"
                                         sx={{
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
@@ -917,20 +917,20 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
                                     <TextField
                                         fullWidth
                                         label="Longitude"
                                         type="number"
-                                        step="0.000001"
+                                        inputProps={{ step: 0.000001 }}
                                         value={editingApartment?.coordinates?.lng || 0}
                                         onChange={(e) => handleInputChange('coordinates', {
-                                            ...editingApartment?.coordinates,
+                                            lat: editingApartment?.coordinates?.lat || 0,
                                             lng: parseFloat(e.target.value) || 0
                                         })}
                                         placeholder="Ex: -17.4677"
-                                        size="large"
+                                        size="medium"
                                         sx={{
                                             '& .MuiOutlinedInput-root': {
                                                 borderRadius: 3,
@@ -953,8 +953,8 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12}>
+                                </Box>
+                                <Box>
                                     <TextField
                                         fullWidth
                                         label="Équipements (séparés par des virgules)"
@@ -968,7 +968,7 @@ export default function AdminApartments() {
                                             const value = e.target.value;
                                             // Garder la valeur brute pour l'affichage, mais traiter les équipements seulement à la sauvegarde
                                             if (editingApartment) {
-                                                setEditingApartment({ ...editingApartment, equipment: value });
+                                                setEditingApartment({ ...editingApartment, equipment: value.split(',').map(item => item.trim()).filter(item => item) });
                                             }
                                         }}
                                         variant="outlined"
@@ -995,8 +995,8 @@ export default function AdminApartments() {
                                             }
                                         }}
                                     />
-                                </Grid>
-                                <Grid item xs={12}>
+                                </Box>
+                                <Box>
                                     <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: '#374151', display: 'flex', alignItems: 'center', gap: 1 }}>
                                         <PhotoIcon /> Images de l&apos;appartement
                                     </Typography>
@@ -1083,9 +1083,9 @@ export default function AdminApartments() {
                                             </ImageList>
                                         </Box>
                                     )}
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <FormControl fullWidth required size="large">
+                                </Box>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 8px)' } }}>
+                                    <FormControl fullWidth required size="medium">
                                         <InputLabel sx={{ fontSize: '1rem', fontWeight: 600 }}>Statut de disponibilité</InputLabel>
                                         <Select
                                             value={editingApartment?.available ? 'available' : 'unavailable'}
@@ -1119,8 +1119,8 @@ export default function AdminApartments() {
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
-                                </Grid>
-                            </Grid>
+                                </Box>
+                            </Box>
                         </Box>
                     </DialogContent>
                     <DialogActions sx={{ p: 4, justifyContent: 'space-between' }}>
@@ -1194,17 +1194,17 @@ export default function AdminApartments() {
                     </DialogTitle>
                     <DialogContent sx={{ p: 4 }}>
                         {viewingApartment && (
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                                <Box>
                                     <Typography variant="h4" sx={{ fontWeight: 800, mb: 2, color: '#1e293b' }}>
                                         {viewingApartment.title}
                                     </Typography>
                                     <Typography variant="body1" sx={{ color: '#64748b', mb: 3 }}>
                                         {viewingApartment.description}
                                     </Typography>
-                                </Grid>
+                                </Box>
 
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 12px)' } }}>
                                     <Box sx={{
                                         p: 3,
                                         borderRadius: 2,
@@ -1224,9 +1224,9 @@ export default function AdminApartments() {
                                             <Typography><strong>Surface:</strong> {viewingApartment.surface} m²</Typography>
                                         </Box>
                                     </Box>
-                                </Grid>
+                                </Box>
 
-                                <Grid item xs={12} sm={6}>
+                                <Box sx={{ display: { xs: 'block', sm: 'inline-block' }, width: { xs: '100%', sm: 'calc(50% - 12px)' } }}>
                                     <Box sx={{
                                         p: 3,
                                         borderRadius: 2,
@@ -1252,10 +1252,10 @@ export default function AdminApartments() {
                                             </Typography>
                                         </Box>
                                     </Box>
-                                </Grid>
+                                </Box>
 
                                 {viewingApartment.equipment && viewingApartment.equipment.length > 0 && (
-                                    <Grid item xs={12}>
+                                    <Box>
                                         <Box sx={{
                                             p: 3,
                                             borderRadius: 2,
@@ -1276,11 +1276,11 @@ export default function AdminApartments() {
                                                 ))}
                                             </Box>
                                         </Box>
-                                    </Grid>
+                                    </Box>
                                 )}
 
                                 {viewingApartment.images && viewingApartment.images.length > 0 && (
-                                    <Grid item xs={12}>
+                                    <Box>
                                         <Box sx={{
                                             p: 3,
                                             borderRadius: 2,
@@ -1307,9 +1307,9 @@ export default function AdminApartments() {
                                                 ))}
                                             </ImageList>
                                         </Box>
-                                    </Grid>
+                                    </Box>
                                 )}
-                            </Grid>
+                            </Box>
                         )}
                     </DialogContent>
                     <DialogActions sx={{ p: 3, justifyContent: 'center' }}>

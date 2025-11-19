@@ -195,9 +195,9 @@ export default function AdminDashboard() {
             <Container maxWidth="xl" sx={{ pb: 6, pt: 8 }}>
 
                 {/* Statistiques compactes */}
-                <Grid container spacing={3} sx={{ mb: 6 }}>
+                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 3, mb: 6 }}>
                     {statCards.map((stat, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Box key={index}>
                             <Fade in timeout={1000 + index * 200}>
                                 <Card
                                     sx={{
@@ -271,9 +271,9 @@ export default function AdminDashboard() {
                                     </CardContent>
                                 </Card>
                             </Fade>
-                        </Grid>
+                        </Box>
                     ))}
-                </Grid>
+                </Box>
 
                 {/* Actions rapides épurées */}
                 <Fade in timeout={1200}>
@@ -375,7 +375,7 @@ export default function AdminDashboard() {
                 </Box>
 
                 {/* Alertes et notifications épurées */}
-               
+
             </Container>
         </Box >
     );

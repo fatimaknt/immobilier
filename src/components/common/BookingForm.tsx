@@ -7,7 +7,6 @@ import {
   TextField,
   Button,
   MenuItem,
-  Grid,
   Typography,
   Box,
   Stepper,
@@ -64,7 +63,10 @@ const BookingForm: React.FC<BookingFormProps> = ({ open, onClose, type, item }) 
       (formData.endDate.getTime() - formData.startDate.getTime()) / (1000 * 60 * 60 * 24)
     );
 
-    return days * item.pricePerDay;
+    if ('price_per_day' in item) {
+      return days * item.price_per_day;
+    }
+    return 0;
   };
 
   const handleSubmit = () => {
@@ -90,27 +92,23 @@ const BookingForm: React.FC<BookingFormProps> = ({ open, onClose, type, item }) 
 
         {activeStep === 0 && (
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={fr}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <DatePicker
-                  label="Date d'arrivée"
-                  value={formData.startDate}
-                  onChange={(date) => handleDateChange('startDate', date)}
-                  minDate={new Date()}
-                  renderInput={(params) => <TextField {...params} fullWidth />}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <DatePicker
-                  label="Date de départ"
-                  value={formData.endDate}
-                  onChange={(date) => handleDateChange('endDate', date)}
-                  minDate={formData.startDate || new Date()}
-                  renderInput={(params) => <TextField {...params} fullWidth />}
-                />
-              </Grid>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 3 }}>
+              <DatePicker
+                label="Date d'arrivée"
+                value={formData.startDate}
+                onChange={(date) => handleDateChange('startDate', date)}
+                minDate={new Date()}
+                slotProps={{ textField: { fullWidth: true } }}
+              />
+              <DatePicker
+                label="Date de départ"
+                value={formData.endDate}
+                onChange={(date) => handleDateChange('endDate', date)}
+                minDate={formData.startDate || new Date()}
+                slotProps={{ textField: { fullWidth: true } }}
+              />
               {formData.startDate && formData.endDate && (
-                <Grid item xs={12}>
+                <Box sx={{ gridColumn: { xs: '1', sm: '1 / -1' } }}>
                   <Typography variant="body1">
                     Durée: {Math.ceil(
                       (formData.endDate.getTime() - formData.startDate.getTime()) / (1000 * 60 * 60 * 24)
@@ -119,56 +117,48 @@ const BookingForm: React.FC<BookingFormProps> = ({ open, onClose, type, item }) 
                   <Typography variant="h6" color="primary">
                     Total: {calculateTotal().toLocaleString()} FCFA
                   </Typography>
-                </Grid>
+                </Box>
               )}
-            </Grid>
+            </Box>
           </LocalizationProvider>
         )}
 
         {activeStep === 1 && (
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="firstName"
-                label="Prénom"
-                fullWidth
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="lastName"
-                label="Nom"
-                fullWidth
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="email"
-                label="Email"
-                type="email"
-                fullWidth
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                name="phone"
-                label="Téléphone"
-                fullWidth
-                value={formData.phone}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 3 }}>
+            <TextField
+              required
+              name="firstName"
+              label="Prénom"
+              fullWidth
+              value={formData.firstName}
+              onChange={handleChange}
+            />
+            <TextField
+              required
+              name="lastName"
+              label="Nom"
+              fullWidth
+              value={formData.lastName}
+              onChange={handleChange}
+            />
+            <TextField
+              required
+              name="email"
+              label="Email"
+              type="email"
+              fullWidth
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <TextField
+              required
+              name="phone"
+              label="Téléphone"
+              fullWidth
+              value={formData.phone}
+              onChange={handleChange}
+            />
+            <Box sx={{ gridColumn: { xs: '1', sm: '1 / -1' } }}>
               <TextField
                 name="message"
                 label="Message (optionnel)"
@@ -178,8 +168,8 @@ const BookingForm: React.FC<BookingFormProps> = ({ open, onClose, type, item }) 
                 value={formData.message}
                 onChange={handleChange}
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         )}
 
         {activeStep === 2 && (

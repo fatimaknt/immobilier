@@ -84,8 +84,8 @@ export const api = {
 
         return apartments.filter(apartment => {
             if (query.zone && apartment.zone !== query.zone) return false;
-            if (query.minPrice && apartment.pricePerDay < query.minPrice) return false;
-            if (query.maxPrice && apartment.pricePerDay > query.maxPrice) return false;
+            if (query.minPrice && apartment.price_per_day < query.minPrice) return false;
+            if (query.maxPrice && apartment.price_per_day > query.maxPrice) return false;
             if (query.rooms && apartment.rooms !== query.rooms) return false;
             if (query.available !== undefined && apartment.available !== query.available) return false;
             return true;
@@ -104,8 +104,8 @@ export const api = {
         return cars.filter(car => {
             if (query.type && car.type !== query.type) return false;
             if (query.transmission && car.transmission !== query.transmission) return false;
-            if (query.minPrice && car.pricePerDay < query.minPrice) return false;
-            if (query.maxPrice && car.pricePerDay > query.maxPrice) return false;
+            if (query.minPrice && car.price_per_day < query.minPrice) return false;
+            if (query.maxPrice && car.price_per_day > query.maxPrice) return false;
             if (query.available !== undefined && car.available !== query.available) return false;
             return true;
         });

@@ -112,7 +112,7 @@ export default function ReservePage() {
         const item = getSelectedItemDetails();
         const days = calculateDays();
         if (!item || days === 0) return 0;
-        return item.pricePerDay * days;
+        return item.price_per_day * days;
     };
 
     return (
@@ -341,7 +341,7 @@ export default function ReservePage() {
                                                                         {getItemTitle(item)}
                                                                     </Typography>
                                                                     <Typography variant="body2" color="text.secondary">
-                                                                        {item.pricePerDay}€/jour
+                                                                        {item.price_per_day}€/jour
                                                                         {'zone' in item && ` - ${item.zone}`}
                                                                     </Typography>
                                                                 </Box>
@@ -590,7 +590,7 @@ export default function ReservePage() {
                                                         />
                                                     </Box>
                                                     <Typography variant="body2" color="text.secondary" sx={{ mt: 1, textAlign: 'center' }}>
-                                                        {getSelectedItemDetails()?.pricePerDay}€/jour × {calculateDays()} jour{calculateDays() > 1 ? 's' : ''}
+                                                        {getSelectedItemDetails()?.price_per_day}€/jour × {calculateDays()} jour{calculateDays() > 1 ? 's' : ''}
                                                     </Typography>
                                                 </Box>
                                             )}

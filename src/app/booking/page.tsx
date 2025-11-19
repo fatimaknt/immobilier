@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
     Box,
@@ -46,7 +46,7 @@ import { formatPrice } from '@/utils/helpers';
 import { COMPANY_INFO } from '@/utils/constants';
 import { Apartment, Car } from '@/types';
 
-export default function BookingPage() {
+function BookingPageContent() {
     const theme = useTheme();
     const searchParams = useSearchParams();
     const [bookingType, setBookingType] = useState<'apartment' | 'car'>('apartment');
@@ -438,8 +438,8 @@ Message: ${formData.message}`;
                                         <Typography variant="h6" sx={{ fontWeight: 700, mb: 3 }}>
                                             Type de réservation
                                         </Typography>
-                                        <Grid container spacing={3}>
-                                            <Grid item xs={12} sm={6} component="div">
+                                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
+                                            <Box sx={{ width: { xs: '100%', sm: '50%' } }}>
                                                 <Card
                                                     sx={{
                                                         p: 4,
@@ -466,8 +466,8 @@ Message: ${formData.message}`;
                                                         Location courte/longue durée
                                                     </Typography>
                                                 </Card>
-                                            </Grid>
-                                            <Grid item xs={12} sm={6} component="div">
+                                            </Box>
+                                            <Box sx={{ width: { xs: '100%', sm: '50%' } }}>
                                                 <Card
                                                     sx={{
                                                         p: 4,
@@ -494,13 +494,13 @@ Message: ${formData.message}`;
                                                         Location journalière
                                                     </Typography>
                                                 </Card>
-                                            </Grid>
-                                        </Grid>
+                                            </Box>
+                                        </Box>
                                     </Box>
 
-                                    <Grid container spacing={6}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                                         {/* Sélection de l'item */}
-                                        <Grid item xs={12} md={6} component="div">
+                                        <Box sx={{ width: { xs: '100%', md: '50%' } }}>
                                             <Typography variant="h6" sx={{ fontWeight: 700, mb: 3 }}>
                                                 {bookingType === 'apartment' ? 'Choisir un appartement' : 'Choisir une voiture'}
                                             </Typography>
@@ -510,9 +510,9 @@ Message: ${formData.message}`;
                                                     <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2 }}>
                                                         Zone préférée
                                                     </Typography>
-                                                    <Grid container spacing={2}>
+                                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                                                         {zones.map(zone => (
-                                                            <Grid item xs={4} key={zone.name} component="div">
+                                                            <Box key={zone.name} sx={{ width: '33.333%' }}>
                                                                 <Button
                                                                     variant="outlined"
                                                                     fullWidth
@@ -535,9 +535,9 @@ Message: ${formData.message}`;
                                                                         {zone.count} dispos
                                                                     </Typography>
                                                                 </Button>
-                                                            </Grid>
+                                                            </Box>
                                                         ))}
-                                                    </Grid>
+                                                    </Box>
                                                 </Box>
                                             )}
 
@@ -583,17 +583,17 @@ Message: ${formData.message}`;
                                                     ))}
                                                 </Stack>
                                             </Box>
-                                        </Grid>
+                                        </Box>
 
                                         {/* Formulaire de contact */}
-                                        <Grid item xs={12} md={6} component="div">
+                                        <Box sx={{ width: { xs: '100%', md: '50%' } }}>
                                             <Typography variant="h6" sx={{ fontWeight: 700, mb: 3 }}>
                                                 👤 Vos informations
                                             </Typography>
 
                                             <Stack spacing={3}>
-                                                <Grid container spacing={2}>
-                                                    <Grid item xs={12} sm={6} component="div">
+                                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                                                    <Box sx={{ width: { xs: '100%', sm: '50%' } }}>
                                                         <TextField
                                                             fullWidth
                                                             label="Date de début"
@@ -605,8 +605,8 @@ Message: ${formData.message}`;
                                                             inputProps={{ min: new Date().toISOString().split('T')[0] }}
                                                             sx={{ '& .MuiOutlinedInput-root': { borderRadius: 3 } }}
                                                         />
-                                                    </Grid>
-                                                    <Grid item xs={12} sm={6} component="div">
+                                                    </Box>
+                                                    <Box sx={{ width: { xs: '100%', sm: '50%' } }}>
                                                         <TextField
                                                             fullWidth
                                                             label="Date de fin"
@@ -618,8 +618,8 @@ Message: ${formData.message}`;
                                                             inputProps={{ min: formData.startDate || new Date().toISOString().split('T')[0] }}
                                                             sx={{ '& .MuiOutlinedInput-root': { borderRadius: 3 } }}
                                                         />
-                                                    </Grid>
-                                                </Grid>
+                                                    </Box>
+                                                </Box>
 
                                                 <TextField
                                                     fullWidth
@@ -687,8 +687,8 @@ Message: ${formData.message}`;
                                                     sx={{ '& .MuiOutlinedInput-root': { borderRadius: 3 } }}
                                                 />
                                             </Stack>
-                                        </Grid>
-                                    </Grid>
+                                        </Box>
+                                    </Box>
 
                                     {/* Résumé de la commande */}
                                     {selectedItem && formData.startDate && formData.endDate && (
@@ -788,6 +788,18 @@ Message: ${formData.message}`;
                     </Fade>
                 </Container>
             </Box>
-        </Box>
+        </Box >
+    );
+}
+
+export default function BookingPage() {
+    return (
+        <Suspense fallback={
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+                <CircularProgress />
+            </Box>
+        }>
+            <BookingPageContent />
+        </Suspense>
     );
 }
