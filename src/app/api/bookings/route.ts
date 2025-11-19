@@ -14,14 +14,14 @@ export async function GET() {
     try {
         console.log('Récupération des réservations...');
 
-        const bookings = await query(
+        const bookings = await query<BookingRow>(
             'SELECT * FROM bookings ORDER BY created_at DESC'
         );
 
         console.log('Résultat de la requête réservations:', { bookings: bookings?.length || 0 });
 
         // Nettoyer les données pour éviter les erreurs d'affichage
-        const cleanedBookings = bookings.map((booking: BookingRow) => ({
+        const cleanedBookings = bookings.map((booking) => ({
             ...booking,
             start_date: booking.start_date || '',
             end_date: booking.end_date || '',
@@ -61,7 +61,12 @@ export async function POST(request: NextRequest) {
             ]
         )
 
-        const [booking] = await query('SELECT * FROM bookings WHERE id = ?', [id])
+        const bookings = await query<BookingRow>('SELECT * FROM bookings WHERE id = ?', [id])
+        const booking = bookings[0]
+
+        if (!booking) {
+            return NextResponse.json({ error: 'Réservation non trouvée' }, { status: 404 })
+        }
 
         return NextResponse.json(booking, { status: 201 })
     } catch (error) {

@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { queryOne, update, remove } from '@/lib/mysql'
 
+interface CarRow {
+    images?: string | unknown;
+    features?: string | unknown;
+    [key: string]: unknown;
+}
+
 export async function GET(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params
-        const car = await queryOne('SELECT * FROM cars WHERE id = ?', [id])
+        const car = await queryOne<CarRow>('SELECT * FROM cars WHERE id = ?', [id])
 
         if (!car) {
             return NextResponse.json({ error: 'Voiture non trouvée' }, { status: 404 })
@@ -66,7 +72,11 @@ export async function PUT(
             values
         )
 
-        const car = await queryOne('SELECT * FROM cars WHERE id = ?', [id])
+        const car = await queryOne<CarRow>('SELECT * FROM cars WHERE id = ?', [id])
+
+        if (!car) {
+            return NextResponse.json({ error: 'Voiture non trouvée' }, { status: 404 })
+        }
 
         // Parser les champs JSON
         const result = {

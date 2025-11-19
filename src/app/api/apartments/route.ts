@@ -11,12 +11,12 @@ interface ApartmentRow {
 
 export async function GET() {
   try {
-    const apartments = await query(
+    const apartments = await query<ApartmentRow>(
       'SELECT * FROM apartments ORDER BY created_at DESC'
     )
 
     // S'assurer que les images sont toujours un tableau
-    const transformedApartments = apartments.map((apartment: ApartmentRow) => ({
+    const transformedApartments = apartments.map((apartment) => ({
       ...apartment,
       images: apartment.images ? (typeof apartment.images === 'string' ? JSON.parse(apartment.images) : apartment.images) : [],
       equipment: apartment.equipment ? (typeof apartment.equipment === 'string' ? JSON.parse(apartment.equipment) : apartment.equipment) : [],
@@ -61,7 +61,12 @@ export async function POST(request: NextRequest) {
       ]
     )
 
-    const [apartment] = await query('SELECT * FROM apartments WHERE id = ?', [id])
+    const apartments = await query<ApartmentRow>('SELECT * FROM apartments WHERE id = ?', [id])
+    const apartment = apartments[0]
+
+    if (!apartment) {
+      return NextResponse.json({ error: 'Appartement non trouvé' }, { status: 404 })
+    }
 
     // Parser les champs JSON
     const result = {

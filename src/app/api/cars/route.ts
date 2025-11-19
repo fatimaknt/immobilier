@@ -10,10 +10,10 @@ interface CarRow {
 
 export async function GET() {
   try {
-    const cars = await query('SELECT * FROM cars ORDER BY created_at DESC')
+    const cars = await query<CarRow>('SELECT * FROM cars ORDER BY created_at DESC')
 
     // S'assurer que les images sont toujours un tableau
-    const transformedCars = cars.map((car: CarRow) => ({
+    const transformedCars = cars.map((car) => ({
       ...car,
       images: car.images ? (typeof car.images === 'string' ? JSON.parse(car.images) : car.images) : [],
       features: car.features ? (typeof car.features === 'string' ? JSON.parse(car.features) : car.features) : []
@@ -56,7 +56,12 @@ export async function POST(request: NextRequest) {
       ]
     )
 
-    const [car] = await query('SELECT * FROM cars WHERE id = ?', [id])
+    const cars = await query<CarRow>('SELECT * FROM cars WHERE id = ?', [id])
+    const car = cars[0]
+
+    if (!car) {
+      return NextResponse.json({ error: 'Voiture non trouvée' }, { status: 404 })
+    }
 
     // Parser les champs JSON
     const result = {

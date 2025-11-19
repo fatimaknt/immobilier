@@ -1,13 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { queryOne, update, remove } from '@/lib/mysql'
 
+interface ApartmentRow {
+  images?: string | unknown;
+  equipment?: string | unknown;
+  coordinates?: string | unknown;
+  [key: string]: unknown;
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params
-    const apartment = await queryOne('SELECT * FROM apartments WHERE id = ?', [id])
+    const apartment = await queryOne<ApartmentRow>('SELECT * FROM apartments WHERE id = ?', [id])
 
     if (!apartment) {
       return NextResponse.json({ error: 'Appartement non trouvé' }, { status: 404 })
@@ -72,7 +79,11 @@ export async function PUT(
       values
     )
 
-    const apartment = await queryOne('SELECT * FROM apartments WHERE id = ?', [id])
+    const apartment = await queryOne<ApartmentRow>('SELECT * FROM apartments WHERE id = ?', [id])
+
+    if (!apartment) {
+      return NextResponse.json({ error: 'Appartement non trouvé' }, { status: 404 })
+    }
 
     // Parser les champs JSON
     const result = {

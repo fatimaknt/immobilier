@@ -39,7 +39,12 @@ export async function POST(request: NextRequest) {
       ]
     );
 
-    const [message] = await query('SELECT * FROM contact_messages WHERE id = ?', [id]);
+    const messages = await query('SELECT * FROM contact_messages WHERE id = ?', [id]);
+    const message = messages[0];
+
+    if (!message) {
+      return NextResponse.json({ error: 'Message non trouvé' }, { status: 404 });
+    }
 
     return NextResponse.json(message, { status: 201 });
   } catch (error) {
