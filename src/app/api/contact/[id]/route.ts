@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase';
+import { queryOne, update, remove } from '@/lib/mysql';
 
 export async function GET(
     request: NextRequest,
@@ -7,18 +7,14 @@ export async function GET(
 ) {
     try {
         const { id } = await params
-        const { data: message, error } = await supabaseAdmin
-            .from('contact_messages')
-            .select('*')
-            .eq('id', id)
-            .single();
+        const message = await queryOne('SELECT * FROM contact_messages WHERE id = ?', [id]);
 
-        if (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 });
+        if (!message) {
+            return NextResponse.json({ error: 'Message non trouvé' }, { status: 404 });
         }
 
         return NextResponse.json(message);
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }
@@ -31,18 +27,19 @@ export async function PATCH(
         const { id } = await params
         const body = await request.json();
 
-        const { data, error } = await supabaseAdmin
-            .from('contact_messages')
-            .update({ status: body.status })
-            .eq('id', id)
-            .select();
+        const affectedRows = await update(
+            'UPDATE contact_messages SET status = ? WHERE id = ?',
+            [body.status, id]
+        );
 
-        if (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 });
+        if (affectedRows === 0) {
+            return NextResponse.json({ error: 'Message non trouvé' }, { status: 404 });
         }
 
-        return NextResponse.json(data[0]);
-    } catch (error) {
+        const message = await queryOne('SELECT * FROM contact_messages WHERE id = ?', [id]);
+
+        return NextResponse.json(message);
+    } catch {
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }
@@ -53,17 +50,14 @@ export async function DELETE(
 ) {
     try {
         const { id } = await params
-        const { error } = await supabaseAdmin
-            .from('contact_messages')
-            .delete()
-            .eq('id', id);
+        const affectedRows = await remove('DELETE FROM contact_messages WHERE id = ?', [id]);
 
-        if (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 });
+        if (affectedRows === 0) {
+            return NextResponse.json({ error: 'Message non trouvé' }, { status: 404 });
         }
 
         return NextResponse.json({ message: 'Message deleted successfully' });
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }

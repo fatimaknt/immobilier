@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { queryOne, update, remove } from '@/lib/mysql'
 
 export async function GET(
     request: NextRequest,
@@ -7,18 +7,21 @@ export async function GET(
 ) {
     try {
         const { id } = await params
-        const { data, error } = await supabaseAdmin
-            .from('cars')
-            .select('*')
-            .eq('id', id)
-            .single()
+        const car = await queryOne('SELECT * FROM cars WHERE id = ?', [id])
 
-        if (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 })
+        if (!car) {
+            return NextResponse.json({ error: 'Voiture non trouvée' }, { status: 404 })
         }
 
-        return NextResponse.json(data)
-    } catch (error) {
+        // Parser les champs JSON
+        const result = {
+            ...car,
+            images: car.images ? (typeof car.images === 'string' ? JSON.parse(car.images) : car.images) : [],
+            features: car.features ? (typeof car.features === 'string' ? JSON.parse(car.features) : car.features) : []
+        }
+
+        return NextResponse.json(result)
+    } catch {
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
     }
 }
@@ -31,18 +34,49 @@ export async function PUT(
         const { id } = await params
         const body = await request.json()
 
-        const { data, error } = await supabaseAdmin
-            .from('cars')
-            .update({ ...body, updated_at: new Date().toISOString() })
-            .eq('id', id)
-            .select()
+        // Préparer les champs JSON
+        const images = body.images ? JSON.stringify(body.images) : undefined
+        const features = body.features ? JSON.stringify(body.features) : undefined
 
-        if (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 })
+        // Construire la requête dynamiquement
+        const fields: string[] = []
+        const values: unknown[] = []
+
+        Object.keys(body).forEach(key => {
+            if (key !== 'images' && key !== 'features' && key !== 'id') {
+                fields.push(`${key} = ?`)
+                values.push(body[key])
+            }
+        })
+
+        if (images !== undefined) {
+            fields.push('images = ?')
+            values.push(images)
+        }
+        if (features !== undefined) {
+            fields.push('features = ?')
+            values.push(features)
         }
 
-        return NextResponse.json(data[0])
-    } catch (error) {
+        fields.push('updated_at = CURRENT_TIMESTAMP')
+        values.push(id)
+
+        await update(
+            `UPDATE cars SET ${fields.join(', ')} WHERE id = ?`,
+            values
+        )
+
+        const car = await queryOne('SELECT * FROM cars WHERE id = ?', [id])
+
+        // Parser les champs JSON
+        const result = {
+            ...car,
+            images: car.images ? (typeof car.images === 'string' ? JSON.parse(car.images) : car.images) : [],
+            features: car.features ? (typeof car.features === 'string' ? JSON.parse(car.features) : car.features) : []
+        }
+
+        return NextResponse.json(result)
+    } catch {
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
     }
 }
@@ -53,17 +87,14 @@ export async function DELETE(
 ) {
     try {
         const { id } = await params
-        const { error } = await supabaseAdmin
-            .from('cars')
-            .delete()
-            .eq('id', id)
+        const affectedRows = await remove('DELETE FROM cars WHERE id = ?', [id])
 
-        if (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 })
+        if (affectedRows === 0) {
+            return NextResponse.json({ error: 'Voiture non trouvée' }, { status: 404 })
         }
 
         return NextResponse.json({ success: true })
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
     }
 }

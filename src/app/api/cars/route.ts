@@ -1,22 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { query } from '@/lib/mysql'
+import { randomUUID } from 'crypto'
+
+interface CarRow {
+  images?: string | unknown;
+  features?: string | unknown;
+  [key: string]: unknown;
+}
 
 export async function GET() {
   try {
-    const { data: cars, error } = await supabaseAdmin
-      .from('cars')
-      .select('*')
-      .order('created_at', { ascending: false })
-
-    if (error) {
-      console.error('Erreur Supabase:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 })
-    }
+    const cars = await query('SELECT * FROM cars ORDER BY created_at DESC')
 
     // S'assurer que les images sont toujours un tableau
-    const transformedCars = cars.map(car => ({
+    const transformedCars = cars.map((car: CarRow) => ({
       ...car,
-      images: car.images || []
+      images: car.images ? (typeof car.images === 'string' ? JSON.parse(car.images) : car.images) : [],
+      features: car.features ? (typeof car.features === 'string' ? JSON.parse(car.features) : car.features) : []
     }));
 
     return NextResponse.json(transformedCars)
@@ -31,33 +31,41 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     console.log('Données reçues pour création voiture:', body);
 
-    // Séparer les champs potentiellement manquants
-    const { fuel_type, mileage, price_per_week, ...carData } = body;
+    const id = randomUUID()
+    const images = body.images ? JSON.stringify(body.images) : JSON.stringify([])
+    const features = body.features ? JSON.stringify(body.features) : JSON.stringify([])
 
-    // Ajouter seulement les champs qui existent dans la base
-    const dataToInsert = {
-      ...carData,
-      // Ajouter les champs optionnels seulement s'ils sont fournis
-      ...(fuel_type && { fuel_type }),
-      ...(mileage && { mileage }),
-      ...(price_per_week && { price_per_week })
-    };
+    await query(
+      `INSERT INTO cars (id, brand, model, year, type, transmission, seats, price_per_day, price_per_week, fuel_type, mileage, available, features, images) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        id,
+        body.brand,
+        body.model,
+        body.year,
+        body.type,
+        body.transmission,
+        body.seats,
+        body.price_per_day,
+        body.price_per_week || null,
+        body.fuel_type || null,
+        body.mileage || null,
+        body.available !== undefined ? body.available : true,
+        features,
+        images
+      ]
+    )
 
-    console.log('Données à insérer:', dataToInsert);
+    const [car] = await query('SELECT * FROM cars WHERE id = ?', [id])
 
-    const { data: car, error } = await supabaseAdmin
-      .from('cars')
-      .insert([dataToInsert])
-      .select()
-      .single()
-
-    if (error) {
-      console.error('Erreur création voiture:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 })
+    // Parser les champs JSON
+    const result = {
+      ...car,
+      images: car.images ? (typeof car.images === 'string' ? JSON.parse(car.images) : car.images) : [],
+      features: car.features ? (typeof car.features === 'string' ? JSON.parse(car.features) : car.features) : []
     }
 
-    // Retourner la voiture créée
-    return NextResponse.json(car, { status: 201 })
+    return NextResponse.json(result, { status: 201 })
   } catch (error) {
     console.error('Erreur API POST:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
