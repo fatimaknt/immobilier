@@ -5,7 +5,6 @@ import {
     Box,
     Container,
     Typography,
-    Grid,
     Card,
     Stack,
     useTheme,
@@ -258,9 +257,16 @@ export default function AboutPage() {
                         </div>
                     </Fade>
 
-                    <Grid container spacing={4} justifyContent="center">
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
+                            gap: 4,
+                            justifyContent: 'center'
+                        }}
+                    >
                         {stats.map((stat, index) => (
-                            <Grid item xs={12} sm={6} md={3} key={index}>
+                            <Box key={index}>
                                 <Card
                                     sx={{
                                         p: 6,
@@ -298,17 +304,24 @@ export default function AboutPage() {
                                         {stat.label}
                                     </Typography>
                                 </Card>
-                            </Grid>
+                            </Box>
                         ))}
-                    </Grid>
+                    </Box>
                 </Container>
             </Box>
 
             {/* Notre Histoire */}
             <Box sx={{ py: 4, backgroundColor: '#f8f9fa' }}>
                 <Container maxWidth="lg">
-                    <Grid container spacing={3} alignItems="center">
-                        <Grid item xs={12} md={6}>
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+                            gap: 3,
+                            alignItems: 'center'
+                        }}
+                    >
+                        <Box>
                             <Fade in timeout={1400}>
                                 <div>
                                     <Box>
@@ -340,8 +353,8 @@ export default function AboutPage() {
                                     </Box>
                                 </div>
                             </Fade>
-                        </Grid>
-                        <Grid item xs={12} md={6}>
+                        </Box>
+                        <Box>
                             <Box
                                 sx={{
                                     height: { xs: 200, md: 250 },
@@ -352,8 +365,8 @@ export default function AboutPage() {
                                     boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
                                 }}
                             />
-                        </Grid>
-                    </Grid>
+                        </Box>
+                    </Box>
                 </Container>
             </Box>
 
@@ -378,9 +391,17 @@ export default function AboutPage() {
                         </div>
                     </Fade>
 
-                    <Grid container spacing={8} justifyContent="center" sx={{ px: 4 }}>
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
+                            gap: 8,
+                            justifyContent: 'center',
+                            px: 4
+                        }}
+                    >
                         {values.map((value, index) => (
-                            <Grid item xs={12} sm={6} md={6} lg={3} key={index}>
+                            <Box key={index}>
                                 <Card
                                     elevation={0}
                                     sx={{
@@ -435,9 +456,9 @@ export default function AboutPage() {
                                         {value.description}
                                     </Typography>
                                 </Card>
-                            </Grid>
+                            </Box>
                         ))}
-                    </Grid>
+                    </Box>
                 </Container>
             </Box>
 
