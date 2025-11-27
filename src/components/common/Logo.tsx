@@ -51,14 +51,15 @@ const Logo: React.FC<LogoProps> = ({
         const baseStyles = {
             width: config.logoSize,
             height: config.logoSize,
-            borderRadius: 3,
+            borderRadius: 4,
             overflow: 'hidden',
             position: 'relative' as const,
-            boxShadow: `0 8px 25px ${alpha(theme.palette.primary.main, 0.3)}`,
+            background: `linear-gradient(135deg, #1e88e5 0%, #9c27b0 100%)`,
+            boxShadow: `0 8px 25px ${alpha('#1e88e5', 0.4)}`,
             transition: 'all 0.3s ease',
             '&:hover': {
                 transform: 'scale(1.05)',
-                boxShadow: `0 12px 35px ${alpha(theme.palette.primary.main, 0.5)}`,
+                boxShadow: `0 12px 35px ${alpha('#1e88e5', 0.9)}`,
             }
         };
 

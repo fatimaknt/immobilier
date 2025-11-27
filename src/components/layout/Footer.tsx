@@ -34,7 +34,7 @@ import {
     Favorite as FavoriteIcon,
 } from '@mui/icons-material';
 import Link from 'next/link';
-import Logo from '@/components/common/Logo';
+import Image from 'next/image';
 
 const Footer: React.FC = () => {
     const theme = useTheme();
@@ -100,7 +100,33 @@ const Footer: React.FC = () => {
                         {/* Logo et description */}
                         <Box>
                             <Box sx={{ mb: 3, textAlign: { xs: 'center', md: 'left' } }}>
-                                <Logo size="md" showText variant="white" />
+                                <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
+                                    <Box
+                                        sx={{
+                                            width: 60,
+                                            height: 60,
+                                            borderRadius: 4,
+                                            overflow: 'hidden',
+                                            position: 'relative',
+                                            background: 'linear-gradient(135deg, #1e88e5 0%, #9c27b0 100%)',
+                                            boxShadow: '0 8px 25px rgba(30, 136, 229, 0.4)',
+                                            transition: 'all 0.3s ease',
+                                            '&:hover': {
+                                                transform: 'scale(1.05)',
+                                                boxShadow: '0 12px 35px rgba(30, 136, 229, 0.6)',
+                                            },
+                                            margin: { xs: '0 auto', md: '0' },
+                                        }}
+                                    >
+                                        <Image
+                                            src="/assets/logos/logo.jpeg"
+                                            alt="Logo"
+                                            fill
+                                            style={{ objectFit: 'cover' }}
+                                            priority
+                                        />
+                                    </Box>
+                                </Link>
                             </Box>
                             <Typography variant="body2" sx={{ mb: 3, opacity: 0.8, lineHeight: 1.6, textAlign: { xs: 'center', md: 'left' } }}>
                                 Résidence Cedo, votre partenaire de confiance pour la location d&apos;appartements et de voitures à Dakar.

@@ -73,17 +73,18 @@ const Header: React.FC = () => {
                             <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
                                 <Box
                                     sx={{
-                                        width: 45,
-                                        height: 45,
-                                        borderRadius: 2,
+                                        width: 50,
+                                        height: 50,
+                                        borderRadius: 4,
                                         overflow: 'hidden',
                                         position: 'relative',
                                         mr: 1.5,
-                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                        background: 'linear-gradient(135deg, #1e88e5 0%, #9c27b0 100%)',
+                                        boxShadow: '0 4px 12px rgba(30, 136, 229, 0.3)',
                                         transition: 'all 0.3s ease',
                                         '&:hover': {
                                             transform: 'scale(1.05)',
-                                            boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
+                                            boxShadow: '0 6px 20px rgba(30, 136, 229, 0.5)',
                                         }
                                     }}
                                 >

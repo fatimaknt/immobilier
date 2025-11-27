@@ -33,6 +33,8 @@ import {
     Security as SecurityIcon,
     RocketLaunch as RocketIcon,
     PhotoCamera as PhotoIcon,
+    LocationOn as LocationIcon,
+    Mail as MailIcon,
 } from '@mui/icons-material';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -270,7 +272,8 @@ export default function HomePage() {
                                                     transition: 'all 0.3s ease',
                                                 }}
                                             >
-                                                🏠 Voir les appartements
+                                                <HomeIcon sx={{ mr: 1 }} />
+                                                Voir les appartements
                                             </Button>
 
                                             <Button
@@ -298,7 +301,8 @@ export default function HomePage() {
                                                     transition: 'all 0.3s ease',
                                                 }}
                                             >
-                                                🚗 Louer une voiture
+                                                <CarIcon sx={{ mr: 1 }} />
+                                                Louer une voiture
                                             </Button>
                                         </Stack>
 
@@ -569,7 +573,8 @@ export default function HomePage() {
                                                             transition: 'all 0.3s ease',
                                                         }}
                                                     >
-                                                        📍 Découvrir la zone
+                                                        <LocationIcon sx={{ mr: 1, fontSize: 20 }} />
+                                                        Découvrir la zone
                                                     </Button>
                                                 </CardContent>
                                             </Card>
@@ -618,7 +623,7 @@ export default function HomePage() {
                             mx: 'auto'
                         }}>
                             {features.map((feature, index) => (
-                                <Box key={index} sx={{ width: '100%', maxWidth: 280 }}>
+                                <Box key={index} sx={{ width: '100%', maxWidth: 420 }}>
                                     <Grow in timeout={1000 + index * 200}>
                                         <div>
                                             <Paper
@@ -745,7 +750,7 @@ export default function HomePage() {
                             }}
                         >
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'center' }}>
-                                <RocketIcon /> Prêt à commencer ?
+                                Vous Etes Prêt à commencer ?
                             </Box>
                         </Typography>
                         <Typography
@@ -759,8 +764,7 @@ export default function HomePage() {
                                 lineHeight: 1.6,
                             }}
                         >
-                            Rejoignez des centaines de clients satisfaits et trouvez
-                            votre location idéale dès aujourd&apos;hui !
+                            Rejoignez des centaines de clients satisfaits et trouvez votre location idéale dès aujourd&apos;hui !
                         </Typography>
 
                         <Stack
@@ -790,7 +794,8 @@ export default function HomePage() {
                                     transition: 'all 0.3s ease',
                                 }}
                             >
-                                📞 Nous contacter
+                                <PhoneIcon sx={{ mr: 1 }} />
+                                Nous contacter
                             </Button>
                             <Button
                                 component={Link}
@@ -843,6 +848,361 @@ export default function HomePage() {
 
                 {/* Section FAQ */}
                 <FAQSection faqs={faqs} />
+
+                {/* Section Louer une Voiture */}
+                <Box sx={{ py: 12, backgroundColor: 'white' }}>
+                    <Container maxWidth="lg">
+                        <Box sx={{ textAlign: 'center', mb: 8 }}>
+                            <Typography
+                                variant="h2"
+                                sx={{
+                                    fontWeight: 700,
+                                    color: 'primary.main',
+                                    mb: 2,
+                                    fontSize: { xs: '2rem', md: '2.5rem' },
+                                }}
+                            >
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, justifyContent: 'center' }}>
+                                    <CarIcon /> Louer une Voiture
+                                </Box>
+                            </Typography>
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    color: 'text.secondary',
+                                    fontWeight: 500,
+                                    maxWidth: '600px',
+                                    mx: 'auto',
+                                }}
+                            >
+                                Explorez Dakar avec nos véhicules premium • Tarifs compétitifs • Assurance incluse
+                            </Typography>
+                        </Box>
+
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+                                gap: 4,
+                                mb: 6,
+                            }}
+                        >
+                            {/* Avantages */}
+                            <Card
+                                sx={{
+                                    boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                                    borderRadius: 3,
+                                    p: 4,
+                                    background: 'linear-gradient(135deg, rgba(30, 136, 229, 0.05), rgba(156, 39, 176, 0.05))',
+                                    border: '1px solid rgba(30, 136, 229, 0.1)',
+                                    transition: 'all 0.3s ease',
+                                    '&:hover': {
+                                        boxShadow: '0 8px 30px rgba(30, 136, 229, 0.2)',
+                                        transform: 'translateY(-4px)',
+                                    },
+                                }}
+                            >
+                                <CardContent sx={{ p: 0 }}>
+                                    <Typography
+                                        variant="h5"
+                                        sx={{ fontWeight: 600, mb: 3, display: 'flex', alignItems: 'center', gap: 1 }}
+                                    >
+                                        <CarIcon sx={{ color: 'primary.main', fontSize: 28 }} />
+                                        Notre Flotte
+                                    </Typography>
+                                    <Stack spacing={2}>
+                                        <Box sx={{ display: 'flex', gap: 2 }}>
+                                            <BoltIcon sx={{ color: 'success.main', flexShrink: 0 }} />
+                                            <Typography>Véhicules récents et bien entretenus</Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', gap: 2 }}>
+                                            <SecurityIcon sx={{ color: 'success.main', flexShrink: 0 }} />
+                                            <Typography>Assurance tous risques incluse</Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', gap: 2 }}>
+                                            <StarIcon sx={{ color: 'success.main', flexShrink: 0 }} />
+                                            <Typography>Service GPS et assistance 24h/24</Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', gap: 2 }}>
+                                            <MoneyIcon sx={{ color: 'success.main', flexShrink: 0 }} />
+                                            <Typography>Tarifs transparents sans frais cachés</Typography>
+                                        </Box>
+                                    </Stack>
+                                </CardContent>
+                            </Card>
+
+                            {/* CTA */}
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    gap: 3,
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        p: 4,
+                                        borderRadius: 3,
+                                        background: 'linear-gradient(135deg, #1e88e5, #9c27b0)',
+                                        color: 'white',
+                                        textAlign: 'center',
+                                        boxShadow: '0 8px 25px rgba(30, 136, 229, 0.4)',
+                                    }}
+                                >
+                                    <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                                        Réservation Facile
+                                    </Typography>
+                                    <Typography sx={{ mb: 3, opacity: 0.9 }}>
+                                        Choisissez votre voiture, sélectionnez vos dates et réservez en quelques clics
+                                    </Typography>
+                                    <Button
+                                        component={Link}
+                                        href="/cars"
+                                        variant="contained"
+                                        sx={{
+                                            backgroundColor: '#1e88e5',
+                                            color: 'white',
+                                            fontWeight: 700,
+                                            px: 4,
+                                            py: 1.5,
+                                            fontSize: '1rem',
+                                            '&:hover': {
+                                                backgroundColor: '#1565c0',
+                                                boxShadow: '0 6px 15px rgba(30, 136, 229, 0.4)',
+                                            },
+                                        }}
+                                    >
+                                        <CarIcon sx={{ mr: 1 }} />
+                                        Voir nos voitures
+                                    </Button>
+                                </Box>
+
+                                <Box
+                                    sx={{
+                                        p: 4,
+                                        borderRadius: 3,
+                                        border: '2px solid',
+                                        borderColor: 'primary.main',
+                                        textAlign: 'center',
+                                        backgroundColor: 'rgba(30, 136, 229, 0.02)',
+                                    }}
+                                >
+                                    <Typography variant="h6" sx={{ mb: 1, fontWeight: 600, color: 'primary.main' }}>
+                                        Questions ?
+                                    </Typography>
+                                    <Typography sx={{ mb: 3, color: 'text.secondary' }}>
+                                        Notre équipe est disponible pour vous aider
+                                    </Typography>
+                                    <Button
+                                        component={Link}
+                                        href="/booking"
+                                        variant="outlined"
+                                        color="primary"
+                                        sx={{
+                                            fontWeight: 600,
+                                            px: 4,
+                                            py: 1.5,
+                                        }}
+                                    >
+                                        Réserver maintenant
+                                    </Button>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Container>
+                </Box>
+
+                {/* Section Nous Contacter */}
+                <Box
+                    sx={{
+                        py: 12,
+                        background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)',
+                        color: 'white',
+                    }}
+                >
+                    <Container maxWidth="lg">
+                        <Box sx={{ textAlign: 'center', mb: 8 }}>
+                            <Typography
+                                variant="h2"
+                                sx={{
+                                    fontWeight: 700,
+                                    color: 'white',
+                                    mb: 2,
+                                    fontSize: { xs: '2rem', md: '2.5rem' },
+                                }}
+                            >
+                                Nous Contacter
+                            </Typography>
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    color: 'rgba(255,255,255,0.8)',
+                                    fontWeight: 500,
+                                    maxWidth: '600px',
+                                    mx: 'auto',
+                                }}
+                            >
+                                Disponible 24h/24, 7j/7 • Réponse rapide garantie • Équipe professionnelle
+                            </Typography>
+                        </Box>
+
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+                                gap: 4,
+                                mb: 6,
+                            }}
+                        >
+                            {/* Téléphone */}
+                            <Card
+                                sx={{
+                                    backgroundColor: 'rgba(255,255,255,0.1)',
+                                    backdropFilter: 'blur(10px)',
+                                    border: '1px solid rgba(255,255,255,0.2)',
+                                    color: 'white',
+                                    textAlign: 'center',
+                                    p: 3,
+                                    borderRadius: 3,
+                                    transition: 'all 0.3s ease',
+                                    '&:hover': {
+                                        backgroundColor: 'rgba(255,255,255,0.15)',
+                                        transform: 'translateY(-4px)',
+                                        boxShadow: '0 8px 25px rgba(255,255,255,0.2)',
+                                    },
+                                }}
+                            >
+                                <PhoneIcon sx={{ fontSize: 40, mb: 2, color: '#1e88e5' }} />
+                                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                                    Téléphone
+                                </Typography>
+                                <Typography sx={{ mb: 2, opacity: 0.8 }}>
+                                    Appelez-nous directement
+                                </Typography>
+                                <Button
+                                    href="tel:+221784929439"
+                                    sx={{
+                                        color: 'white',
+                                        borderColor: 'white',
+                                        '&:hover': {
+                                            backgroundColor: 'rgba(255,255,255,0.1)',
+                                        },
+                                    }}
+                                    variant="outlined"
+                                >
+                                    +221 78 492 94 39
+                                </Button>
+                            </Card>
+
+                            {/* Email */}
+                            <Card
+                                sx={{
+                                    backgroundColor: 'rgba(255,255,255,0.1)',
+                                    backdropFilter: 'blur(10px)',
+                                    border: '1px solid rgba(255,255,255,0.2)',
+                                    color: 'white',
+                                    textAlign: 'center',
+                                    p: 3,
+                                    borderRadius: 3,
+                                    transition: 'all 0.3s ease',
+                                    '&:hover': {
+                                        backgroundColor: 'rgba(255,255,255,0.15)',
+                                        transform: 'translateY(-4px)',
+                                        boxShadow: '0 8px 25px rgba(255,255,255,0.2)',
+                                    },
+                                }}
+                            >
+                                <MailIcon sx={{ fontSize: 40, mb: 2, color: '#9c27b0' }} />
+                                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                                    Email
+                                </Typography>
+                                <Typography sx={{ mb: 2, opacity: 0.8 }}>
+                                    Écrivez-nous par email
+                                </Typography>
+                                <Button
+                                    href="mailto:contact@residencecedo.sn"
+                                    sx={{
+                                        color: 'white',
+                                        borderColor: 'white',
+                                        '&:hover': {
+                                            backgroundColor: 'rgba(255,255,255,0.1)',
+                                        },
+                                    }}
+                                    variant="outlined"
+                                >
+                                    contact@residencecedo.sn
+                                </Button>
+                            </Card>
+
+                            {/* WhatsApp */}
+                            <Card
+                                sx={{
+                                    backgroundColor: 'rgba(255,255,255,0.1)',
+                                    backdropFilter: 'blur(10px)',
+                                    border: '1px solid rgba(255,255,255,0.2)',
+                                    color: 'white',
+                                    textAlign: 'center',
+                                    p: 3,
+                                    borderRadius: 3,
+                                    transition: 'all 0.3s ease',
+                                    '&:hover': {
+                                        backgroundColor: 'rgba(255,255,255,0.15)',
+                                        transform: 'translateY(-4px)',
+                                        boxShadow: '0 8px 25px rgba(255,255,255,0.2)',
+                                    },
+                                }}
+                            >
+                                <WhatsAppIcon sx={{ fontSize: 40, mb: 2, color: '#25D366' }} />
+                                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                                    WhatsApp
+                                </Typography>
+                                <Typography sx={{ mb: 2, opacity: 0.8 }}>
+                                    Messagerie instantanée
+                                </Typography>
+                                <Button
+                                    href="https://wa.me/221784929439"
+                                    target="_blank"
+                                    sx={{
+                                        color: 'white',
+                                        borderColor: 'white',
+                                        '&:hover': {
+                                            backgroundColor: 'rgba(255,255,255,0.1)',
+                                        },
+                                    }}
+                                    variant="outlined"
+                                >
+                                    Nous écrire
+                                </Button>
+                            </Card>
+                        </Box>
+
+                        {/* Formulaire de contact */}
+                        <Box sx={{ textAlign: 'center' }}>
+                            <Button
+                                component={Link}
+                                href="/contact"
+                                variant="contained"
+                                size="large"
+                                sx={{
+                                    background: 'linear-gradient(135deg, #1e88e5, #9c27b0)',
+                                    px: 6,
+                                    py: 2,
+                                    fontSize: '1.1rem',
+                                    fontWeight: 600,
+                                    borderRadius: 3,
+                                    boxShadow: '0 8px 25px rgba(30, 136, 229, 0.4)',
+                                    '&:hover': {
+                                        boxShadow: '0 12px 35px rgba(30, 136, 229, 0.6)',
+                                        transform: 'translateY(-2px)',
+                                    },
+                                }}
+                            >
+                                Formulaire de Contact Complet
+                            </Button>
+                        </Box>
+                    </Container>
+                </Box>
             </Box>
         </>
     );
