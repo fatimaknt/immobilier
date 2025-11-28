@@ -100,7 +100,7 @@ const Header: React.FC = () => {
                                     variant="h6"
                                     sx={{
                                         fontFamily: 'Poppins',
-                                        fontWeight: 700,
+                                        fontWeight: 400,
                                         color: 'primary.main',
                                         textDecoration: 'none',
                                         display: { xs: 'none', sm: 'block' },
@@ -169,7 +169,7 @@ const Header: React.FC = () => {
                                 flexGrow: 1,
                                 display: { xs: 'block', sm: 'none' },
                                 fontFamily: 'Poppins',
-                                fontWeight: 700,
+                                fontWeight: 400,
                                 color: 'primary.main',
                                 textAlign: 'center',
                             }}
@@ -186,7 +186,7 @@ const Header: React.FC = () => {
                                     href={item.path}
                                     sx={{
                                         color: pathname === item.path ? 'primary.main' : 'text.primary',
-                                        fontWeight: pathname === item.path ? 600 : 500,
+                                        fontWeight: pathname === item.path ? 400 : 400,
                                         textTransform: 'none',
                                         fontSize: '1rem',
                                         px: 2,
@@ -228,7 +228,7 @@ const Header: React.FC = () => {
                                     borderRadius: 3,
                                     px: 3,
                                     py: 1.5,
-                                    fontWeight: 600,
+                                    fontWeight: 400,
                                     textTransform: 'none',
                                     background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
                                     boxShadow: '0 4px 15px rgba(25, 118, 210, 0.4)',

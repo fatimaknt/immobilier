@@ -1,0 +1,20 @@
+version: '3.8'
+ 
+services:
+  residences-cedo:
+    build: .
+    container_name: residences-cedo
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - VIRTUAL_HOST=
+      - LETSENCRYPT_HOST=lesresidences_cedo
+      - LETSENCRYPT_EMAIL=kanoutef163@gmail.com
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - nginx-proxy
+ 
+networks:
+  nginx-proxy:
+    external: true

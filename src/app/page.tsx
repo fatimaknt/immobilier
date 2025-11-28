@@ -209,6 +209,7 @@ export default function HomePage() {
                                                 fontWeight: 900,
                                                 lineHeight: 1.1,
                                                 mb: 3,
+                                                fontFamily: "'Playfair Display', 'Georgia', serif",
                                                 background: 'linear-gradient(45deg, #fff, #f0f0f0)',
                                                 backgroundClip: 'text',
                                                 WebkitBackgroundClip: 'text',
@@ -228,6 +229,7 @@ export default function HomePage() {
                                             sx={{
                                                 mb: 4,
                                                 fontSize: { xs: '1.2rem', md: '1.5rem' },
+                                                fontWeight: 400,
                                                 lineHeight: 1.6,
                                                 opacity: 0.95,
                                                 maxWidth: '600px',
@@ -351,7 +353,7 @@ export default function HomePage() {
                                                 <PhoneIcon />
                                             </IconButton>
                                             <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                                                📞 +221 78 492 94 39
+                                                 +221 78 492 94 39
                                             </Typography>
                                         </Stack>
                                     </Box>
@@ -445,7 +447,7 @@ export default function HomePage() {
                                 variant="h2"
                                 sx={{
                                     mb: 2,
-                                    fontWeight: 800,
+                                    fontWeight: 400,
                                     color: theme.palette.primary.main,
                                     display: 'flex',
                                     alignItems: 'center',
@@ -594,7 +596,7 @@ export default function HomePage() {
                                 variant="h2"
                                 sx={{
                                     mb: 2,
-                                    fontWeight: 800,
+                                    fontWeight: 400,
                                     color: theme.palette.text.primary,
                                     fontSize: { xs: '2rem', md: '2.5rem' }
                                 }}
@@ -745,7 +747,7 @@ export default function HomePage() {
                             variant="h2"
                             sx={{
                                 mb: 3,
-                                fontWeight: 900,
+                                fontWeight: 400,
                                 fontSize: { xs: '2.5rem', md: '3.5rem' },
                             }}
                         >
@@ -856,7 +858,7 @@ export default function HomePage() {
                             <Typography
                                 variant="h2"
                                 sx={{
-                                    fontWeight: 700,
+                                    fontWeight: 400,
                                     color: 'primary.main',
                                     mb: 2,
                                     fontSize: { xs: '2rem', md: '2.5rem' },
@@ -1026,7 +1028,7 @@ export default function HomePage() {
                             <Typography
                                 variant="h2"
                                 sx={{
-                                    fontWeight: 700,
+                                    fontWeight: 400,
                                     color: 'white',
                                     mb: 2,
                                     fontSize: { xs: '2rem', md: '2.5rem' },

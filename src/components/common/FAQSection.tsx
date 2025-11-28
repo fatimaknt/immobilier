@@ -60,7 +60,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
                         <Typography
                             variant="h3"
                             sx={{
-                                fontWeight: 800,
+                                fontWeight: 400,
                                 mb: 2,
                                 color: theme.palette.text.primary,
                             }}

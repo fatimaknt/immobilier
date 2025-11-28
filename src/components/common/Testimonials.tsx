@@ -72,7 +72,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
                         <Typography
                             variant="h3"
                             sx={{
-                                fontWeight: 800,
+                                fontWeight: 400,
                                 mb: 2,
                                 color: theme.palette.text.primary,
                             }}
